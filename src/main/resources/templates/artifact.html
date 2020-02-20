@@ -1,9 +1,19 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
   <meta charset="UTF-8">
   <!-- todo create variable title with Thymeleaf -->
   <title th:text="">Artifact</title>
+
+  <style>
+    #artifact {
+      border: 1px solid black;
+      border-radius: 5px;
+    }
+    td { padding: 0px !important; }
+    tr > td { font-weight: bold; }
+    td ~ td { font-weight: normal; }
+  </style>
 
   <link href="https://stackpath.bootstrapcdn.com/bootswatch/4.4.1/journal/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-0d2eTc91EqtDkt3Y50+J9rW3tCXJWw6/lDgf1QNHLlV0fadTyvcA120WPsSOlwga" crossorigin="anonymous">
@@ -12,9 +22,36 @@
 <div th:replace="header.html">
   <h1>Library Management System</h1>
 </div>
-<div id="grid">
-<!--  todo bootstrap grid here -->
-  <div id="artifact"></div>
+<div id="grid" class="container">
+  <div id="artifact" class="col-lg-8">
+    <h3 style="padding: 20px 0px;">Harry Potter and the Half-Blood Prince</h3>
+    <div id="artifact_info" class="container">
+      <table class="table table-borderless">
+        <tbody>
+        <tr>
+          <td>Author:</td>
+          <td>J.K. Rowling</td>
+        </tr>
+        <tr>
+          <td>Publisher:</td>
+          <td>Bloomsbury</td>
+        </tr>
+        <tr>
+          <td>Date:</td>
+          <td>2005</td>
+        </tr>
+        <tr>
+          <td>Subject:</td>
+          <td>Book</td>
+        </tr>
+        <tr>
+          <td>Genre:</td>
+          <td>Fantasy Fiction</td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
   <div id="control"></div>
 </div>
 <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
