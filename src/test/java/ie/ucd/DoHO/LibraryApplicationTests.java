@@ -1,4 +1,4 @@
-package ie.ucd.DoHO.application;
+package ie.ucd.DoHO;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -12,7 +12,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
-public class DemoApplicationTests {
+public class LibraryApplicationTests {
 
 	@Test
 	public void contextLoads() {
