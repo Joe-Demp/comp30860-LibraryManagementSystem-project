@@ -6,13 +6,35 @@
   <title th:text="">Artifact</title>
 
   <style>
-    #artifact {
+    .page-box {
       border: 1px solid black;
       border-radius: 5px;
     }
-    td { padding: 0px !important; }
-    tr > td { font-weight: bold; }
-    td ~ td { font-weight: normal; }
+
+    td {
+      padding: 0 !important;
+    }
+
+    tr > td {
+      font-weight: bold;
+    }
+
+    td ~ td {
+      font-weight: normal;
+    }
+
+    .btn-gang {
+      margin-top: 1rem;
+      margin-bottom: 1rem;
+    }
+
+    .btn-gang > a {
+
+    }
+
+    p {
+      margin: 0.1rem 0 !important;
+    }
   </style>
 
   <link href="https://stackpath.bootstrapcdn.com/bootswatch/4.4.1/journal/bootstrap.min.css" rel="stylesheet"
@@ -20,39 +42,86 @@
 </head>
 <body>
 <div th:replace="header.html">
-  <h1>Library Management System</h1>
+  <h1>HEADER Library Management System</h1>
 </div>
 <div id="grid" class="container">
-  <div id="artifact" class="col-lg-8">
-    <h3 style="padding: 20px 0px;">Harry Potter and the Half-Blood Prince</h3>
-    <div id="artifact_info" class="container">
-      <table class="table table-borderless">
+  <div class="row">
+    <div id="artifact" class="page-box col-lg-8 my-4 px-5 pb-3 shadow-lg">
+      <h3 class="my-4" style="//padding-top: 20px; //padding-bottom: 20px;">Harry Potter and the Half-Blood Prince</h3>
+      <table id="mainInfo" class="table table-borderless mb-4">
         <tbody>
         <tr>
-          <td>Author:</td>
+          <td class="w-25">Author:</td>
           <td>J.K. Rowling</td>
         </tr>
         <tr>
-          <td>Publisher:</td>
+          <td class="w-25">Publisher:</td>
           <td>Bloomsbury</td>
         </tr>
         <tr>
-          <td>Date:</td>
+          <td class="w-25">Date:</td>
           <td>2005</td>
         </tr>
         <tr>
-          <td>Subject:</td>
+          <td class="w-25">Subject:</td>
           <td>Book</td>
         </tr>
         <tr>
-          <td>Genre:</td>
+          <td class="w-25">Genre:</td>
           <td>Fantasy Fiction</td>
         </tr>
         </tbody>
       </table>
+      <h5>Additional Information</h5>
+      <table id="addInfo" class="table table-borderless">
+        <tbody>
+        <tr>
+          <td class="w-25">Library Location:</td>
+          <td>A-43</td>
+        </tr>
+        <tr>
+          <td class="w-25">Pages:</td>
+          <td>607</td>
+        </tr>
+        <tr>
+          <td class="w-25">Language:</td>
+          <td>English; Subtitles in French</td>
+        </tr>
+        <tr>
+          <td class="w-25">Notes:</td>
+          <td>Originally published in 2005</td>
+        </tr>
+        <tr>
+          <td class="w-25">ISBN:</td>
+          <td>9781408894767</td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="col-lg-1"></div>
+    <div id="control" class="col-lg-3">
+      <div class="d-flex justify-content-center flex-column page-box shadow-lg my-4 p-3">
+        <a href="#" class="btn btn-primary btn-lg btn-block my-2">Reserve it</a>
+        <p style="text-align: center;">0 copies available currently</p>
+        <p style="text-align: center;">Next available on 23-Feb 2020</p>
+      </div>
+      <div class="d-flex justify-content-center flex-column page-box shadow-lg my-4 p-3">
+        <a href="#" class="btn btn-primary btn-lg btn-block mt-2 mb-4">Receive</a>
+        <h4 style="text-align: center;">Options</h4>
+        <div class="btn-gang d-flex justify-content-center flex-column">
+          <a href="#" class="btn btn-outline-primary btn-block">View Reservations</a>
+          <a href="#" class="btn btn-outline-primary btn-block">Edit Artifact</a>
+        </div>
+        <div class="btn-gang d-flex justify-content-center flex-column">
+          <a href="#" class="btn btn-outline-warning btn-block">Delete Artifact</a>
+          <a href="#" class="btn btn-outline-danger btn-block">Hide Artifact</a>
+        </div>
+      </div>
     </div>
   </div>
-  <div id="control"></div>
+</div>
+<div th:replace="footer.html">
+  <h1>FOOTER</h1>
 </div>
 <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
         integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
