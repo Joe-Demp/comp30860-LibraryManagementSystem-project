@@ -9,16 +9,16 @@ public class Book extends Artifact {
     @Column
     private String ISBN;
     @Column
-    private boolean hardback;
+    private int pages;
 
     public Book() {
     }
 
     public Book(String title, String author, String publisher, Date releaseDate,
-                String genre, String libraryLocation, String language, String ISBN, boolean hardback) {
+                String genre, String libraryLocation, String language, String ISBN, int pages) {
         super(title, author, publisher, releaseDate, "Book", genre, libraryLocation, language);
         setISBN(ISBN);
-        setHardback(hardback);
+        setPages(pages);
     }
 
     public String getISBN() {
@@ -29,11 +29,11 @@ public class Book extends Artifact {
         this.ISBN = ISBN;
     }
 
-    public boolean isHardback() {
-        return hardback;
+    public int getPages() {
+        return pages;
     }
 
-    public void setHardback(boolean hardback) {
-        this.hardback = hardback;
+    public void setPages(int pages) {
+        this.pages = pages;
     }
 }
