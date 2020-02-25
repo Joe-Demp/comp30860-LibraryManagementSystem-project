@@ -10,6 +10,7 @@ import java.sql.Date;
  * Class to model common attributes of all Artifacts
  */
 @Entity
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 public abstract class Artifact implements Serializable {
     private static final long serialVersionUID = 1L;
 
