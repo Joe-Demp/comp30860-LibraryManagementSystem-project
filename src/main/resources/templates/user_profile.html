@@ -5,11 +5,15 @@
 <head>
   <meta charset="UTF-8">
   <title>User</title>
+  <link href="css/layout.css" rel="stylesheet" type="text/css">
+  <!--  todo remove the below line for deployment -->
+  <link href="../static/css/layout.css" rel="stylesheet" type="text/css">
+
   <link crossorigin="anonymous" href="https://stackpath.bootstrapcdn.com/bootswatch/4.4.1/journal/bootstrap.min.css"
         integrity="sha384-0d2eTc91EqtDkt3Y50+J9rW3tCXJWw6/lDgf1QNHLlV0fadTyvcA120WPsSOlwga" rel="stylesheet">
 </head>
 <body>
-<div th:replace="header.html">
+<div id="header" th:replace="header.html">
   <h1>HEADER Library Management System</h1>
 </div>
 <div class="container" id="grid">
@@ -17,10 +21,51 @@
     <h3>User Profile</h3>
   </div>
   <div class="row" id="content">
-
+    <div class="col-lg-5" id="profile" style="display: block;">
+      <div class="page-box shadow-lg" id="info">
+        <table class="table table-borderless text-table" id="mainInfo">
+          <tbody>
+          <tr>
+            <td class="">Name:</td>
+            <td>Mary Reilly</td>
+          </tr>
+          <tr>
+            <td class="">Member ID:</td>
+            <td>AT2668</td>
+          </tr>
+          <tr>
+            <td class="">email:</td>
+            <td>mary.reilly@yahoo.com</td>
+          </tr>
+          <tr>
+            <td class="">Phone:</td>
+            <!-- todo make sure thymeleaf gets a formatted phone number string here -->
+            <td>+353 87 123 4567</td>
+          </tr>
+          <tr>
+            <td class="">Date Joined:</td>
+            <td>07/06/2005</td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="page-box shadow-lg" id="control">
+        <table id="button-table">
+          <tr>
+            <td><a class="btn btn-primary btn-block" href="#">Edit Profile</a></td>
+            <td><a class="btn btn-primary btn-block" href="#">Catalogue</a></td>
+          </tr>
+          <tr>
+            <td><a class="btn btn-primary btn-block" href="#">Change Password</a></td>
+            <td><a class="btn btn-primary btn-block" href="#">View Requests</a></td>
+          </tr>
+        </table>
+      </div>
+    </div>
+    <div class="col-lg-7" id="loans"></div>
   </div>
 </div>
-<div th:replace="footer.html">
+<div id="footer" th:replace="footer.html">
   <h1>FOOTER</h1>
 </div>
 <script crossorigin="anonymous"

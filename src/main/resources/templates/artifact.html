@@ -7,15 +7,19 @@
   <!-- todo create variable title with Thymeleaf -->
   <title>Artifact</title>
 
+  <link href="css/layout.css" rel="stylesheet" type="text/css">
+  <!--  todo remove the below line for deployment -->
+  <link href="../static/css/layout.css" rel="stylesheet" type="text/css">
+
   <style>
     .page-box {
       border: 1px solid black;
       border-radius: 5px;
     }
 
-    td {
-      padding: 0 !important;
-    }
+    /*td {*/
+    /*  padding: 0 !important;*/
+    /*}*/
 
     tr > td {
       font-weight: bold;
@@ -28,10 +32,6 @@
     .btn-gang {
       margin-top: 1rem;
       margin-bottom: 1rem;
-    }
-
-    .btn-gang > a {
-
     }
 
     p {
@@ -50,7 +50,7 @@
   <div class="row">
     <div id="artifact" class="page-box col-lg-8 my-4 px-5 pb-3 shadow-lg">
       <h3 class="my-4" style="//padding-top: 20px; //padding-bottom: 20px;">Harry Potter and the Half-Blood Prince</h3>
-      <table id="mainInfo" class="table table-borderless mb-4">
+      <table class="table table-borderless text-table mb-4" id="mainInfo">
         <tbody>
         <tr>
           <td class="w-25">Author:</td>
@@ -75,7 +75,7 @@
         </tbody>
       </table>
       <h5>Additional Information</h5>
-      <table id="addInfo" class="table table-borderless">
+      <table class="table table-borderless text-table" id="addInfo">
         <tbody>
         <tr>
           <td class="w-25">Library Location:</td>

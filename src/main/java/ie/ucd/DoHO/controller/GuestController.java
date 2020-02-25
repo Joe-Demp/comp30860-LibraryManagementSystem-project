@@ -14,4 +14,9 @@ public class GuestController {
     public String index() {
         return "index.html";
     }
+
+    @GetMapping("/user")
+    public String user() {
+        return "user_profile.html";
+    }
 }
