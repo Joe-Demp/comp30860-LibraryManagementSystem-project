@@ -1,4 +1,6 @@
 package ie.ucd.DoHO.model;
 
-public interface PeriodicalRepository {
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface PeriodicalRepository extends JpaRepository<Periodical,Integer> {
 }
