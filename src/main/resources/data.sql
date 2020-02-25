@@ -1,0 +1,1 @@
+insert into artifact(dtype,title,author) values('Book','Pride and Predjuice','Jane Austin');
