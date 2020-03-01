@@ -10,7 +10,7 @@
 </head>
 <body>
     <nav th:replace="header.html"></nav>
-    <div style="border:solid 1px red; padding-top: 20px;"  class="container" >
+    <div style="padding-top: 20px;"  class="container" >
         <form class="form-inline">
             <div style="margin-left:auto; margin-right:auto;">
                 <input class="form-control" type="search" placeholder="Search Catalogue">
@@ -18,7 +18,7 @@
             </div>
         </form>
         <div  style="padding: 10px;" class="row">
-            <div style="background-color:#c9c9c9; padding:0px;margin:0px;"  class="col-md-4">
+            <div style="padding:0px;margin:0px;"  class="col-md-4">
                 <div style="width:100% padding:0; margin:0;"class="card">
                     <h3 class="card-header text-center">Where can you find us</h3>
                     <div class="card-body">
@@ -45,12 +45,12 @@
             <div class="col-md-4">
                 <h2 class="text-center">Contact Us</h2>
                 <p class="text-center">Got a question? Send us a message!</p>
-                <form id="contact-form" name="contact-form" method="POST">
-                    <input style="margin:5px;" type="text" id="name" name="name" placeholder="Name" class="form-control">
-                    <input style="margin:5px;" type="text" id="email" name="email" placeholder="Email" class="form-control">
-                    <input style="margin:5px;" type="text" id="subject" name="subject" placeholder="Subject" class="form-control">
-                    <input style="margin:5px;" type="text" id="message" name="message" placeholder="Message" class="form-control">
-                    <button style="margin:5px;" class="btn btn-info center-block" type="submit">Send</button>
+                <form class="text-center" id="contact-form" name="contact-form" method="POST">
+                    <input type="text" id="name" name="name" placeholder="Name" class="form-control contact-form">
+                    <input type="text" id="email" name="email" placeholder="Email" class="form-control contact-form">
+                    <input type="text" id="subject" name="subject" placeholder="Subject" class="form-control contact-form">
+                    <textarea style="max-height:150px;" type="text-area" id="message" name="message" placeholder="Message" class="form-control contact-form"></textarea>
+                    <button class="btn btn-info center-block contact-form" type="submit">Send</button>
                 </form>
             </div>
         </div>

@@ -13,7 +13,7 @@ html, body {
 }
 
 .navbar-nav li .btn{
-    padding: 0, 5px, 0, 5px;
+    padding: 0 5px 0 5px;
     margin: 5px;
     width: 100px;
 }
@@ -32,6 +32,9 @@ footer {
     background-color: #d5d5d5;
 }
 
+.contact-form{
+    margin: 5px;
+}
 
 @media (max-width: 992px) {
     .navbar-nav li .btn{
