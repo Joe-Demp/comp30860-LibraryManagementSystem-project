@@ -2,31 +2,32 @@ package ie.ucd.DoHO.model;
 
 import org.hibernate.annotations.CreationTimestamp;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
 
 @Entity
-public class User implements Serializable {
+public class User implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private long id;
     private String username;
-    @CreationTimestamp
-    private Date profileCreated;
+    private String password;
     private String email;
-    private String type;
+    private String role;
 
-    public User(String username, String email, String type) {
-        this.username = username;
-        this.email = email;
-        this.type = type;
+    public User(){
+
     }
 
-    public Long getId() {
+    public User(String username, String password, String email, String role) {
+        this.username = username;
+        this.password = password;
+        this.email = email;
+        this.role = role;
+    }
+
+    public long getId() {
         return id;
     }
 
@@ -34,19 +35,19 @@ public class User implements Serializable {
         return username;
     }
 
-    public Date getProfileCreated() {
-        return profileCreated;
+    public String getPassword() {
+        return password;
     }
 
     public String getEmail() {
         return email;
     }
 
-    public String getType() {
-        return type;
+    public String getRole() {
+        return role;
     }
 
-    public void setId(Long id) {
+    public void setId(long id) {
         this.id = id;
     }
 
@@ -54,15 +55,15 @@ public class User implements Serializable {
         this.username = username;
     }
 
-    public void setProfileCreated(Date profileCreated) {
-        this.profileCreated = profileCreated;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public void setEmail(String email) {
         this.email = email;
     }
 
-    public void setType(String type) {
-        this.type = type;
+    public void setRole(String role) {
+        this.role = role;
     }
 }

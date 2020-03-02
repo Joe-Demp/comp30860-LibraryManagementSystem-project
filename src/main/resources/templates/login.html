@@ -12,26 +12,34 @@
     <div class="row" style="margin-top: 15%">
         <h2>Login</h2>
     </div>
-    <div class="form-group">
-        <div class="row">
-            <div class="col-9" style="margin-left: 10%">
-                <label class="col-form-label" for="loginUsername">Username</label>
-                <input type="text" class="form-control" placeholder="username" id="loginUsername">
+    <form method="POST" action="/login">
+        <div class="form-group">
+            <div class="row">
+                <div class="col-9" style="margin-left: 10%">
+                    <label class="col-form-label" for="loginUsername">Username</label>
+                    <input type="text" name="username" class="form-control" placeholder="username" id="loginUsername">
+                </div>
             </div>
-        </div>
-        <div class="row">
+            <div class="row">
                 <div class="col-9" style="margin-left: 10%">
                     <label class="col-form-label" for="loginPassword">Password</label>
-                    <input type="text" class="form-control" placeholder="password" id="loginPassword">
+                    <input type="password" name="password" class="form-control" placeholder="password" id="loginPassword">
                 </div>
-        </div>
-        <div class="row">
-            <div class="col-10"></div>
-            <div class="col" style="margin-top: 5%">
-                <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+            <span th:if="error != null">
+                <div class="row">
+                    <p style="color:red;" th:text="${error}"></p>
+                </div>
+            </span>
+            <div class="row">
+                <div class="col-10"></div>
+                <div class="col" style="margin-top: 5%">
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
             </div>
         </div>
-    </div>
+    </form>
+
 
 </div>
 
