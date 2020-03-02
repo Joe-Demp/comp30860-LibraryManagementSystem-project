@@ -1,10 +1,6 @@
 
-tr > td {
+.t-text {
     font-weight: bold;
-}
-
-td ~ td {
-    font-weight: normal;
 }
 
 .page-box {
@@ -24,4 +20,8 @@ td ~ td {
 
 #button-table td {
     width: 50%;
+}
+
+#loan-table td {
+    width: 25%;
 }
