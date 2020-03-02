@@ -14,4 +14,19 @@ public class GuestController {
     public String index() {
         return "index.html";
     }
+
+    @GetMapping("/loan_history")
+    public String loan_history() {
+        return "loan_history.html";
+    }
+
+    @GetMapping("/artifact")
+    public String artifact() {
+        return "artifact.html";
+    }
+
+    @GetMapping("/user")
+    public String user() {
+        return "user_profile.html";
+    }
 }

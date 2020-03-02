@@ -1,0 +1,27 @@
+
+.t-text {
+    font-weight: bold;
+}
+
+.page-box {
+    border: 1px solid black;
+    border-radius: 5px;
+}
+
+.text-table td {
+    padding: 0 !important;
+}
+
+#button-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 1em 1em;
+}
+
+#button-table td {
+    width: 50%;
+}
+
+#loan-table td {
+    width: 25%;
+}
