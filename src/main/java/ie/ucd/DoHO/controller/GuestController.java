@@ -39,4 +39,9 @@ public class GuestController {
         return "signUp.html";
     }
 
+
+    @GetMapping("/searchArtifact")
+    public String displayArtifacts(){
+        return "searchArtifact.html";
+    }
 }
