@@ -29,4 +29,9 @@ public class GuestController {
     public String user() {
         return "user_profile.html";
     }
+
+    @GetMapping("/searchArtifact")
+    public String displayArtifacts(){
+        return "searchArtifact.html";
+    }
 }

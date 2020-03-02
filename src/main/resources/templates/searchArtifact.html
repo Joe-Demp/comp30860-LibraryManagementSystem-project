@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<link href="https://stackpath.bootstrapcdn.com/bootswatch/4.4.1/journal/bootstrap.min.css" rel="stylesheet"
+      integrity="sha384-0d2eTc91EqtDkt3Y50+J9rW3tCXJWw6/lDgf1QNHLlV0fadTyvcA120WPsSOlwga" crossorigin="anonymous">
+<body>
+<nav th:replace="header.html"></nav>
+<div class="container">
+
+    <table class="table" style="margin-top: 10%">
+        <thead>
+        <th>Artifact</th>
+        <th>Title</th>
+        <th></th>
+        </thead>
+        <tbody>
+        <!TODO: Dynamic results based on search >
+        <tr>
+            <th scope="row">book</th>
+            <td>Six Of Crows</td>
+            <td><button class="btn btn-primary">view</button></td>
+        </tr>
+        <tr>
+            <th scope="row">book</th>
+            <td>King Of Scars</td>
+            <td><button class="btn btn-primary">view</button></td>
+        </tr>
+        <tr>
+            <th scope="row">book</th>
+            <td>Crooked Kingdom</td>
+            <td><button class="btn btn-primary">view</button></td>
+        </tr>
+        </tbody>
+
+    </table>
+
+</div>
+
+<div th:replace="footer.html"></div>
+
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"+
+            integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+            crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+            integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+            crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+            integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+            crossorigin="anonymous"></script>
+</body>
+</html>
