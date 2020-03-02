@@ -15,8 +15,8 @@ public class GuestController {
         return "index.html";
     }
 
-    @GetMapping("/user")
-    public String user() {
-        return "user_profile.html";
+    @GetMapping("/loan_history")
+    public String loan_history() {
+        return "loan_history.html";
     }
 }
