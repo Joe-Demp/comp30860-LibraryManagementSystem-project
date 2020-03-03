@@ -16,22 +16,27 @@ public class GuestController {
     @GetMapping("/")
     public String index(Model model) {
         model.addAttribute("user", userSession.getUser());
-        return "index.html";
+        return "index";
     }
 
     @GetMapping("/loan_history")
     public String loan_history() {
-        return "loan_history.html";
+        return "loan_history";
     }
 
     @GetMapping("/artifact")
     public String artifact() {
-        return "artifact.html";
+        return "artifact";
     }
 
     @GetMapping("/user")
     public String user() {
-        return "user_profile.html";
+        return "user_profile";
+    }
+
+    @GetMapping("/portal")
+    public String librarianPortal() {
+        return "librarian_portal";
     }
 
     @GetMapping("/signUp")
