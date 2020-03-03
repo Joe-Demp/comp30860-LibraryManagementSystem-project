@@ -142,7 +142,9 @@ public abstract class Artifact implements Serializable {
             if (!primaryFields.contains(fieldString)) {
                 try {
                     fieldString = Formatter.toKeyString(fieldString);
-                    additionals.put(fieldString, field.get(this).toString());
+                    Object value = field.get(this);
+                    String valueString = value == null ? "null" : value.toString();
+                    additionals.put(fieldString, valueString);
                 } catch (IllegalAccessException e) {
                     System.err.printf("Field %s could not be added to additionalDetails", fieldString);
                     e.printStackTrace();
@@ -153,6 +155,9 @@ public abstract class Artifact implements Serializable {
     }
 
     public String getReleaseDateString() {
+        if (releaseDate == null) {
+            return "null";
+        }
         return Formatter.toDateString(releaseDate);
     }
 }

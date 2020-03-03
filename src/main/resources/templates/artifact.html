@@ -3,16 +3,13 @@
       xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org">
 <head>
-  <meta charset="UTF-8">
   <!-- todo create variable title with Thymeleaf -->
   <title th:text="${artifact.title}">Artifact</title>
 
+  <meta th:replace="common/standard_head.html">
   <link href="css/layout.css" rel="stylesheet" type="text/css">
   <!--  todo remove the below line for deployment -->
   <link href="../static/css/layout.css" rel="stylesheet" type="text/css">
-  <link href="css/style.css" rel="stylesheet" type="text/css">
-  <!--  todo remove the below line for deployment -->
-  <link href="../static/css/style.css" rel="stylesheet" type="text/css">
 
   <style>
     .page-box {
@@ -41,9 +38,6 @@
       margin: 0.1rem 0 !important;
     }
   </style>
-
-  <link crossorigin="anonymous" href="https://stackpath.bootstrapcdn.com/bootswatch/4.4.1/journal/bootstrap.min.css"
-        integrity="sha384-0d2eTc91EqtDkt3Y50+J9rW3tCXJWw6/lDgf1QNHLlV0fadTyvcA120WPsSOlwga" rel="stylesheet">
 </head>
 <body>
 <div th:replace="header.html">
