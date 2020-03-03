@@ -51,11 +51,18 @@ public class AuthenticationController {
         response.sendRedirect("/");
     }
 
+    @GetMapping("/sign_up")
+    public String signUp() {
+        return "sign_up.html";
+    }
+
     @PostMapping("/signup")
-    public void signup(String username, String password, String email, HttpServletResponse response) throws IOException{
+    public void signup(String username, String password, String email, String phoneNumber, String fullName, HttpServletResponse response) throws IOException{
         User user = new User();
+        user.setFullName(fullName);
         user.setUsername(username);
         user.setEmail(email);
+        user.setPhoneNumber(phoneNumber);
         user.setPassword(password);
         user.setRole("member");
         userRepository.save(user);

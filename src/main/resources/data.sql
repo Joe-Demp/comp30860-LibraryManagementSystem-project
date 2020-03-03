@@ -26,5 +26,5 @@ VALUES ('Book', 2, 'J.K. Rowling', 'Fantasy Fiction', 'English', 'A1001', 'Harpe
         'Eat, Pray, Love', '10002345', 534, '2 Weeks')
 ;
 
-INSERT INTO user(id, username, password, role)
-VALUES (0, 'user1', 'password', 'admin');
+INSERT INTO user(id, full_name, username, password, email, phone_number, role, created)
+VALUES (0, 'my name' ,'user1', 'password', 'user1@gmail.com', '+353 87 123 4567', 'admin', '2020-05-06');

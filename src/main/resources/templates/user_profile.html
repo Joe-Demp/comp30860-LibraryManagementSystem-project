@@ -32,24 +32,28 @@
           <tbody>
           <tr>
             <td class="key-text">Name:</td>
-            <td>Mary Reilly</td>
+            <td th:text="${fullName}"></td>
+          </tr>
+          <tr>
+            <td class="key-text">Username:</td>
+            <td th:text="${username}"></td>
           </tr>
           <tr>
             <td class="key-text">Member ID:</td>
-            <td>AT2668</td>
+            <td th:text="${id}"></td>
           </tr>
           <tr>
             <td class="key-text">email:</td>
-            <td>mary.reilly@yahoo.com</td>
+            <td th:text="${email}"></td>
           </tr>
           <tr>
             <td class="key-text">Phone:</td>
             <!-- todo make sure thymeleaf gets a formatted phone number string here -->
-            <td>+353 87 123 4567</td>
+            <td th:text="${phoneNumber}"></td>
           </tr>
           <tr>
             <td class="key-text">Date Joined:</td>
-            <td>07/06/2005</td>
+            <td th:text="${#dates.format(created, 'dd/MM/YYYY')}"></td>
           </tr>
           </tbody>
         </table>

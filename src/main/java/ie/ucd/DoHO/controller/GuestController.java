@@ -2,6 +2,8 @@ package ie.ucd.DoHO.controller;
 
 import ie.ucd.DoHO.model.Artifact;
 import ie.ucd.DoHO.model.ArtifactRepository;
+import ie.ucd.DoHO.model.User;
+import ie.ucd.DoHO.model.UserRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +21,11 @@ public class GuestController {
     private UserSession userSession;
     @Autowired
     private ArtifactRepository artifactRepository;
+    @Autowired
+    private UserRepository userRepository;
     private Logger logger = LoggerFactory.getLogger(GuestController.class);
+
+
 
     @GetMapping("/")
     public String index(Model model) {
@@ -49,7 +55,14 @@ public class GuestController {
     }
 
     @GetMapping("/user")
-    public String user() {
+    public String user(@RequestParam("id") Integer id, Model model) {
+        Optional<User> user = userRepository.findById(id);
+        model.addAttribute("fullName", user.get().getFullName());
+        model.addAttribute("username", user.get().getUsername());
+        model.addAttribute("email", user.get().getEmail());
+        model.addAttribute("phoneNumber", user.get().getPhoneNumber());
+        model.addAttribute("id", user.get().getId());
+        model.addAttribute("created", user.get().getCreated());
         return "user_profile";
     }
 
@@ -57,12 +70,6 @@ public class GuestController {
     public String librarianPortal() {
         return "librarian_portal";
     }
-
-    @GetMapping("/sign_up")
-    public String signUp() {
-        return "sign_up.html";
-    }
-
 
     @GetMapping("/search_artifact")
     public String displayArtifacts() {
