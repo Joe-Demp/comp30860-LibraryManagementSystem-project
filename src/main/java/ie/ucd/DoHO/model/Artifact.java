@@ -164,6 +164,14 @@ public abstract class Artifact implements Serializable {
         this.stockOnLoan = stockOnLoan;
     }
 
+    public List<Reservation> getReservations() {
+        return reservations;
+    }
+
+    public List<Loan> getLoans() {
+        return loans;
+    }
+
     public Map<String, String> getAdditionalDetails() {
         Map<String, String> additionals = new HashMap<>();
         for (Field field : this.getClass().getDeclaredFields()) {

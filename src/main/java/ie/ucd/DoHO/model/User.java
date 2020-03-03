@@ -95,6 +95,14 @@ public class User implements Serializable {
         this.created = created;
     }
 
+    public List<Reservation> getReservations() {
+        return reservations;
+    }
+
+    public List<Loan> getLoans() {
+        return loans;
+    }
+
     @Override
     public String toString() {
         return "{" +
