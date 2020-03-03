@@ -16,7 +16,7 @@ public abstract class Artifact implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Integer id;
     @Column
     private String title;
     @Column
@@ -50,6 +50,14 @@ public abstract class Artifact implements Serializable {
         setGenre(genre);
         setLibraryLocation(libraryLocation);
         setLanguage(language);
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getTitle() {
