@@ -1,5 +1,7 @@
 package ie.ucd.DoHO.model;
 
+import ie.ucd.DoHO.util.Formatter;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.lang.reflect.Field;
@@ -139,6 +141,7 @@ public abstract class Artifact implements Serializable {
             String fieldString = field.getName();
             if (!primaryFields.contains(fieldString)) {
                 try {
+                    fieldString = Formatter.toKeyString(fieldString);
                     additionals.put(fieldString, field.get(this).toString());
                 } catch (IllegalAccessException e) {
                     System.err.printf("Field %s could not be added to additionalDetails", fieldString);
@@ -147,5 +150,9 @@ public abstract class Artifact implements Serializable {
             }
         }
         return additionals;
+    }
+
+    public String getReleaseDateString() {
+        return Formatter.toDateString(releaseDate);
     }
 }
