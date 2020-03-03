@@ -1,50 +1,48 @@
+<a class="btn btn-primary" data-target="#login" data-toggle="modal" href="/login" type="button">Login</a>
 
-
-    <a type="button" class="btn btn-primary" data-toggle="modal" data-target="#login" href="/login">Login</a>
-
-    <div class="modal" id="login">
-        <div class="modal-dialog" type="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Login</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="model-body">
-                    <form method="POST" action="/login">
-                        <div class="form-group">
-                            <div class="row">
-                                <div class="col-9" style="margin-left: 10%">
-                                    <label class="col-form-label" for="loginUsername">Username</label>
-                                    <input type="text" name="username" class="form-control" placeholder="username" id="loginUsername">
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-9" style="margin-left: 10%">
-                                    <label class="col-form-label" for="loginPassword">Password</label>
-                                    <input type="password" name="password" class="form-control" placeholder="password" id="loginPassword">
-                                </div>
-                            </div>
-                            <span th:if="error != null">
+<div class="modal" id="login">
+  <div class="modal-dialog" type="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Login</h5>
+        <button aria-label="Close" class="close" data-dismiss="modal" type="button">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="model-body">
+        <form action="/login" method="POST">
+          <div class="form-group">
+            <div class="row">
+              <div class="col-9" style="margin-left: 10%">
+                <label class="col-form-label" for="loginUsername">Username</label>
+                <input class="form-control" id="loginUsername" name="username" placeholder="username" type="text">
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-9" style="margin-left: 10%">
+                <label class="col-form-label" for="loginPassword">Password</label>
+                <input class="form-control" id="loginPassword" name="password" placeholder="password" type="password">
+              </div>
+            </div>
+            <span th:if="error != null">
                                 <div class="row">
                                     <p style="color:red;" th:text="${error}"></p>
                                 </div>
                             </span>
-                            <div class="row">
-                                <div class="col-10"></div>
-                                <div class="col" style="margin-top: 5%">
-                                    <button type="submit" class="btn btn-primary">Submit</button>
-                                </div>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                </div>
+            <div class="row">
+              <div class="col-10"></div>
+              <div class="col" style="margin-top: 5%">
+                <button class="btn btn-primary" type="submit">Submit</button>
+              </div>
             </div>
-
-        </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" data-dismiss="modal" type="button">Close</button>
+      </div>
     </div>
+
+  </div>
+</div>
 

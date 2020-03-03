@@ -1,41 +1,43 @@
-<nav xmlns:th="http://www.w3.org/1999/xhtml" class="navbar navbar-expand-md navbar-light bg-light">
-    <div class="container-fluid">
-        <h1 >TJD LIBRARY SYSTEMS</h1>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarColor01">
-            <ul class="navbar-nav ml-auto">
+<nav class="navbar navbar-expand-md navbar-light bg-light" xmlns:th="http://www.w3.org/1999/xhtml">
+  <div class="container-fluid">
+    <h1>TJD LIBRARY SYSTEMS</h1>
+    <button class="navbar-toggler" data-target="#navbarColor01" data-toggle="collapse" type="button">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarColor01">
+      <ul class="navbar-nav ml-auto">
 
-                <li class="nav-item">
-                    <form class="form-inline">
-                        <div>
-                            <input class="form-control mr-auto" type="search" placeholder="Search">
-                            <button style="margin-left: auto; margin-right: auto;" class="btn btn-outline-info mr-auto" type="submit">Search</button>
-                        </div>
-                    </form>
-                </li>
-                <li class="nav-item active">
-                    <button type="button" class="btn btn-primary">Home</button>
-                </li>
-                <li class="nav-item">
-                    <button type="button" class="btn btn-primary special">About</button>
-                </li>
-                <li class="nav-item">
-                    <button type="button" class="btn btn-primary">Profile</button>
-                </li>
+        <li class="nav-item">
+          <form class="form-inline">
+            <div>
+              <input class="form-control mr-auto" placeholder="Search" type="search">
+              <button class="btn btn-outline-info mr-auto" style="margin-left: auto; margin-right: auto;" type="submit">
+                Search
+              </button>
+            </div>
+          </form>
+        </li>
+        <li class="nav-item active">
+          <button class="btn btn-primary" type="button">Home</button>
+        </li>
+        <li class="nav-item">
+          <button class="btn btn-primary special" type="button">About</button>
+        </li>
+        <li class="nav-item">
+          <button class="btn btn-primary" type="button">Profile</button>
+        </li>
 
-                <div class="row">
-                    <li class="nav-item ">
-                        <span th:if="${user == null}"><span th:include="login.html"></span></span>
-                        <span th:if="${user != null}"><a type="button" class="btn btn-primary" href="/logout">Logout</a></span>
-                    </li>
-                    <li class="nav-item">
-                        <span th:if="${user == null}"><span th:include="sign_up.html"></span></span>
-                    </li>
-                </div>
-            </ul>
+        <div class="row">
+          <li class="nav-item ">
+            <span th:if="${user == null}"><span th:include="login.html"></span></span>
+            <span th:if="${user != null}"><a class="btn btn-primary" href="/logout" type="button">Logout</a></span>
+          </li>
+          <li class="nav-item">
+            <span th:if="${user == null}"><span th:include="sign_up.html"></span></span>
+          </li>
         </div>
+      </ul>
     </div>
+  </div>
 
 </nav>

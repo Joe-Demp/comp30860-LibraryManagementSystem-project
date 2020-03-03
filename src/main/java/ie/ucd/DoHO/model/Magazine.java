@@ -1,6 +1,5 @@
 package ie.ucd.DoHO.model;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import java.sql.Date;
 

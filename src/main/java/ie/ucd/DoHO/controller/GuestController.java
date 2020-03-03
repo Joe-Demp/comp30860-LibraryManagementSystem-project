@@ -59,13 +59,13 @@ public class GuestController {
     }
 
     @GetMapping("/sign_up")
-    public String signUp(){
+    public String signUp() {
         return "sign_up.html";
     }
 
 
     @GetMapping("/search_artifact")
-    public String displayArtifacts(){
+    public String displayArtifacts() {
         return "search_artifact.html";
     }
 }

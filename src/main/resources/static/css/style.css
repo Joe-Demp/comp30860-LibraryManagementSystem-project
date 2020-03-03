@@ -2,17 +2,19 @@ html, body {
     height: 100%;
     width: 100%;
 }
+
 .navbar {
     padding: 0px;
     border-bottom: solid 1px black;
 }
-.navbar-nav li{
+
+.navbar-nav li {
     padding-right: 20px;
     margin-top: auto;
     margin-bottom: auto;
 }
 
-.navbar-nav li .btn{
+.navbar-nav li .btn {
     padding: 0 5px 0 5px;
     margin: 5px;
     width: 100px;
@@ -28,16 +30,16 @@ footer {
     color: #f0f0f0;
 }
 
-.foot-hr{
+.foot-hr {
     background-color: #d5d5d5;
 }
 
-.contact-form{
+.contact-form {
     margin: 5px;
 }
 
 @media (max-width: 992px) {
-    .navbar-nav li .btn{
+    .navbar-nav li .btn {
         width: 85px;
     }
 }

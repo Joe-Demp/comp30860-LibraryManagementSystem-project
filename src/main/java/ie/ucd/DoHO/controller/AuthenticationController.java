@@ -20,14 +20,14 @@ public class AuthenticationController {
     private UserRepository userRepository;
 
     @GetMapping("/login_main")
-    public String login_main(Model model){
+    public String login_main(Model model) {
         model.addAttribute("error", "Username or Password not correct. Please try again.");
         return "login_main.html";
     }
 
     @GetMapping("/login")
-    public String login(Model model){
-        if(userSession.isLoginFailed()){
+    public String login(Model model) {
+        if (userSession.isLoginFailed()) {
             userSession.setLoginFailed(false);
         }
         return "login.html";
@@ -36,17 +36,17 @@ public class AuthenticationController {
     @PostMapping("/login")
     public void doLogin(String username, String password, HttpServletResponse response) throws IOException {
         Optional<User> user = userRepository.findByUsernameAndPassword(username, password);
-        if(user.isPresent()){
+        if (user.isPresent()) {
             userSession.setUser(user.get());
             response.sendRedirect("/");
-        }else {
+        } else {
             userSession.setLoginFailed(true);
             response.sendRedirect("/login_main");
         }
     }
 
     @GetMapping("/logout")
-    public void logout(HttpServletResponse response) throws IOException{
+    public void logout(HttpServletResponse response) throws IOException {
         userSession.setUser(null);
         response.sendRedirect("/");
     }

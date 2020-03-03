@@ -7,9 +7,9 @@ import java.sql.Date;
 @Entity
 public class Periodical extends Artifact {
     @Column
-    private String frequency;
+    protected String frequency;
     @Column
-    private int issue;
+    protected int issue;
 
     public Periodical() {
     }

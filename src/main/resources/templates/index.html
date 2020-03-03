@@ -1,58 +1,71 @@
 <!DOCTYPE html>
-<html  lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
-    <title></title>
-    <link href="https://stackpath.bootstrapcdn.com/bootswatch/4.4.1/journal/bootstrap.min.css" rel="stylesheet"
-          integrity="sha384-0d2eTc91EqtDkt3Y50+J9rW3tCXJWw6/lDgf1QNHLlV0fadTyvcA120WPsSOlwga" crossorigin="anonymous">
-   <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous"> -->
+  <title></title>
+  <link crossorigin="anonymous" href="https://stackpath.bootstrapcdn.com/bootswatch/4.4.1/journal/bootstrap.min.css"
+        integrity="sha384-0d2eTc91EqtDkt3Y50+J9rW3tCXJWw6/lDgf1QNHLlV0fadTyvcA120WPsSOlwga" rel="stylesheet">
+  <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous"> -->
 
-    <link href="css/style.css" rel="stylesheet">
+  <link href="css/style.css" rel="stylesheet">
 </head>
 <body>
-    <nav th:replace="header.html"></nav>
-    <div style="padding-top: 20px;"  class="container" >
-        <div  style="padding: 10px;" class="row">
-            <div style="padding:0px;margin:0px;"  class="col-md-4">
-                <div style="width:100% padding:0; margin:0;"class="card shadow-lg">
-                    <h3 class="card-header text-center">Where can you find us</h3>
-                    <div class="card-body">
-                        <p class="card-text text-center">University College Dublin, Ireland</p>
-                        <div class="mapouter">
-                            <div class="gmap_canvas">
-                                <iframe width="100%" height="300" id="gmap_canvas" src="https://maps.google.com/maps?q=university%20college%20dublin&t=&z=15&ie=UTF8&iwloc=&output=embed" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+<nav th:replace="header.html"></nav>
+<div class="container" style="padding-top: 20px;">
+  <div class="row" style="padding: 10px;">
+    <div class="col-md-4" style="padding:0px;margin:0px;">
+      <div class="card shadow-lg" style="width:100% padding:0; margin:0;">
+        <h3 class="card-header text-center">Where can you find us</h3>
+        <div class="card-body">
+          <p class="card-text text-center">University College Dublin, Ireland</p>
+          <div class="mapouter">
+            <div class="gmap_canvas">
+              <iframe frameborder="0" height="300" id="gmap_canvas"
+                      marginheight="0"
+                      marginwidth="0" scrolling="no"
+                      src="https://maps.google.com/maps?q=university%20college%20dublin&t=&z=15&ie=UTF8&iwloc=&output=embed"
+                      width="100%"></iframe>
             </div>
-            <div style="padding:0px;" class="col-md-4">
-                <div class="card shadow-lg">
-                    <h1 class="card-header text-center">OPEN until 5pm today</h1>
-                </div>
-                <div class="card">
-                    <h3 class="card-header text-center">About Us</h3>
-                    <div class="card-body">
-                        <p class="card-text text-center">We are a small library located at the heart of UCD <br/><a href="#">Find out more</a></p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4 shadow-lg">
-                <h2 class="text-center">Contact Us</h2>
-                <p class="text-center">Got a question? Send us a message!</p>
-                <form class="text-center" id="contact-form" name="contact-form" method="POST">
-                    <input type="text" id="name" name="name" placeholder="Name" class="form-control contact-form">
-                    <input type="text" id="email" name="email" placeholder="Email" class="form-control contact-form">
-                    <input type="text" id="subject" name="subject" placeholder="Subject" class="form-control contact-form">
-                    <textarea style="max-height:150px;" type="text-area" id="message" name="message" placeholder="Message" class="form-control contact-form"></textarea>
-                    <button class="btn btn-info center-block contact-form" type="submit">Send</button>
-                </form>
-            </div>
+          </div>
         </div>
+      </div>
     </div>
+    <div class="col-md-4" style="padding:0px;">
+      <div class="card shadow-lg">
+        <h1 class="card-header text-center">OPEN until 5pm today</h1>
+      </div>
+      <div class="card">
+        <h3 class="card-header text-center">About Us</h3>
+        <div class="card-body">
+          <p class="card-text text-center">We are a small library located at the heart of UCD <br/><a href="#">Find out
+            more</a></p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4 shadow-lg">
+      <h2 class="text-center">Contact Us</h2>
+      <p class="text-center">Got a question? Send us a message!</p>
+      <form class="text-center" id="contact-form" method="POST" name="contact-form">
+        <input class="form-control contact-form" id="name" name="name" placeholder="Name" type="text">
+        <input class="form-control contact-form" id="email" name="email" placeholder="Email" type="text">
+        <input class="form-control contact-form" id="subject" name="subject" placeholder="Subject" type="text">
+        <textarea class="form-control contact-form" id="message" name="message" placeholder="Message"
+                  style="max-height:150px;"
+                  type="text-area"></textarea>
+        <button class="btn btn-info center-block contact-form" type="submit">Send</button>
+      </form>
+    </div>
+  </div>
+</div>
 
-    <footer th:replace="footer.html"></footer>
-    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+<footer th:replace="footer.html"></footer>
+<script crossorigin="anonymous"
+        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+        src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
+<script crossorigin="anonymous"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+<script crossorigin="anonymous"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+        src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
 </body>
 </html>

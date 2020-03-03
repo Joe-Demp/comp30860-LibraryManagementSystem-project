@@ -42,14 +42,14 @@
     }
   </style>
 
-  <link href="https://stackpath.bootstrapcdn.com/bootswatch/4.4.1/journal/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-0d2eTc91EqtDkt3Y50+J9rW3tCXJWw6/lDgf1QNHLlV0fadTyvcA120WPsSOlwga" crossorigin="anonymous">
+  <link crossorigin="anonymous" href="https://stackpath.bootstrapcdn.com/bootswatch/4.4.1/journal/bootstrap.min.css"
+        integrity="sha384-0d2eTc91EqtDkt3Y50+J9rW3tCXJWw6/lDgf1QNHLlV0fadTyvcA120WPsSOlwga" rel="stylesheet">
 </head>
 <body>
 <div th:replace="header.html">
   <h1>HEADER Library Management System</h1>
 </div>
-<div id="grid" class="container">
+<div class="container" id="grid">
   <div class="row">
     <div class="col-lg-8" id="artifact">
       <div class="page-box my-4 px-5 pb-3 shadow-lg" id="a-box">
@@ -101,23 +101,23 @@
       </div>
     </div>
     <div class="col-lg-1"></div>
-    <div id="control" class="col-lg-3">
+    <div class="col-lg-3" id="control">
       <div class="d-flex justify-content-center flex-column page-box shadow-lg my-4 p-3">
-        <a href="#" class="btn btn-primary btn-lg btn-block my-2">Reserve it</a>
+        <a class="btn btn-primary btn-lg btn-block my-2" href="#">Reserve it</a>
         <p style="text-align: center;">0 copies available currently</p>
         <p style="text-align: center;">Next available on 23-Feb 2020</p>
       </div>
       <div class="d-flex justify-content-center flex-column page-box shadow-lg my-4 p-3" id="admin-panel"
            th:if="${isAdmin}">
-        <a href="#" class="btn btn-primary btn-lg btn-block mt-2 mb-4">Receive</a>
+        <a class="btn btn-primary btn-lg btn-block mt-2 mb-4" href="#">Receive</a>
         <h4 style="text-align: center;">Options</h4>
         <div class="btn-gang d-flex justify-content-center flex-column">
-          <a href="#" class="btn btn-outline-primary btn-block">View Reservations</a>
-          <a href="#" class="btn btn-outline-primary btn-block">Edit Artifact</a>
+          <a class="btn btn-outline-primary btn-block" href="#">View Reservations</a>
+          <a class="btn btn-outline-primary btn-block" href="#">Edit Artifact</a>
         </div>
         <div class="btn-gang d-flex justify-content-center flex-column">
-          <a href="#" class="btn btn-outline-warning btn-block">Delete Artifact</a>
-          <a href="#" class="btn btn-outline-danger btn-block">Hide Artifact</a>
+          <a class="btn btn-outline-warning btn-block" href="#">Delete Artifact</a>
+          <a class="btn btn-outline-danger btn-block" href="#">Hide Artifact</a>
         </div>
       </div>
     </div>
@@ -126,14 +126,14 @@
 <div th:replace="footer.html">
   <h1>FOOTER</h1>
 </div>
-<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+<script crossorigin="anonymous"
         integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
-        crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
+<script crossorigin="anonymous"
         integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
-        crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+        src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+<script crossorigin="anonymous"
         integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
-        crossorigin="anonymous"></script>
+        src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
 </body>
 </html>

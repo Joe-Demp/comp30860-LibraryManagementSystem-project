@@ -1,7 +1,6 @@
 package ie.ucd.DoHO.model;
 
 
-import javax.accessibility.AccessibleHyperlink;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import java.sql.Date;
@@ -9,10 +8,7 @@ import java.sql.Date;
 @Entity
 public class EBook extends Book {
     @Column
-    private String ISBN;
-
-    @Column
-    private String hyperlink;
+    protected String hyperlink;
 
     public EBook() {
     }
