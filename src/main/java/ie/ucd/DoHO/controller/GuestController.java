@@ -1,5 +1,6 @@
 package ie.ucd.DoHO.controller;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import ie.ucd.DoHO.model.Artifact;
 import ie.ucd.DoHO.model.ArtifactRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +20,7 @@ public class GuestController {
     private UserSession userSession;
     @Autowired
     private ArtifactRepository artifactRepository;
+    private ObjectMapper mapper = new ObjectMapper();
 
     @GetMapping("/")
     public String index(Model model) {
@@ -36,7 +38,10 @@ public class GuestController {
             throws IOException {
         Optional<Artifact> artifact = artifactRepository.findById(id);
         if (artifact.isPresent()) {
+            String artifactJSON = mapper.writeValueAsString(artifact.get());
+
             model.addAttribute("artifact", artifact.get());
+            model.addAttribute("artifactJSON", artifactJSON);
         } else {
             return "404";
         }
