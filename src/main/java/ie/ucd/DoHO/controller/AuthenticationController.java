@@ -50,4 +50,15 @@ public class AuthenticationController {
         userSession.setUser(null);
         response.sendRedirect("/");
     }
+
+    @PostMapping("/signup")
+    public void signup(String username, String password, String email, HttpServletResponse response) throws IOException{
+        User user = new User();
+        user.setUsername(username);
+        user.setEmail(email);
+        user.setPassword(password);
+        user.setRole("member");
+        userRepository.save(user);
+        response.sendRedirect("/");
+    }
 }
