@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<link href="https://stackpath.bootstrapcdn.com/bootswatch/4.4.1/journal/bootstrap.min.css" rel="stylesheet"
+      integrity="sha384-0d2eTc91EqtDkt3Y50+J9rW3tCXJWw6/lDgf1QNHLlV0fadTyvcA120WPsSOlwga" crossorigin="anonymous">
+<head>
+    <meta charset="UTF-8">
+    <title>DoHLO Login</title>
+</head>
+<body>
+
+<div class="container">
+    <div class="row" style="margin-top: 15%">
+        <h2>Login</h2>
+    </div>
+    <form method="POST" action="/login">
+        <div class="form-group">
+            <div class="row">
+                <div class="col-9" style="margin-left: 10%">
+                    <label class="col-form-label" for="loginUsername">Username</label>
+                    <input type="text" name="username" class="form-control" placeholder="username" id="loginUsername">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-9" style="margin-left: 10%">
+                    <label class="col-form-label" for="loginPassword">Password</label>
+                    <input type="password" name="password" class="form-control" placeholder="password" id="loginPassword">
+                </div>
+            </div>
+            <span th:if="error != null">
+                <div class="row">
+                    <p style="color:red;" th:text="${error}"></p>
+                </div>
+            </span>
+            <div class="row">
+                <div class="col-10"></div>
+                <div class="col" style="margin-top: 5%">
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
+            </div>
+        </div>
+    </form>
+
+
+</div>
+
+</body>
+</html>

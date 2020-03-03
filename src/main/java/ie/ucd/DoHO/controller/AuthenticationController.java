@@ -19,10 +19,15 @@ public class AuthenticationController {
     @Autowired
     private UserRepository userRepository;
 
+    @GetMapping("/login_main")
+    public String login_main(Model model){
+        model.addAttribute("error", "Username or Password not correct. Please try again.");
+        return "login_main.html";
+    }
+
     @GetMapping("/login")
     public String login(Model model){
         if(userSession.isLoginFailed()){
-            model.addAttribute("error", "Username or Password not correct. Please try again.");
             userSession.setLoginFailed(false);
         }
         return "login.html";
@@ -36,7 +41,7 @@ public class AuthenticationController {
             response.sendRedirect("/");
         }else {
             userSession.setLoginFailed(true);
-            response.sendRedirect("/login");
+            response.sendRedirect("/login_main");
         }
     }
 
