@@ -12,27 +12,36 @@
       </div>
       <div class="modal-body">
         <p>Sign up to experience a whole range of new features, exclusive to our members</p>
-        <div class="form-group">
-          <div class="row">
-            <div class="col-9" style="margin-left: 10%">
-              <label class="col-form-label" for="loginUsername">Username</label>
-              <input class="form-control" id="loginUsername" placeholder="username" type="text">
+        <form method="POST" action="/signup">
+          <div class="form-group">
+            <div class="row">
+              <div class="col-9" style="margin-left: 10%">
+                <label class="col-form-label" for="loginUsername">Username</label>
+                <input class="form-control"  name="username" id="loginUsername" placeholder="username" type="text">
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-9" style="margin-left: 10%">
+                <label class="col-form-label" for="loginPassword">Password</label>
+                <input class="form-control" name="password" id="loginPassword" placeholder="password" type="password">
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-9" style="margin-left: 10%">
+                <label class="col-form-label" for="email">Email</label>
+                <input class="form-control" name="email" id="email" placeholder="email" type="email">
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-10"></div>
+              <div class="col" style="margin-top: 5%;margin-left: 10%;">
+                <button class="btn btn-primary" type="submit">Submit</button>
+              </div>
             </div>
           </div>
-          <div class="row">
-            <div class="col-9" style="margin-left: 10%">
-              <label class="col-form-label" for="loginPassword">Password</label>
-              <input class="form-control" id="loginPassword" placeholder="password" type="password">
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-10"></div>
-            <div class="col" style="margin-top: 5%;margin-left: 10%;">
-              <button class="btn btn-primary" type="submit">Submit</button>
-            </div>
-          </div>
-        </div>
+        </form>
       </div>
+
       <div class="modal-footer">
         <button class="btn btn-secondary" data-dismiss="modal" type="button">Close</button>
       </div>
