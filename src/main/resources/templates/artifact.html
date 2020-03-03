@@ -83,29 +83,18 @@
         <h5>Additional Information</h5>
         <table class="table table-borderless text-table" id="addInfo">
           <tbody>
-          <tr th:each="detailEntry : ${additionalDetails}">
-            <td class="w-25 key-text" th:text="${detailEntry.key}">Key</td>
-            <td class="w-25 key-text" th:text="${detailEntry.value}">Value</td>
-          </tr>
           <tr>
             <td class="w-25 key-text">Library Location:</td>
-            <td>A-43</td>
-          </tr>
-          <tr>
-            <td class="w-25 key-text">Pages:</td>
-            <td>607</td>
+            <td th:text="${artifact.libraryLocation}">Location not found</td>
           </tr>
           <tr>
             <td class="w-25 key-text">Language:</td>
-            <td>English; Subtitles in French</td>
+            <td th:text="${artifact.language}">Language not found</td>
           </tr>
-          <tr>
-            <td class="w-25 key-text">Notes:</td>
-            <td>Originally published in 2005</td>
-          </tr>
-          <tr>
-            <td class="w-25 key-text">ISBN:</td>
-            <td>9781408894767</td>
+          <!-- Additional details provided by the subclass below -->
+          <tr th:each="detailEntry : ${additionalDetails}">
+            <td class="w-25 key-text" th:text="${detailEntry.key}">Key</td>
+            <td th:text="${detailEntry.value}">Value</td>
           </tr>
           </tbody>
         </table>
