@@ -12,21 +12,26 @@ public class GuestController {
 
     @GetMapping("/")
     public String index() {
-        return "index.html";
+        return "index";
     }
 
     @GetMapping("/loan_history")
     public String loan_history() {
-        return "loan_history.html";
+        return "loan_history";
     }
 
     @GetMapping("/artifact")
     public String artifact() {
-        return "artifact.html";
+        return "artifact";
     }
 
     @GetMapping("/user")
     public String user() {
-        return "user_profile.html";
+        return "user_profile";
+    }
+
+    @GetMapping("/admin/portal")
+    public String librarianPortal() {
+        return "librarian_portal";
     }
 }
