@@ -1,5 +1,6 @@
 package ie.ucd.DoHO.model;
 
+import ie.ucd.DoHO.model.Contracts.Reservation;
 import ie.ucd.DoHO.model.Exceptions.ArtifactUnavailableException;
 import ie.ucd.DoHO.util.Formatter;
 
@@ -49,6 +50,8 @@ public abstract class Artifact implements Serializable {
     private int totalStock;
     @Column
     private int stockOnLoan = 0;
+    @OneToMany(mappedBy = "artifact")
+    private List<Reservation> reservations;
 
     public Artifact() {
     }
