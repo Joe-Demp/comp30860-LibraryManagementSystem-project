@@ -30,7 +30,7 @@ public class GuestController {
         return "user_profile";
     }
 
-    @GetMapping("/admin/portal")
+    @GetMapping("/portal")
     public String librarianPortal() {
         return "librarian_portal";
     }

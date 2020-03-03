@@ -7,7 +7,8 @@
   <!-- todo change this to portal user.name -->
   <title>Portal - Librarian</title>
   <link href="css/layout.css" rel="stylesheet" type="text/css">
-  <!--  todo remove the below line for deployment -->
+  <!--  todo remove the below line for deployment
+   Note it should cause an error in the console when viewing page "through the application" as opposed to the raw html-->
   <link href="../static/css/layout.css" rel="stylesheet" type="text/css">
 
   <style>
@@ -25,6 +26,15 @@
       color: white;
     }
 
+    #tasks a {
+      color: black;
+      font-size: 1.2rem;
+    }
+
+    #content {
+      width: inherit;
+    }
+
     .primary-li {
       padding-bottom: 0.5rem;
     }
@@ -39,6 +49,12 @@
 
     .display-4 {
       font-size: 1.5rem !important;
+    }
+
+    #edit-btn {
+      width: 9.5rem;
+      display: block;
+      /*line-height: 3.12rem;*/
     }
   </style>
 
@@ -76,46 +92,79 @@
     </ul>
   </nav>
   <div id="content">
-    <div class="container-fluid">
+    <div class="container px-5">
       <div class="row">
         <div class="col-lg-6" id="person">
           <div class="page-box my-4 px-5 pb-3 shadow-lg">
-            <table class="table table-borderless text-table mb-4" id="person-info">
+            <h3 class="my-4">Employee Details</h3>
+            <table class="table table-borderless text-table" id="person-info">
               <tbody>
               <tr>
-                <td class="w-25 key-text">Employee ID:</td>
+                <td class="w-25 key-text">ID:</td>
+                <td class="w-25"></td>
                 <td>LB1001</td>
               </tr>
               <tr>
                 <td class="w-25 key-text">Name:</td>
+                <td class="w-25"></td>
                 <td>Mary Jones</td>
               </tr>
               <tr>
                 <td class="w-25 key-text">Phone:</td>
+                <td class="w-25"></td>
                 <td>+353 87 123 4567</td>
               </tr>
               <tr>
                 <td class="w-25 key-text">Date Joined:</td>
+                <td class="w-25"></td>
                 <td>09-Mar 2017</td>
               </tr>
               <tr>
                 <td class="w-25 key-text">Genre:</td>
+                <td class="w-25"></td>
                 <td>Fantasy Fiction</td>
               </tr>
               </tbody>
             </table>
           </div>
         </div>
-        <div class="col-lg-6" id="edit-info">
-          <div class="page-box my-4 px-5 pb-3 shadow-lg">
-            <a class="btn btn-primary" href="#">Edit Profile</a>
-            <a class="btn btn-primary" href="#">Change Password</a>
+        <div class="col-lg-1"></div>
+        <div class="col-lg-5" id="edit-info">
+          <div class="d-flex justify-content-center page-box my-4 p-3 shadow-lg">
+            <a class="btn btn-primary mx-2" href="#" id="edit-btn">Edit Profile</a>
+            <a class="btn btn-primary mx-2" href="#">Change Password</a>
           </div>
         </div>
       </div>
       <div class="row">
-        <div class="col-lg-6" id="tasks"></div>
-        <div class="col-lg-6" id="messages"></div>
+        <div class="col-lg-6" id="tasks">
+          <div class="page-box shadow-lg px-5 py-2">
+            <h3 class="my-3">Tasks</h3>
+            <div class="list-group list-group-flush">
+              <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center"
+                 href="#">
+                Check Reservations
+                <span class="badge badge-primary badge-pill">2</span>
+              </a>
+              <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center"
+                 href="#">
+                Check Renewals
+                <span class="badge badge-primary badge-pill">2</span>
+              </a>
+              <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center"
+                 href="#">
+                Infraction Control
+                <span class="badge badge-primary badge-pill">2</span>
+              </a>
+              <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center"
+                 href="#">
+                Messages
+                <span class="badge badge-primary badge-pill">2</span>
+              </a>
+            </div>
+          </div>
+        </div>
+        <!--        <div class="col-lg-6" id="messages"></div>-->
       </div>
     </div>
   </div>
