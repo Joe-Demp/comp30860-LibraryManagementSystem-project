@@ -1,5 +1,6 @@
 package ie.ucd.DoHO.model;
 
+import ie.ucd.DoHO.model.Exceptions.ArtifactUnavailableException;
 import ie.ucd.DoHO.util.Formatter;
 
 import javax.persistence.*;
@@ -44,6 +45,10 @@ public abstract class Artifact implements Serializable {
     private String libraryLocation;
     @Column
     private String language;
+    @Column
+    private int totalStock;
+    @Column
+    private int stockOnLoan = 0;
 
     public Artifact() {
     }
@@ -52,7 +57,8 @@ public abstract class Artifact implements Serializable {
      * An overloaded constructor to facilitate adding Artifacts to the LMS
      */
     public Artifact(String title, String author, String publisher, Date releaseDate,
-                    String subject, String genre, String libraryLocation, String language) {
+                    String subject, String genre, String libraryLocation, String language,
+                    int totalStock) {
         setTitle(title);
         setAuthor(author);
         setPublisher(publisher);
@@ -61,6 +67,7 @@ public abstract class Artifact implements Serializable {
         setGenre(genre);
         setLibraryLocation(libraryLocation);
         setLanguage(language);
+        setTotalStock(totalStock);
     }
 
     public Integer getId() {
@@ -135,6 +142,22 @@ public abstract class Artifact implements Serializable {
         this.language = language;
     }
 
+    public int getTotalStock() {
+        return totalStock;
+    }
+
+    public void setTotalStock(int totalStock) {
+        this.totalStock = totalStock;
+    }
+
+    public int getStockOnLoan() {
+        return stockOnLoan;
+    }
+
+    public void setStockOnLoan(int stockOnLoan) {
+        this.stockOnLoan = stockOnLoan;
+    }
+
     public Map<String, String> getAdditionalDetails() {
         Map<String, String> additionals = new HashMap<>();
         for (Field field : this.getClass().getDeclaredFields()) {
@@ -159,5 +182,21 @@ public abstract class Artifact implements Serializable {
             return "null";
         }
         return Formatter.toDateString(releaseDate);
+    }
+
+    public void loan() {
+        if (stockOnLoan < totalStock) {
+            stockOnLoan++;
+        } else {
+            throw new ArtifactUnavailableException(getTitle() + " is unavailable.");
+        }
+    }
+
+    public void receive() {
+        if (stockOnLoan > 0) {
+            stockOnLoan++;
+        } else {
+            throw new ArtifactUnavailableException(getTitle() + " is not currently out on loan.");
+        }
     }
 }
