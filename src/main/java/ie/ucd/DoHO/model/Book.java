@@ -7,9 +7,9 @@ import java.sql.Date;
 @Entity
 public class Book extends Artifact {
     @Column
-    private String ISBN;
+    protected String ISBN;
     @Column
-    private int pages;
+    protected Integer pages;
 
     public Book() {
     }
@@ -29,11 +29,11 @@ public class Book extends Artifact {
         this.ISBN = ISBN;
     }
 
-    public int getPages() {
+    public Integer getPages() {
         return pages;
     }
 
-    public void setPages(int pages) {
+    public void setPages(Integer pages) {
         this.pages = pages;
     }
 }

@@ -1,8 +1,12 @@
 package ie.ucd.DoHO.model;
 
+import ie.ucd.DoHO.util.Formatter;
+
 import javax.persistence.*;
 import java.io.Serializable;
+import java.lang.reflect.Field;
 import java.sql.Date;
+import java.util.*;
 
 /**
  * @author Department of Homeland Obscurity
@@ -13,10 +17,17 @@ import java.sql.Date;
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 public abstract class Artifact implements Serializable {
     private static final long serialVersionUID = 1L;
+    private static final Set<String> primaryFields = new HashSet<>();
+
+    static {
+        primaryFields.addAll(
+                Arrays.asList("title", "author", "publisher", "releaseDate", "subject", "genre")
+        );
+    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Integer id;
     @Column
     private String title;
     @Column
@@ -50,6 +61,14 @@ public abstract class Artifact implements Serializable {
         setGenre(genre);
         setLibraryLocation(libraryLocation);
         setLanguage(language);
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getTitle() {
@@ -114,5 +133,26 @@ public abstract class Artifact implements Serializable {
 
     public void setLanguage(String language) {
         this.language = language;
+    }
+
+    public Map<String, String> getAdditionalDetails() {
+        Map<String, String> additionals = new HashMap<>();
+        for (Field field : this.getClass().getDeclaredFields()) {
+            String fieldString = field.getName();
+            if (!primaryFields.contains(fieldString)) {
+                try {
+                    fieldString = Formatter.toKeyString(fieldString);
+                    additionals.put(fieldString, field.get(this).toString());
+                } catch (IllegalAccessException e) {
+                    System.err.printf("Field %s could not be added to additionalDetails", fieldString);
+                    e.printStackTrace();
+                }
+            }
+        }
+        return additionals;
+    }
+
+    public String getReleaseDateString() {
+        return Formatter.toDateString(releaseDate);
     }
 }

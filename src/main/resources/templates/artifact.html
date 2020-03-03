@@ -5,7 +5,7 @@
 <head>
   <meta charset="UTF-8">
   <!-- todo create variable title with Thymeleaf -->
-  <title>Artifact</title>
+  <title th:text="${artifact.title}">Artifact</title>
 
   <link href="css/layout.css" rel="stylesheet" type="text/css">
   <!--  todo remove the below line for deployment -->
@@ -53,29 +53,30 @@
   <div class="row">
     <div class="col-lg-8" id="artifact">
       <div class="page-box my-4 px-5 pb-3 shadow-lg" id="a-box">
-        <h3 class="my-4" style="//padding-top: 20px; //padding-bottom: 20px;">Harry Potter and the Half-Blood
+        <h3 class="my-4" style="//padding-top: 20px; //padding-bottom: 20px;" th:text="${artifact.title}">Harry Potter
+          and the Half-Blood
           Prince</h3>
         <table class="table table-borderless text-table mb-4" id="mainInfo">
           <tbody>
           <tr>
             <td class="w-25 key-text">Author:</td>
-            <td>J.K. Rowling</td>
+            <td th:text="${artifact.author}">J.K. Rowling</td>
           </tr>
           <tr>
             <td class="w-25 key-text">Publisher:</td>
-            <td>Bloomsbury</td>
+            <td th:text="${artifact.publisher}">Bloomsbury</td>
           </tr>
           <tr>
             <td class="w-25 key-text">Date:</td>
-            <td>2005</td>
+            <td th:text="${artifact.releaseDateString}">2005</td>
           </tr>
           <tr>
             <td class="w-25 key-text">Subject:</td>
-            <td>Book</td>
+            <td th:text="${artifact.subject}">Book</td>
           </tr>
           <tr>
             <td class="w-25 key-text">Genre:</td>
-            <td>Fantasy Fiction</td>
+            <td th:text="${artifact.genre}">Fantasy Fiction</td>
           </tr>
           </tbody>
         </table>
@@ -84,23 +85,16 @@
           <tbody>
           <tr>
             <td class="w-25 key-text">Library Location:</td>
-            <td>A-43</td>
-          </tr>
-          <tr>
-            <td class="w-25 key-text">Pages:</td>
-            <td>607</td>
+            <td th:text="${artifact.libraryLocation}">Location not found</td>
           </tr>
           <tr>
             <td class="w-25 key-text">Language:</td>
-            <td>English; Subtitles in French</td>
+            <td th:text="${artifact.language}">Language not found</td>
           </tr>
-          <tr>
-            <td class="w-25 key-text">Notes:</td>
-            <td>Originally published in 2005</td>
-          </tr>
-          <tr>
-            <td class="w-25 key-text">ISBN:</td>
-            <td>9781408894767</td>
+          <!-- Additional details provided by the subclass below -->
+          <tr th:each="detailEntry : ${additionalDetails}">
+            <td class="w-25 key-text" th:text="${detailEntry.key}">Key</td>
+            <td th:text="${detailEntry.value}">Value</td>
           </tr>
           </tbody>
         </table>
@@ -113,7 +107,8 @@
         <p style="text-align: center;">0 copies available currently</p>
         <p style="text-align: center;">Next available on 23-Feb 2020</p>
       </div>
-      <div class="d-flex justify-content-center flex-column page-box shadow-lg my-4 p-3">
+      <div class="d-flex justify-content-center flex-column page-box shadow-lg my-4 p-3" id="admin-panel"
+           th:if="${isAdmin}">
         <a href="#" class="btn btn-primary btn-lg btn-block mt-2 mb-4">Receive</a>
         <h4 style="text-align: center;">Options</h4>
         <div class="btn-gang d-flex justify-content-center flex-column">

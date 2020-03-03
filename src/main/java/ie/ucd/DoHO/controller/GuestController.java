@@ -1,17 +1,25 @@
 package ie.ucd.DoHO.controller;
 
+import ie.ucd.DoHO.model.Artifact;
 import ie.ucd.DoHO.model.ArtifactRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import java.io.IOException;
+import java.util.Optional;
 
 @Controller
 public class GuestController {
     @Autowired
     private UserSession userSession;
     @Autowired
-    private ArtifactRepository repository;
+    private ArtifactRepository artifactRepository;
+    private Logger logger = LoggerFactory.getLogger(GuestController.class);
 
     @GetMapping("/")
     public String index(Model model) {
@@ -25,7 +33,18 @@ public class GuestController {
     }
 
     @GetMapping("/artifact")
-    public String artifact() {
+    public String viewArtifact(@RequestParam(name = "aID") Integer id, Model model)
+            throws IOException {
+        Optional<Artifact> artifact = artifactRepository.findById(id);
+        if (artifact.isPresent()) {
+            model.addAttribute("artifact", artifact.get());
+            model.addAttribute("additionalDetails", artifact.get().getAdditionalDetails());
+
+            model.addAttribute("isAdmin", userSession.isAdmin());
+            logger.info("In viewArtifact: user=" + userSession.getUser() + " isAdmin=" + userSession.isAdmin());
+        } else {
+            return "404";
+        }
         return "artifact";
     }
 
