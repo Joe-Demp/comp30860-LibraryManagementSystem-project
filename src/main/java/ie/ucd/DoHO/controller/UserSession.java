@@ -19,11 +19,15 @@ public class UserSession {
         this.user = user;
     }
 
-    public boolean isLoginFailed(){
+    public boolean isLoginFailed() {
         return loginFailed;
     }
 
-    public void setLoginFailed(boolean loginFailed){
+    public void setLoginFailed(boolean loginFailed) {
         this.loginFailed = loginFailed;
+    }
+
+    public boolean isAdmin() {
+        return user != null && user.getRole().equals("admin");
     }
 }

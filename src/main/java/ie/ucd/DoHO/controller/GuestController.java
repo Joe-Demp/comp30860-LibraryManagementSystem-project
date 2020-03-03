@@ -1,11 +1,10 @@
 package ie.ucd.DoHO.controller;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import ie.ucd.DoHO.model.Artifact;
 import ie.ucd.DoHO.model.ArtifactRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Example;
-import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,7 +19,7 @@ public class GuestController {
     private UserSession userSession;
     @Autowired
     private ArtifactRepository artifactRepository;
-    private ObjectMapper mapper = new ObjectMapper();
+    private Logger logger = LoggerFactory.getLogger(GuestController.class);
 
     @GetMapping("/")
     public String index(Model model) {
@@ -38,11 +37,11 @@ public class GuestController {
             throws IOException {
         Optional<Artifact> artifact = artifactRepository.findById(id);
         if (artifact.isPresent()) {
-            // todo remove this
-            // String artifactJSON = mapper.writeValueAsString(artifact.get());
-
             model.addAttribute("artifact", artifact.get());
             model.addAttribute("additionalDetails", artifact.get().getAdditionalDetails());
+
+            model.addAttribute("isAdmin", userSession.isAdmin());
+            logger.info("In viewArtifact: user=" + userSession.getUser() + " isAdmin=" + userSession.isAdmin());
         } else {
             return "404";
         }
