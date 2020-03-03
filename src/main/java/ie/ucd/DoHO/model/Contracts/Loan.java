@@ -6,10 +6,11 @@ import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Calendar;
 import java.util.Date;
 
 @Entity
-public class Reservation implements Serializable {
+public class Loan implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
@@ -21,14 +22,17 @@ public class Reservation implements Serializable {
     private Artifact artifact;
     @CreationTimestamp
     private Date created;
-    private boolean active = true;
+    private Date due;
+    private Date returned;
 
-    public Reservation(User user, Artifact artifact) {
-        setUser(user);
-        setArtifact(artifact);
+    public Loan() {
     }
 
-    public Reservation() {
+    public Loan(User user, Artifact artifact, Date due) {
+        setUser(user);
+        setArtifact(artifact);
+        // todo consider the possibility of having a standard loan period here and computing due
+        setDue(due);
     }
 
     public Integer getId() {
@@ -63,11 +67,27 @@ public class Reservation implements Serializable {
         this.created = created;
     }
 
-    public boolean isActive() {
-        return active;
+    public Date getDue() {
+        return due;
     }
 
-    public void setInactive() {
-        this.active = false;
+    public void setDue(Date due) {
+        this.due = due;
+    }
+
+    public Date getReturned() {
+        return returned;
+    }
+
+    public void setReturned(Date returned) {
+        this.returned = returned;
+    }
+
+    public boolean isActive() {
+        return returned == null;
+    }
+
+    public boolean isOverdue() {
+        return due.before(Calendar.getInstance().getTime());
     }
 }

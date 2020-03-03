@@ -1,13 +1,13 @@
 package ie.ucd.DoHO.model;
 
+import ie.ucd.DoHO.model.Contracts.Loan;
+import ie.ucd.DoHO.model.Contracts.Reservation;
 import org.hibernate.annotations.CreationTimestamp;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 public class User implements Serializable {
@@ -22,6 +22,10 @@ public class User implements Serializable {
     private String role;
     @CreationTimestamp
     private Date created;
+    @OneToMany(mappedBy = "user")
+    private List<Reservation> reservations;
+    @OneToMany(mappedBy = "user")
+    private List<Loan> loans;
 
     public User() {
 

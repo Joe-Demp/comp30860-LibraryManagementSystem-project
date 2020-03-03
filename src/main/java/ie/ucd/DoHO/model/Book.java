@@ -15,8 +15,9 @@ public class Book extends Artifact {
     }
 
     public Book(String title, String author, String publisher, Date releaseDate,
-                String genre, String libraryLocation, String language, String ISBN, int pages) {
-        super(title, author, publisher, releaseDate, "Book", genre, libraryLocation, language);
+                String genre, String libraryLocation, String language, int totalStock,
+                String ISBN, int pages) {
+        super(title, author, publisher, releaseDate, "Book", genre, libraryLocation, language, totalStock);
         setISBN(ISBN);
         setPages(pages);
     }

@@ -9,8 +9,8 @@ public class Comic extends Magazine {
 	}
 
 	public Comic(String title, String author, String publisher, Date releaseDate, String genre,
-				 String libraryLocation, String language, String frequency, int issue) {
-		super(title, author, publisher, releaseDate, genre, libraryLocation, language, frequency, issue);
+				 String libraryLocation, String language, int totalStock, String frequency, int issue) {
+		super(title, author, publisher, releaseDate, genre, libraryLocation, language, totalStock, frequency, issue);
 		setSubject("Comic");
 	}
 }
