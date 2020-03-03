@@ -25,3 +25,6 @@ VALUES ('Book', 2, 'J.K. Rowling', 'Fantasy Fiction', 'English', 'A1001', 'Harpe
        ('Book', 11, 'Elizabeth Gilbert', 'Romance', 'English', 'A1001', 'Harper', '2005-05-05', 'Book',
         'Eat, Pray, Love', '10002345', 534, '2 Weeks')
 ;
+
+INSERT INTO user(id, username, password, role)
+VALUES (0, 'user1', 'password', 'admin');
