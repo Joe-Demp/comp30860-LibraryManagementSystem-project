@@ -39,13 +39,13 @@ public class GuestController {
         return "librarian_portal";
     }
 
-    @GetMapping("/signUp")
+    @GetMapping("/sign_up")
     public String signUp(){
         return "sign_up.html";
     }
 
 
-    @GetMapping("/searchArtifact")
+    @GetMapping("/search_artifact")
     public String displayArtifacts(){
         return "search_artifact.html";
     }
