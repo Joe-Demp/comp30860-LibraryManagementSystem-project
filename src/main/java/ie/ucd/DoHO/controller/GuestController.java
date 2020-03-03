@@ -38,10 +38,11 @@ public class GuestController {
             throws IOException {
         Optional<Artifact> artifact = artifactRepository.findById(id);
         if (artifact.isPresent()) {
-            String artifactJSON = mapper.writeValueAsString(artifact.get());
+            // todo remove this
+            // String artifactJSON = mapper.writeValueAsString(artifact.get());
 
             model.addAttribute("artifact", artifact.get());
-            model.addAttribute("artifactJSON", artifactJSON);
+            model.addAttribute("additionalDetails", artifact.get().getAdditionalDetails());
         } else {
             return "404";
         }
