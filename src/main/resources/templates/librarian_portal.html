@@ -10,6 +10,34 @@
   <!--  todo remove the below line for deployment -->
   <link href="../static/css/layout.css" rel="stylesheet" type="text/css">
 
+  <style>
+    .wrapper {
+      display: flex;
+      width: 100%;
+      align-items: stretch;
+    }
+
+    #sidebar a {
+      color: white;
+    }
+
+    .primary-li {
+      padding-bottom: 0.5rem;
+    }
+
+    .secondary-li {
+      padding: 0.5rem 0 0 1.5rem;
+    }
+
+    .display-3 {
+      font-size: 1.75rem !important;
+    }
+
+    .display-4 {
+      font-size: 1.5rem !important;
+    }
+  </style>
+
   <link crossorigin="anonymous" href="https://stackpath.bootstrapcdn.com/bootswatch/4.4.1/journal/bootstrap.min.css"
         integrity="sha384-0d2eTc91EqtDkt3Y50+J9rW3tCXJWw6/lDgf1QNHLlV0fadTyvcA120WPsSOlwga" rel="stylesheet">
 </head>
@@ -17,7 +45,36 @@
 <div id="header" th:replace="header.html">
   <h1>HEADER Library Management System</h1>
 </div>
-
+<!-- sidenav made with the help of https://bootstrapious.com/p/bootstrap-sidebar -->
+<div class="wrapper">
+  <nav class="px-3 bg-primary" id="sidebar">
+    <div class="sidebar-header my-4">
+      <h2>Librarian Portal</h2>
+    </div>
+    <ul class="list-unstyled components">
+      <li class="active primary-li">
+        <a aria-expanded="false" class="dropdown-toggle display-3" data-toggle="collapse" href="#catalogueSubmenu">Catalogue</a>
+        <ul class="collapse list-unstyled" id="catalogueSubmenu">
+          <li class="secondary-li"><a class="display-4" href="#">Complete</a></li>
+          <li class="secondary-li"><a class="display-4" href="#">On Loan</a></li>
+          <li class="secondary-li"><a class="display-4" href="#">Reserved</a></li>
+        </ul>
+      </li>
+      <li class="active primary-li">
+        <a aria-expanded="false" class="dropdown-toggle display-3" data-toggle="collapse" href="#loansSubmenu">Loans</a>
+        <ul class="collapse list-unstyled" id="loansSubmenu">
+          <li class="secondary-li"><a class="display-4" href="#">Current</a></li>
+          <li class="secondary-li"><a class="display-4" href="#">Archive</a></li>
+        </ul>
+      </li>
+      <li class="primary-li"><a class="display-3" href="#">Members</a></li>
+      <li class="primary-li"><a class="display-3" href="#">Add Artifact</a></li>
+    </ul>
+  </nav>
+  <div id="content">
+    <div class="container"></div>
+  </div>
+</div>
 <div id="footer" th:replace="footer.html">
   <h1>FOOTER</h1>
 </div>
