@@ -18,32 +18,34 @@
 </div>
 <div class="container" id="grid">
   <div class="row">
-    <h3>User Profile</h3>
+    <div class="col-lg-12">
+      <h3>User Profile</h3>
+    </div>
   </div>
   <div class="row" id="content">
     <div class="col-lg-5" id="profile" style="display: block;">
-      <div class="page-box shadow-lg" id="info">
+      <div class="page-box my-4 px-5 py-3 shadow-lg" id="info">
         <table class="table table-borderless text-table" id="mainInfo">
           <tbody>
           <tr>
-            <td class="t-text">Name:</td>
+            <td class="key-text">Name:</td>
             <td>Mary Reilly</td>
           </tr>
           <tr>
-            <td class="t-text">Member ID:</td>
+            <td class="key-text">Member ID:</td>
             <td>AT2668</td>
           </tr>
           <tr>
-            <td class="t-text">email:</td>
+            <td class="key-text">email:</td>
             <td>mary.reilly@yahoo.com</td>
           </tr>
           <tr>
-            <td class="t-text">Phone:</td>
+            <td class="key-text">Phone:</td>
             <!-- todo make sure thymeleaf gets a formatted phone number string here -->
             <td>+353 87 123 4567</td>
           </tr>
           <tr>
-            <td class="t-text">Date Joined:</td>
+            <td class="key-text">Date Joined:</td>
             <td>07/06/2005</td>
           </tr>
           </tbody>
@@ -62,38 +64,40 @@
         </table>
       </div>
     </div>
-    <div class="col-lg-7" id="loans">
-      <div class="page-box shadow-lg">
-        <table class="table text-table table-striped table-bordered" id="loan-table">
-          <thead>
-          <tr>
-            <th>Title</th>
-            <th>Author</th>
-            <th>Checked Out</th>
-            <th>Status</th>
-          </tr>
-          </thead>
-          <tbody>
-          <tr>
-            <td>How to Cook Well</td>
-            <td>Rory O'Connell</td>
-            <td>18-Feb 2020</td>
-            <td>DUE 25-Feb 2020</td>
-          </tr>
-          <tr>
-            <td>Programming Pearls</td>
-            <td>Jon Bentley</td>
-            <td>23-Dec 2019</td>
-            <td>RETURNED 10-Jan 2020</td>
-          </tr>
-          <tr>
-            <td>Harry Potter and the Order of the Phoenix</td>
-            <td>J.K. Rowling</td>
-            <td>11-Dec 2019</td>
-            <td>OVERDUE 17 days</td>
-          </tr>
-          </tbody>
-        </table>
+    <div class="col-lg-7" id="loans" style="max-height: 100%;">
+      <div class="page-box my-4 p-2 shadow-lg">
+        <div style="overflow-y: scroll;">
+          <table class="table table-striped" id="loan-table">
+            <thead>
+            <tr>
+              <th>Title</th>
+              <th>Author</th>
+              <th>Checked Out</th>
+              <th>Status</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+              <td>How to Cook Well</td>
+              <td>Rory O'Connell</td>
+              <td>18-Feb 2020</td>
+              <td>DUE 25-Feb 2020</td>
+            </tr>
+            <tr>
+              <td>Programming Pearls</td>
+              <td>Jon Bentley</td>
+              <td>23-Dec 2019</td>
+              <td>RETURNED 10-Jan 2020</td>
+            </tr>
+            <tr>
+              <td>Harry Potter and the Order of the Phoenix</td>
+              <td>J.K. Rowling</td>
+              <td>11-Dec 2019</td>
+              <td>OVERDUE 17 days</td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
   </div>
