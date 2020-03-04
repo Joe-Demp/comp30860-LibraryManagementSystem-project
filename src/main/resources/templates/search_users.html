@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>DoHO</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootswatch/4.4.1/journal/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-0d2eTc91EqtDkt3Y50+J9rW3tCXJWw6/lDgf1QNHLlV0fadTyvcA120WPsSOlwga" crossorigin="anonymous">
+    <link href="css/style.css" rel="stylesheet" type="text/css">
+    <!--  todo remove the below line for deployment -->
+    <link href="../static/css/style.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+<nav th:replace="header.html"></nav>
+    <div class="container">
+            <div style="display: flex; flex-wrap: wrap;">
+                    <div class="card border-primary mb-3" style="max-width: 20rem; margin-left: 15%;margin-top: 5%;"
+                         th:each="user : ${users}">
+                        <div class="card-header">User</div>
+                        <img src="images/user_profile_default.png" style="border-radius: 50%; width: 100px; height: 100px; margin-left: 100px; margin-right : 100px; margin-top: 10px">
+                        <div class="card-body">
+                            <h4 class="card-title" style="margin-left: 100px" th:text="${user.username}"></h4>
+                            <p class="card-text" th:text="${user.role}"></p>
+                            <p><a class="btn btn-primary"th:href="@{/user(id=${user.id})}">View</a></p>
+                        </div>
+                    </div>
+            </div>
+        </div>
+<div th:replace="footer.html"></div>
+</body>
+</html>

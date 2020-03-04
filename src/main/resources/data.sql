@@ -27,4 +27,5 @@ VALUES ('Book', 2, 'J.K. Rowling', 'Fantasy Fiction', 'English', 'A1001', 'Harpe
 ;
 
 INSERT INTO user(id, username, password, role)
-VALUES (0, 'user1', 'password', 'admin');
+VALUES (0, 'user1', 'password', 'admin'),(1, 'user2', 'password', 'admin'),
+       (2, 'user3', 'password', 'admin');

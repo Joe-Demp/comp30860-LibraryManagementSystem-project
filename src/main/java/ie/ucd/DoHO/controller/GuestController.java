@@ -1,6 +1,7 @@
 package ie.ucd.DoHO.controller;
 
 import ie.ucd.DoHO.model.ArtifactRepository;
+import ie.ucd.DoHO.model.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,6 +13,8 @@ public class GuestController {
     private UserSession userSession;
     @Autowired
     private ArtifactRepository repository;
+    @Autowired
+    private UserRepository userRepository;
 
     @GetMapping("/")
     public String index(Model model) {
@@ -27,6 +30,12 @@ public class GuestController {
     @GetMapping("/artifact")
     public String artifact() {
         return "artifact";
+    }
+
+    @GetMapping("/search_user")
+    public String displayUsers(Model model){
+        model.addAttribute("users",userRepository.findAll());
+        return "search_users.html";
     }
 
     @GetMapping("/user")
