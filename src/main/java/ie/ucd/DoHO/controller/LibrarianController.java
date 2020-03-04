@@ -29,7 +29,10 @@ public class LibrarianController {
 
     @GetMapping("/portal")
     public String portal() {
-        return "librarian_portal";
+        if (userSession.isAdmin()) {
+            return "librarian_portal";
+        }
+        return "login_main";
     }
 
     @PostMapping("/artifact/delete")
