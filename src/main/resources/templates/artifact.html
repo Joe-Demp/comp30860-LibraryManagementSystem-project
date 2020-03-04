@@ -106,8 +106,8 @@
           <a class="btn btn-outline-primary btn-block" href="#">Edit Artifact</a>
         </div>
         <div class="btn-gang d-flex justify-content-center flex-column">
-          <form action="/artifact" method="DELETE">
-
+          <form action="/artifact/delete" method="POST">
+            <input name="aID" th:value="${artifact.id}" type="hidden">
             <button class="btn btn-outline-warning btn-block" type="submit">Delete Artifact</button>
           </form>
           <a class="btn btn-outline-danger btn-block" href="#">Hide Artifact</a>
