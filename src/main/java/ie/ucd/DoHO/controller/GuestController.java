@@ -25,8 +25,6 @@ public class GuestController {
     private UserRepository userRepository;
     private Logger logger = LoggerFactory.getLogger(GuestController.class);
 
-
-
     @GetMapping("/")
     public String index(Model model) {
         model.addAttribute("user", userSession.getUser());
@@ -52,6 +50,12 @@ public class GuestController {
             return "404";
         }
         return "artifact";
+    }
+
+    @GetMapping("/search_user")
+    public String displayUsers(Model model){
+        model.addAttribute("users",userRepository.findAll());
+        return "search_users.html";
     }
 
     @GetMapping("/user")
