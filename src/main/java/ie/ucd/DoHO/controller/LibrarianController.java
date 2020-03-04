@@ -55,8 +55,14 @@ public class LibrarianController {
                           Model model, HttpServletResponse response)
             throws IOException {
         if (userSession.isAdmin()) {
-            logger.info("Book received:" + book.toString());
-            response.sendRedirect("/portal");
+            artifactRepository.save(book);
+
+            logger.info("name : header");
+            for (String name : response.getHeaderNames()) {
+                logger.info(name + " : " + response.getHeader(name));
+            }
+
+            response.sendRedirect("/");
         }
         return "login_main";
     }

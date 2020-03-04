@@ -77,6 +77,13 @@
             </div>
           </div>
           <div class="form-group row">
+            <label class="col-sm-2 col-form-label">Language:</label>
+            <div class="col-sm-10">
+              <input class="form-control" placeholder="Enter language(s)" th:field="*{language}"
+                     type="text">
+            </div>
+          </div>
+          <div class="form-group row">
             <label class="col-sm-2 col-form-label">Total Stock:</label>
             <div class="col-sm-10">
               <input class="form-control" min="1" placeholder="Enter total stock" th:field="*{totalStock}"
