@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.io.IOException;
@@ -25,9 +26,15 @@ public class GuestController {
     private UserRepository userRepository;
     private Logger logger = LoggerFactory.getLogger(GuestController.class);
 
+    @ModelAttribute
+    public void addAttributes(Model model){
+        model.addAttribute("user", userSession.getUser());
+    }
+
     @GetMapping("/")
     public String index(Model model) {
-        model.addAttribute("user", userSession.getUser());
+        if(userSession.getUser() != null)
+            model.addAttribute("id", userSession.getUser().getId());
         return "index";
     }
 
@@ -59,7 +66,7 @@ public class GuestController {
         return "search_users.html";
     }
 
-    @GetMapping("/user")
+    @GetMapping("/user_profile")
     public String user(@RequestParam("id") Integer id, Model model) {
         Optional<User> user = userRepository.findById(id);
         model.addAttribute("fullName", user.get().getFullName());
