@@ -37,7 +37,7 @@ public class GuestController {
     }
 
     @GetMapping("/artifact")
-    public String viewArtifact(@RequestParam(name = "aID") Integer id, Model model)
+    public String viewArtifact(@RequestParam(name = "id") Integer id, Model model)
             throws IOException {
         Optional<Artifact> artifact = artifactRepository.findById(id);
         if (artifact.isPresent()) {
@@ -76,7 +76,8 @@ public class GuestController {
     }
 
     @GetMapping("/search_artifact")
-    public String displayArtifacts() {
+    public String displayArtifacts(Model model) {
+        model.addAttribute("artifacts", artifactRepository.findAll());
         return "search_artifact.html";
     }
 }

@@ -1,5 +1,3 @@
-insert into artifact(dtype, id, title, author)
-values ('Book', 1, 'Pride and Prejudice', 'Jane Austin');
 
 -- Sample Artifacts
 INSERT INTO artifact

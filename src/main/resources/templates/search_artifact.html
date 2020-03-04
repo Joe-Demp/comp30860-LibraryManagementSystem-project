@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 
 <head>
   <link crossorigin="anonymous" href="https://stackpath.bootstrapcdn.com/bootswatch/4.4.1/journal/bootstrap.min.css"
@@ -12,36 +12,20 @@
 <nav th:replace="header.html"></nav>
 <div class="container">
 
-  <table class="table" style="margin-top: 10%">
+  <table class="table" style="margin-top: 10%" >
     <thead>
     <th>Artifact</th>
     <th>Title</th>
     <th></th>
     </thead>
     <tbody>
-    <!TODO: Dynamic results based on search >
-    <tr>
-      <th scope="row">book</th>
-      <td>Six Of Crows</td>
+    <tr th:each="artifact : ${artifacts}">
+      <th scope="row" th:text="${artifact.subject}">Book</th>
+      <td th:text="${artifact.title}"></td>
       <td>
-        <button class="btn btn-primary">view</button>
+        <a class="btn btn-primary" th:href="@{/artifact(id=${artifact.id})}">view</a>
       </td>
     </tr>
-    <tr>
-      <th scope="row">book</th>
-      <td>King Of Scars</td>
-      <td>
-        <button class="btn btn-primary">view</button>
-      </td>
-    </tr>
-    <tr>
-      <th scope="row">book</th>
-      <td>Crooked Kingdom</td>
-      <td>
-        <button class="btn btn-primary">view</button>
-      </td>
-    </tr>
-    </tbody>
 
   </table>
 

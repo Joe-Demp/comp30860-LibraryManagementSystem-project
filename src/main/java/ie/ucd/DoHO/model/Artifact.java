@@ -56,6 +56,7 @@ public abstract class Artifact implements Serializable {
     @OneToMany(mappedBy = "artifact")
     private List<Loan> loans;
 
+
     public Artifact() {
     }
 
