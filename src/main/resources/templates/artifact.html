@@ -17,10 +17,6 @@
       border-radius: 5px;
     }
 
-    /*td {*/
-    /*  padding: 0 !important;*/
-    /*}*/
-
     tr > td {
       font-weight: bold;
     }
@@ -110,7 +106,10 @@
           <a class="btn btn-outline-primary btn-block" href="#">Edit Artifact</a>
         </div>
         <div class="btn-gang d-flex justify-content-center flex-column">
-          <a class="btn btn-outline-warning btn-block" href="#">Delete Artifact</a>
+          <form action="/artifact" method="DELETE">
+
+            <button class="btn btn-outline-warning btn-block" type="submit">Delete Artifact</button>
+          </form>
           <a class="btn btn-outline-danger btn-block" href="#">Hide Artifact</a>
         </div>
       </div>
