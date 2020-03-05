@@ -1,8 +1,6 @@
 package ie.ucd.DoHO.controller;
 
-import ie.ucd.DoHO.model.ArtifactRepository;
-import ie.ucd.DoHO.model.Book;
-import ie.ucd.DoHO.model.UserRepository;
+import ie.ucd.DoHO.model.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,6 +42,7 @@ public class LibrarianController {
     public String addArtifact(Model model) {
         if (userSession.isAdmin()) {
             model.addAttribute("book", new Book());
+            model.addAttribute("magazine", new Magazine());
             // todo add all attributes (all types of artifact)
             return "add_artifact";
         }
@@ -57,6 +56,17 @@ public class LibrarianController {
         if (userSession.isAdmin()) {
             artifactRepository.save(book);
             response.sendRedirect("/artifact?aID=" + book.getId());
+        }
+        return "login_main";
+    }
+
+    @PostMapping("/create/magazine")
+    public String addMagazine(@ModelAttribute Magazine magazine, BindingResult errors,
+                              Model model, HttpServletResponse response)
+            throws IOException {
+        if (userSession.isAdmin()) {
+            artifactRepository.save(magazine);
+            response.sendRedirect("/artifact?aID=" + magazine.getId());
         }
         return "login_main";
     }
