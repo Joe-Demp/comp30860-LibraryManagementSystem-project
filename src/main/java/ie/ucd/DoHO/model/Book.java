@@ -12,9 +12,10 @@ public class Book extends Artifact {
     protected Integer pages;
 
     public Book() {
+        setSubject("Book");
     }
 
-    public Book(String title, String author, String publisher, Date releaseDate,
+    public Book(String title, String author, String publisher, Integer releaseDate,
                 String genre, String libraryLocation, String language, Integer totalStock,
                 String ISBN, Integer pages) {
         super(title, author, publisher, releaseDate, "Book", genre, libraryLocation, language, totalStock);

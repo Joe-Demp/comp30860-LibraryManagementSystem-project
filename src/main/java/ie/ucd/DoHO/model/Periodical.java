@@ -14,7 +14,7 @@ public class Periodical extends Artifact {
     public Periodical() {
     }
 
-    public Periodical(String title, String author, String publisher, Date releaseDate, String genre,
+    public Periodical(String title, String author, String publisher, Integer releaseDate, String genre,
                       String libraryLocation, String language, int totalStock, String frequency,
                       int issue) {
         super(title, author, publisher, releaseDate, "Periodical", genre, libraryLocation, language, totalStock);

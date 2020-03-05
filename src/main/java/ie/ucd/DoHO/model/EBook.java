@@ -13,7 +13,7 @@ public class EBook extends Book {
     public EBook() {
     }
 
-    public EBook(String title, String author, String publisher, Date releaseDate,
+    public EBook(String title, String author, String publisher, Integer releaseDate,
                  String genre, String libraryLocation, String language, int totalStock,
                  String ISBN, int pages, String hyperlink) {
         super(title, author, publisher, releaseDate, genre, libraryLocation, language, totalStock, ISBN, pages);

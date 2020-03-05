@@ -18,7 +18,7 @@ public class Formatter {
         return str + ":";
     }
 
-    public static String toDateString(Date date) {
+    public static String toDateString(Integer date) {
         return dateFormat.format(date);
     }
 }
