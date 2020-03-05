@@ -12,7 +12,7 @@
 <nav th:replace="header.html"></nav>
 <div class="container">
 
-  <table class="table" style="margin-top: 10%" >
+  <table class="table" style="margin-top: 10%">
     <thead>
     <th>Artifact</th>
     <th>Title</th>
@@ -20,7 +20,7 @@
     </thead>
     <tbody>
     <tr th:each="artifact : ${artifacts}">
-      <th scope="row" th:text="${artifact.subject}">Book</th>
+      <th scope="row" th:text="${artifact.subject}"></th>
       <td th:text="${artifact.title}"></td>
       <td>
         <a class="btn btn-primary" th:href="@{/artifact(id=${artifact.id})}">view</a>

@@ -4,6 +4,7 @@ import ie.ucd.DoHO.model.Artifact;
 import ie.ucd.DoHO.model.ArtifactRepository;
 import ie.ucd.DoHO.model.User;
 import ie.ucd.DoHO.model.UserRepository;
+import ie.ucd.DoHO.model.HibernateSearchDao;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,8 +12,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-
 import java.io.IOException;
+import java.util.List;
 import java.util.Optional;
 
 @Controller
@@ -23,7 +24,10 @@ public class GuestController {
     private ArtifactRepository artifactRepository;
     @Autowired
     private UserRepository userRepository;
+    @Autowired
+    private HibernateSearchDao searchservice;
     private Logger logger = LoggerFactory.getLogger(GuestController.class);
+
 
     @GetMapping("/")
     public String index(Model model) {
@@ -76,8 +80,15 @@ public class GuestController {
     }
 
     @GetMapping("/search_artifact")
-    public String displayArtifacts(Model model) {
-        model.addAttribute("artifacts", artifactRepository.findAll());
+    public String displayArtifacts(@RequestParam(value="search",required = false)String query, Model model) {
+        List<Artifact> searchResults = null;
+        try{
+            searchResults = searchservice.fuzzySearch(query);
+        }catch(Exception ex){}
+
+
+
+        model.addAttribute("artifacts", searchResults);
         return "search_artifact.html";
     }
 }
