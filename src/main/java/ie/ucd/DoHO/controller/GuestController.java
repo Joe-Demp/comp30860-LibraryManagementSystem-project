@@ -11,8 +11,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.Optional;
 
@@ -85,5 +87,14 @@ public class GuestController {
     @GetMapping("/search_artifact")
     public String displayArtifacts() {
         return "search_artifact.html";
+    }
+
+    //TODO Authentication to promt user to enter current password before changing to new
+    @PostMapping("change_password")
+    public void changePassword(String newPassword, HttpServletResponse response) throws IOException{
+        User user = userSession.getUser();
+        user.setPassword(newPassword);
+        userRepository.save(user);
+        response.sendRedirect("/");
     }
 }
