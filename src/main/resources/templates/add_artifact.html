@@ -39,57 +39,7 @@
     <div class="tab-content" id="tab-content">
       <div class="tab-pane fade active show m-2" id="book">
         <form action="#" method="POST" th:action="@{/create/book}" th:object="${book}">
-          <div class="form-group row">
-            <label class="col-sm-2 col-form-label">Title:</label>
-            <div class="col-sm-10">
-              <input class="form-control" placeholder="Enter title" th:field="*{title}" type="text">
-            </div>
-          </div>
-          <div class="form-group row">
-            <label class="col-sm-2 col-form-label">Author:</label>
-            <div class="col-sm-10">
-              <input class="form-control" placeholder="Enter author" th:field="*{author}" type="text">
-            </div>
-          </div>
-          <div class="form-group row">
-            <label class="col-sm-2 col-form-label">Publisher:</label>
-            <div class="col-sm-10">
-              <input class="form-control" placeholder="Enter publisher" th:field="*{publisher}" type="text">
-            </div>
-          </div>
-          <div class="form-group row">
-            <label class="col-sm-2 col-form-label">Release Year:</label>
-            <div class="col-sm-10">
-              <input class="form-control" placeholder="Enter year of release" th:field="*{releaseYear}" type="number">
-            </div>
-          </div>
-          <div class="form-group row">
-            <label class="col-sm-2 col-form-label">Genre:</label>
-            <div class="col-sm-10">
-              <input class="form-control" placeholder="Enter genre" th:field="*{genre}" type="text">
-            </div>
-          </div>
-          <div class="form-group row">
-            <label class="col-sm-2 col-form-label">Library Location:</label>
-            <div class="col-sm-10">
-              <input class="form-control" placeholder="Enter library location" th:field="*{libraryLocation}"
-                     type="text">
-            </div>
-          </div>
-          <div class="form-group row">
-            <label class="col-sm-2 col-form-label">Language:</label>
-            <div class="col-sm-10">
-              <input class="form-control" placeholder="Enter language(s)" th:field="*{language}"
-                     type="text">
-            </div>
-          </div>
-          <div class="form-group row">
-            <label class="col-sm-2 col-form-label">Total Stock:</label>
-            <div class="col-sm-10">
-              <input class="form-control" min="1" placeholder="Enter total stock" th:field="*{totalStock}"
-                     type="number">
-            </div>
-          </div>
+          <div th:replace="common/form_fields.html"></div>
 
           <!-- Book Fields -->
           <div class="form-group row">
