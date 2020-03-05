@@ -61,11 +61,11 @@
       <div class="page-box shadow-lg" id="control">
         <table id="button-table">
           <tr>
-            <td><a class="btn btn-primary btn-block" href="#">Edit Profile</a></td>
+            <td><span th:include="modals/edit_profile.html"></span></td>
             <td><a class="btn btn-primary btn-block" href="#">Catalogue</a></td>
           </tr>
           <tr>
-            <td><span th:include="change_password.html"></span></td>
+            <td><span th:include="modals/change_password.html"></span></td>
             <td><a class="btn btn-primary btn-block" href="#">View Requests</a></td>
           </tr>
         </table>

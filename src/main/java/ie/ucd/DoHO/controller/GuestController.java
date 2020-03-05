@@ -89,12 +89,25 @@ public class GuestController {
         return "search_artifact.html";
     }
 
-    //TODO Authentication to promt user to enter current password before changing to new
+    //TODO Authentication to prompt user to enter current password before changing to new
     @PostMapping("change_password")
     public void changePassword(String newPassword, HttpServletResponse response) throws IOException{
         User user = userSession.getUser();
         user.setPassword(newPassword);
         userRepository.save(user);
         response.sendRedirect("/");
+    }
+
+
+    @PostMapping("edit_profile")
+    public void editProfile(String newName, String newUsername, String newEmail, String newPhoneNumber, HttpServletResponse response) throws IOException{
+        User user = userSession.getUser();
+        Integer id = user.getId();
+        user.setFullName(newName);
+        user.setUsername(newUsername);
+        user.setEmail(newEmail);
+        user.setPhoneNumber(newPhoneNumber);
+        userRepository.save(user);
+        response.sendRedirect("/user_profile?id="+id);
     }
 }

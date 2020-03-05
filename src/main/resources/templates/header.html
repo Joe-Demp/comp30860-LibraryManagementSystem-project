@@ -29,11 +29,11 @@
 
         <div class="row">
           <li class="nav-item ">
-            <span th:if="${user == null}"><span th:include="login.html"></span></span>
+            <span th:if="${user == null}"><span th:include="modals/login.html"></span></span>
             <span th:if="${user != null}"><a class="btn btn-primary" href="/logout" type="button">Logout</a></span>
           </li>
           <li class="nav-item">
-            <span th:if="${user == null}"><span th:include="sign_up.html"></span></span>
+            <span th:if="${user == null}"><span th:include="modals/sign_up.html"></span></span>
           </li>
         </div>
       </ul>
