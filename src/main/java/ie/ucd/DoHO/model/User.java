@@ -3,6 +3,7 @@ package ie.ucd.DoHO.model;
 import ie.ucd.DoHO.model.Contracts.Loan;
 import ie.ucd.DoHO.model.Contracts.Reservation;
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.search.annotations.Indexed;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -10,6 +11,7 @@ import java.util.Date;
 import java.util.List;
 
 @Entity
+@Indexed
 public class User implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -1,10 +1,14 @@
 package ie.ucd.DoHO.model;
 
+import org.hibernate.search.annotations.Field;
+import org.hibernate.search.annotations.Indexed;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import java.sql.Date;
 
 @Entity
+@Indexed
 public class Book extends Artifact {
     @Column
     protected String ISBN;
