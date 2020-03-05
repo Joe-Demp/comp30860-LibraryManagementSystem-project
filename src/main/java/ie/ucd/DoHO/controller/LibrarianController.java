@@ -56,13 +56,7 @@ public class LibrarianController {
             throws IOException {
         if (userSession.isAdmin()) {
             artifactRepository.save(book);
-
-            logger.info("name : header");
-            for (String name : response.getHeaderNames()) {
-                logger.info(name + " : " + response.getHeader(name));
-            }
-
-            response.sendRedirect("/");
+            response.sendRedirect("/artifact?aID=" + book.getId());
         }
         return "login_main";
     }
