@@ -29,13 +29,13 @@
         <a class="nav-link active" data-toggle="tab" href="#book">Book</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link active" data-toggle="tab" href="#cd">CD</a>
+        <a class="nav-link" data-toggle="tab" href="#cd">CD</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link active" data-toggle="tab" href="#comic">Comic</a>
+        <a class="nav-link" data-toggle="tab" href="#comic">Comic</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link active" data-toggle="tab" href="#ebook">EBook</a>
+        <a class="nav-link" data-toggle="tab" href="#ebook">EBook</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" data-toggle="tab" href="#magazine">Magazine</a>
@@ -71,7 +71,7 @@
         </form>
       </div>
 
-      <div class="tab-pane fade active show m-2" id="cd">
+      <div class="tab-pane fade m-2" id="cd">
         <form action="#" method="POST" th:action="@{/create/cd}" th:object="${cd}">
           <div th:replace="common/form_fields.html"></div>
 
@@ -79,13 +79,7 @@
           <div class="form-group row">
             <label class="col-sm-2 col-form-label">Runtime in minutes:</label>
             <div class="col-sm-10">
-              <input class="form-control" placeholder="Enter runtime" th:field="*{runtimeMinutes}" type="text">
-            </div>
-          </div>
-          <div class="form-group row">
-            <label class="col-sm-2 col-form-label">Number of Pages:</label>
-            <div class="col-sm-10">
-              <input class="form-control" min="1" placeholder="Enter number of pages" th:field="*{pages}" type="number">
+              <input class="form-control" placeholder="Enter runtime" th:field="*{runtimeMinutes}" type="number">
             </div>
           </div>
           <button class="btn btn-primary" type="submit">Submit</button>
@@ -93,11 +87,34 @@
         </form>
       </div>
 
-      <div class="tab-pane fade active show m-2" id="book">
-        <form action="#" method="POST" th:action="@{/create/book}" th:object="${book}">
+      <div class="tab-pane fade m-2" id="comic">
+        <form action="#" method="POST" th:action="@{/create/comic}" th:object="${comic}">
           <div th:replace="common/form_fields.html"></div>
 
-          <!-- Book Fields -->
+          <!-- Comic Fields -->
+          <div class="form-group row">
+            <label class="col-sm-2 col-form-label">Issue:</label>
+            <div class="col-sm-10">
+              <input class="form-control" placeholder="Enter issue number" th:field="*{issue}" type="number">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-sm-2 col-form-label">Frequency:</label>
+            <div class="col-sm-10">
+              <input class="form-control" min="1" placeholder="Enter release frequency" th:field="*{frequency}"
+                     type="text">
+            </div>
+          </div>
+          <button class="btn btn-primary" type="submit">Submit</button>
+          <button class="btn btn-primary float-right" type="reset">Reset</button>
+        </form>
+      </div>
+
+      <div class="tab-pane fade m-2" id="ebook">
+        <form action="#" method="POST" th:action="@{/create/ebook}" th:object="${ebook}">
+          <div th:replace="common/form_fields.html"></div>
+
+          <!-- EBook Fields -->
           <div class="form-group row">
             <label class="col-sm-2 col-form-label">ISBN:</label>
             <div class="col-sm-10">
@@ -110,26 +127,10 @@
               <input class="form-control" min="1" placeholder="Enter number of pages" th:field="*{pages}" type="number">
             </div>
           </div>
-          <button class="btn btn-primary" type="submit">Submit</button>
-          <button class="btn btn-primary float-right" type="reset">Reset</button>
-        </form>
-      </div>
-
-      <div class="tab-pane fade active show m-2" id="book">
-        <form action="#" method="POST" th:action="@{/create/book}" th:object="${book}">
-          <div th:replace="common/form_fields.html"></div>
-
-          <!-- Book Fields -->
           <div class="form-group row">
-            <label class="col-sm-2 col-form-label">ISBN:</label>
+            <label class="col-sm-2 col-form-label">Hyperlink:</label>
             <div class="col-sm-10">
-              <input class="form-control" placeholder="Enter ISBN" th:field="*{ISBN}" type="text">
-            </div>
-          </div>
-          <div class="form-group row">
-            <label class="col-sm-2 col-form-label">Number of Pages:</label>
-            <div class="col-sm-10">
-              <input class="form-control" min="1" placeholder="Enter number of pages" th:field="*{pages}" type="number">
+              <input class="form-control" min="1" placeholder="Enter link to EBook" th:field="*{hyperlink}" type="text">
             </div>
           </div>
           <button class="btn btn-primary" type="submit">Submit</button>
@@ -159,8 +160,43 @@
           <button class="btn btn-primary float-right" type="reset">Reset</button>
         </form>
       </div>
+
+      <div class="tab-pane fade m-2" id="periodical">
+        <form action="#" method="POST" th:action="@{/create/periodical}" th:object="${periodical}">
+          <div th:replace="common/form_fields.html"></div>
+
+          <!-- Periodical Fields -->
+          <div class="form-group row">
+            <label class="col-sm-2 col-form-label">Frequency:</label>
+            <div class="col-sm-10">
+              <input class="form-control" placeholder="Enter frequency" th:field="*{frequency}" type="text">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-sm-2 col-form-label">Issue Number:</label>
+            <div class="col-sm-10">
+              <input class="form-control" min="1" placeholder="Enter number of pages" th:field="*{issue}" type="number">
+            </div>
+          </div>
+          <button class="btn btn-primary" type="submit">Submit</button>
+          <button class="btn btn-primary float-right" type="reset">Reset</button>
+        </form>
+      </div>
+
       <div class="tab-pane fade m-2" id="video">
-        <p>Video form</p>
+        <form action="#" method="POST" th:action="@{/create/video}" th:object="${video}">
+          <div th:replace="common/form_fields.html"></div>
+
+          <!-- Video Fields -->
+          <div class="form-group row">
+            <label class="col-sm-2 col-form-label">Runtime in minutes:</label>
+            <div class="col-sm-10">
+              <input class="form-control" placeholder="Enter runtime" th:field="*{runtimeMinutes}" type="number">
+            </div>
+          </div>
+          <button class="btn btn-primary" type="submit">Submit</button>
+          <button class="btn btn-primary float-right" type="reset">Reset</button>
+        </form>
       </div>
     </div>
   </div>

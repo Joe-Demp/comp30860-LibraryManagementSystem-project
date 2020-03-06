@@ -7,7 +7,7 @@ import java.time.Duration;
 
 @Entity
 public class Video extends Artifact {
-    private Integer runtimeMinutes = 0;
+    protected Integer runtimeMinutes = 0;
 
     public Video() {
         setSubject("Video");

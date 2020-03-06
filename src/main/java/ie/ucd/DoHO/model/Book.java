@@ -1,14 +1,10 @@
 package ie.ucd.DoHO.model;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
-import java.sql.Date;
 
 @Entity
 public class Book extends Artifact {
-    @Column
     protected String ISBN;
-    @Column
     protected Integer pages;
 
     public Book() {

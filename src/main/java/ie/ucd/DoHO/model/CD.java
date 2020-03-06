@@ -7,7 +7,7 @@ import java.time.Duration;
 
 @Entity
 public class CD extends Artifact {
-    private Integer runtimeMinutes = 0;
+    protected Integer runtimeMinutes = 0;
 
     public CD() {
         setSubject("CD");
@@ -23,7 +23,6 @@ public class CD extends Artifact {
 
     public String runtimeString() {
         Duration d = Duration.ofMinutes(runtimeMinutes);
-
         return Formatter.toDurationString(d);
     }
 }

@@ -6,8 +6,10 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -42,8 +44,12 @@ public class LibrarianController {
     public String addArtifact(Model model) {
         if (userSession.isAdmin()) {
             model.addAttribute("book", new Book());
+            model.addAttribute("cd", new CD());
+            model.addAttribute("comic", new Comic());
+            model.addAttribute("ebook", new EBook());
             model.addAttribute("magazine", new Magazine());
-            // todo add all attributes (all types of artifact)
+            model.addAttribute("periodical", new Periodical());
+            model.addAttribute("video", new Video());
             return "add_artifact";
         }
         return "login_main";
