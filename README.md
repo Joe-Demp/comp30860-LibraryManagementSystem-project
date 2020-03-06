@@ -4,8 +4,8 @@ This project is based on a GitLab [Project Template](https://docs.gitlab.com/ee/
 
 Improvements can be proposed in the [original project](https://gitlab.com/gitlab-org/project-templates/spring).
 
-### CI/CD with Auto DevOps
+### References
 
-This template is compatible with [Auto DevOps](https://docs.gitlab.com/ee/topics/autodevops/).
+Thanks to:
 
-If Auto DevOps is not already enabled for this project, you can [turn it on](https://docs.gitlab.com/ee/topics/autodevops/#enabling-auto-devops) in the project settings.
+Icon image from: https://www.kindpng.com/imgv/ibxwmm_icon-book-transparent-book-icon-png-png-download/

@@ -68,23 +68,6 @@ public class GuestController {
         return "search_users.html";
     }
 
-    @GetMapping("/user_profile")
-    public String user(@RequestParam("id") Integer id, Model model, HttpServletResponse response) throws IOException {
-        Optional<User> user = userRepository.findById(id);
-
-      if(user.isPresent() && user.get().getRole().equals("admin")) {
-          response.sendRedirect("/portal");
-      }
-
-        model.addAttribute("fullName", user.get().getFullName());
-        model.addAttribute("username", user.get().getUsername());
-        model.addAttribute("email", user.get().getEmail());
-        model.addAttribute("phoneNumber", user.get().getPhoneNumber());
-        model.addAttribute("id", user.get().getId());
-        model.addAttribute("created", user.get().getCreated());
-        return "user_profile";
-    }
-
     @GetMapping("/search_artifact")
     public String displayArtifacts(@RequestParam(value="search",required = false)String query, Model model) {
         List<Artifact> searchResults = null;
