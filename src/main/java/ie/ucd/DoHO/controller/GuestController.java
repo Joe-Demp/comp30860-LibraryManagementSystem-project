@@ -1,6 +1,10 @@
 package ie.ucd.DoHO.controller;
 
 import ie.ucd.DoHO.model.*;
+import ie.ucd.DoHO.model.Contracts.Loan;
+import ie.ucd.DoHO.model.Contracts.LoanRepository;
+import ie.ucd.DoHO.model.Contracts.Reservation;
+import ie.ucd.DoHO.model.Contracts.ReservationRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +29,10 @@ public class GuestController {
     @Autowired
     private UserRepository userRepository;
     @Autowired
+    private LoanRepository loanRepository;
+    @Autowired
+    private ReservationRepository reservationRepository;
+
     private HibernateSearchDao searchservice;
     private Logger logger = LoggerFactory.getLogger(GuestController.class);
 
@@ -72,9 +80,12 @@ public class GuestController {
     public String user(@RequestParam("id") Integer id, Model model, HttpServletResponse response) throws IOException {
         Optional<User> user = userRepository.findById(id);
 
-      if(user.isPresent() && user.get().getRole().equals("admin")) {
+        if(user.isPresent() && user.get().getRole().equals("admin")) {
           response.sendRedirect("/portal");
-      }
+        }
+
+        List<Loan> loans = loanRepository.findByUserId(id);
+
 
         model.addAttribute("fullName", user.get().getFullName());
         model.addAttribute("username", user.get().getUsername());
@@ -82,6 +93,8 @@ public class GuestController {
         model.addAttribute("phoneNumber", user.get().getPhoneNumber());
         model.addAttribute("id", user.get().getId());
         model.addAttribute("created", user.get().getCreated());
+        model.addAttribute("loans", loans);
+
         return "user_profile";
     }
 
@@ -98,7 +111,7 @@ public class GuestController {
     }
 
     //TODO Authentication to prompt user to enter current password before changing to new
-    @PostMapping("change_password")
+    @PostMapping("/change_password")
     public void changePassword(String newPassword, HttpServletResponse response) throws IOException{
         User user = userSession.getUser();
         user.setPassword(newPassword);
@@ -107,7 +120,7 @@ public class GuestController {
     }
 
 
-    @PostMapping("edit_profile")
+    @PostMapping("/edit_profile")
     public void editProfile(String newName, String newUsername, String newEmail, String newPhoneNumber, HttpServletResponse response) throws IOException{
         User user = userSession.getUser();
         Integer id = user.getId();

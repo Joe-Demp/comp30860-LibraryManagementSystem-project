@@ -61,13 +61,7 @@ public class AuthenticationController {
 
     @PostMapping("/signup")
     public void signup(String username, String password, String email, String phoneNumber, String fullName, HttpServletResponse response) throws IOException{
-        User user = new User();
-        user.setFullName(fullName);
-        user.setUsername(username);
-        user.setEmail(email);
-        user.setPhoneNumber(phoneNumber);
-        user.setPassword(password);
-        user.setRole("member");
+        User user = new User(fullName, username, password, email, phoneNumber, "member");
         userRepository.save(user);
         response.sendRedirect("/");
     }
