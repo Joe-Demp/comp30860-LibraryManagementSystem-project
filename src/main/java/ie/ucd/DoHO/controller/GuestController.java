@@ -29,13 +29,13 @@ public class GuestController {
     private Logger logger = LoggerFactory.getLogger(GuestController.class);
 
     @ModelAttribute
-    public void addAttributes(Model model){
+    public void addAttributes(Model model) {
         model.addAttribute("user", userSession.getUser());
     }
 
     @GetMapping("/")
     public String index(Model model) {
-        if(userSession.getUser() != null)
+        if (userSession.getUser() != null)
             model.addAttribute("id", userSession.getUser().getId());
         return "index";
     }
@@ -62,19 +62,20 @@ public class GuestController {
         return "artifact";
     }
 
-    @GetMapping("/search_user")
-    public String displayUsers(Model model){
-        model.addAttribute("users",userRepository.findAll());
+    @GetMapping("/members")
+    public String displayUsers(Model model) {
+        model.addAttribute("users", userRepository.findAll());
         return "search_users.html";
     }
+
 
     @GetMapping("/user_profile")
     public String user(@RequestParam("id") Integer id, Model model, HttpServletResponse response) throws IOException {
         Optional<User> user = userRepository.findById(id);
 
-      if(user.isPresent() && user.get().getRole().equals("admin")) {
-          response.sendRedirect("/portal");
-      }
+        if (user.isPresent() && user.get().getRole().equals("admin")) {
+            response.sendRedirect("/portal");
+        }
 
         model.addAttribute("fullName", user.get().getFullName());
         model.addAttribute("username", user.get().getUsername());
@@ -86,20 +87,37 @@ public class GuestController {
     }
 
     @GetMapping("/search_artifact")
-    public String displayArtifacts(@RequestParam(value="search",required = false)String query, Model model) {
+    public String displayArtifacts(@RequestParam(value = "search", required = false) String query, Model model) {
         List<Artifact> searchResults = null;
         try {
-            searchResults = searchservice.fuzzySearch(query);
+            searchResults = searchservice.fuzzySearchArtifact(query);
         } catch (Exception ignored) {
         }
-        
+
         model.addAttribute("artifacts", searchResults);
         return "search_artifact.html";
     }
 
+    @GetMapping("/search_members")
+    public String displayMembers(@RequestParam(value = "searchMems", required = false) String query, Model model) {
+
+       System.out.println("query :" + query);
+        List<User> searchResults = null;
+        try {
+            searchResults = searchservice.fuzzySearchUser(query);
+            System.out.println(searchResults.size());
+        } catch (Exception ignored) {
+
+        }
+
+        model.addAttribute("users", searchResults);
+        return "search_users.html";
+    }
+
+
     //TODO Authentication to prompt user to enter current password before changing to new
     @PostMapping("change_password")
-    public void changePassword(String newPassword, HttpServletResponse response) throws IOException{
+    public void changePassword(String newPassword, HttpServletResponse response) throws IOException {
         User user = userSession.getUser();
         user.setPassword(newPassword);
         userRepository.save(user);
@@ -108,7 +126,7 @@ public class GuestController {
 
 
     @PostMapping("edit_profile")
-    public void editProfile(String newName, String newUsername, String newEmail, String newPhoneNumber, HttpServletResponse response) throws IOException{
+    public void editProfile(String newName, String newUsername, String newEmail, String newPhoneNumber, HttpServletResponse response) throws IOException {
         User user = userSession.getUser();
         Integer id = user.getId();
         user.setFullName(newName);
@@ -116,6 +134,6 @@ public class GuestController {
         user.setEmail(newEmail);
         user.setPhoneNumber(newPhoneNumber);
         userRepository.save(user);
-        response.sendRedirect("/user_profile?id="+id);
+        response.sendRedirect("/user_profile?id=" + id);
     }
 }

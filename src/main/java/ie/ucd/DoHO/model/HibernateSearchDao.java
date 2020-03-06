@@ -15,7 +15,7 @@ public class HibernateSearchDao {
     private EntityManager entityManager;
 
 
-    private QueryBuilder getQueryBuilder() throws InterruptedException {
+    private QueryBuilder getQueryBuilderArtifact() throws InterruptedException {
 
         FullTextEntityManager fullTextEntityManager = Search.getFullTextEntityManager(entityManager);
         fullTextEntityManager.createIndexer().startAndWait();
@@ -26,20 +26,56 @@ public class HibernateSearchDao {
                 .get();
     }
 
-    private FullTextQuery getJpaQuery(org.apache.lucene.search.Query luceneQuery) {
+    private FullTextQuery getJpaQueryArtifact(org.apache.lucene.search.Query luceneQuery) {
 
         FullTextEntityManager fullTextEntityManager = Search.getFullTextEntityManager(entityManager);
 
         return fullTextEntityManager.createFullTextQuery(luceneQuery, Artifact.class);
     }
 
-    public List<Artifact> fuzzySearch(String searchTerm) throws InterruptedException {
-        Query fuzzyQuery = getQueryBuilder().keyword().fuzzy()
+
+    private QueryBuilder getQueryBuilderUser() throws InterruptedException {
+
+        FullTextEntityManager fullTextEntityManager = Search.getFullTextEntityManager(entityManager);
+        fullTextEntityManager.createIndexer().startAndWait();
+
+        return fullTextEntityManager.getSearchFactory()
+                .buildQueryBuilder()
+                .forEntity(User.class)
+                .get();
+    }
+
+    private FullTextQuery getJpaQueryUser(org.apache.lucene.search.Query luceneQuery) {
+
+        FullTextEntityManager fullTextEntityManager = Search.getFullTextEntityManager(entityManager);
+
+        if(fullTextEntityManager != null){
+        }
+        return fullTextEntityManager.createFullTextQuery(luceneQuery, User.class);
+    }
+
+
+
+    public List<Artifact> fuzzySearchArtifact(String searchTerm) throws InterruptedException {
+        Query fuzzyQuery = getQueryBuilderArtifact().keyword().fuzzy()
                 .withEditDistanceUpTo(2).withPrefixLength(0).onFields("title", "author","genre","language")
                 .matching(searchTerm).createQuery();
 
 
-        List<Artifact> results = getJpaQuery(fuzzyQuery).getResultList();
+        List<Artifact> results = getJpaQueryArtifact(fuzzyQuery).getResultList();
+        return results;
+    }
+
+
+    public List<User> fuzzySearchUser(String searchTerm) throws InterruptedException {
+
+        Query fuzzyQuery = getQueryBuilderUser().keyword().fuzzy()
+                .withEditDistanceUpTo(2).withPrefixLength(0).onFields("username","email")
+                .matching(searchTerm).createQuery();
+
+
+        List<User> results = getJpaQueryUser(fuzzyQuery).getResultList();
+
         return results;
     }
 

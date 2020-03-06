@@ -3,7 +3,9 @@ package ie.ucd.DoHO.model;
 import ie.ucd.DoHO.model.Contracts.Loan;
 import ie.ucd.DoHO.model.Contracts.Reservation;
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.search.annotations.Field;
 import org.hibernate.search.annotations.Indexed;
+import org.hibernate.search.annotations.TermVector;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -17,8 +19,10 @@ public class User implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String fullName;
+    @Field(termVector = TermVector.YES)
     private String username;
     private String password;
+    @Field(termVector = TermVector.YES)
     private String email;
     private String phoneNumber;
     private String role;

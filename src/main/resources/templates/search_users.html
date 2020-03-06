@@ -12,13 +12,33 @@
 <body>
 <nav th:replace="header.html"></nav>
     <div class="container">
+
+
+        <form class="form-group" style="margin-top: 10%;margin-right: 10%;" action="#" th:action="@{/search_members}"
+        th:object="${user}">
+            <div class="row">
+                <div class="col"></div>
+                <div class="col-6">
+            <input class="form-control"  placeholder="Search Members" type="search" name="searchMems"
+                       id="searchMems">
+                </div>
+                <div class="col">
+                <button class="btn btn-outline-info mr-auto" type="submit">
+                    Search
+                </button>
+                </div>
+            </div>
+
+        </form>
+
+
             <div style="display: flex; flex-wrap: wrap;">
                     <div class="card border-primary mb-3" style="max-width: 20rem; margin-left: 15%;margin-top: 5%;"
                          th:each="user : ${users}">
                         <div class="card-header">User</div>
                         <img src="images/user_profile_default.png" style="border-radius: 50%; width: 100px; height: 100px; margin-left: 100px; margin-right : 100px; margin-top: 10px">
                         <div class="card-body">
-                            <h4 class="card-title" style="margin-left: 100px" th:text="${user.username}"></h4>
+                            <h4 class="card-title" th:text="${user.username}"></h4>
                             <p class="card-text" th:text="${user.role}"></p>
                             <p><a class="btn btn-primary"th:href="@{/user(id=${user.id})}">View</a></p>
                         </div>
