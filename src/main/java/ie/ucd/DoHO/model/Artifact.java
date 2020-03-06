@@ -27,7 +27,7 @@ public abstract class Artifact implements Serializable {
 
     static {
         primaryFields.addAll(
-                Arrays.asList("title", "author", "publisher", "releaseDate", "subject", "genre")
+                Arrays.asList("title", "author", "publisher", "releaseYear", "subject", "genre")
         );
     }
 
@@ -43,7 +43,7 @@ public abstract class Artifact implements Serializable {
     @org.hibernate.search.annotations.Field(termVector = TermVector.YES)
     private String publisher;
     @Column
-    private Date releaseDate;
+    private Integer releaseYear;
     @Column
     @org.hibernate.search.annotations.Field(termVector = TermVector.YES)
     private String subject;
@@ -72,13 +72,13 @@ public abstract class Artifact implements Serializable {
     /**
      * An overloaded constructor to facilitate adding Artifacts to the LMS
      */
-    public Artifact(String title, String author, String publisher, Date releaseDate,
+    public Artifact(String title, String author, String publisher, Integer releaseYear,
                     String subject, String genre, String libraryLocation, String language,
                     int totalStock) {
         setTitle(title);
         setAuthor(author);
         setPublisher(publisher);
-        setReleaseDate(releaseDate);
+        setReleaseYear(releaseYear);
         setSubject(subject);
         setGenre(genre);
         setLibraryLocation(libraryLocation);
@@ -118,12 +118,12 @@ public abstract class Artifact implements Serializable {
         this.publisher = publisher;
     }
 
-    public Date getReleaseDate() {
-        return releaseDate;
+    public Integer getReleaseYear() {
+        return releaseYear;
     }
 
-    public void setReleaseDate(Date releaseDate) {
-        this.releaseDate = releaseDate;
+    public void setReleaseYear(Integer releaseDate) {
+        this.releaseYear = releaseDate;
     }
 
     public String getSubject() {
@@ -199,13 +199,6 @@ public abstract class Artifact implements Serializable {
             }
         }
         return additionals;
-    }
-
-    public String getReleaseDateString() {
-        if (releaseDate == null) {
-            return "null";
-        }
-        return Formatter.toDateString(releaseDate);
     }
 
     public void loan() {

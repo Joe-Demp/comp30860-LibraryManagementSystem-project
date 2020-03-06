@@ -3,6 +3,7 @@ package ie.ucd.DoHO.util;
 import java.sql.Date;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.time.Duration;
 
 public class Formatter {
     private static DateFormat dateFormat;
@@ -18,7 +19,11 @@ public class Formatter {
         return str + ":";
     }
 
-    public static String toDateString(Date date) {
+    public static String toDateString(Integer date) {
         return dateFormat.format(date);
+    }
+
+    public static String toDurationString(Duration duration) {
+        return duration.toHours() + ":" + duration.toMinutes();
     }
 }

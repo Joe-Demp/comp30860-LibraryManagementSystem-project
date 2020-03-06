@@ -60,6 +60,7 @@ public class GuestController {
             model.addAttribute("isAdmin", userSession.isAdmin());
             logger.info("In viewArtifact: user=" + userSession.getUser() + " isAdmin=" + userSession.isAdmin());
         } else {
+            // todo return a proper error page here
             return "404";
         }
         return "artifact";
@@ -81,11 +82,6 @@ public class GuestController {
         model.addAttribute("id", user.get().getId());
         model.addAttribute("created", user.get().getCreated());
         return "user_profile";
-    }
-
-    @GetMapping("/portal")
-    public String librarianPortal() {
-        return "librarian_portal";
     }
 
     @GetMapping("/search_artifact")

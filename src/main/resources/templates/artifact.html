@@ -3,7 +3,7 @@
       xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org">
 <head>
-  <!-- todo create variable title with Thymeleaf -->
+  <!--/*@thymesVar id="artifact" type="java"*/-->
   <title th:text="${artifact.title}">Artifact</title>
 
   <meta th:replace="common/standard_head.html">
@@ -43,9 +43,7 @@
   <div class="row">
     <div class="col-lg-8" id="artifact">
       <div class="page-box my-4 px-5 pb-3 shadow-lg" id="a-box">
-        <h3 class="my-4" style="//padding-top: 20px; //padding-bottom: 20px;" th:text="${artifact.title}">Harry Potter
-          and the Half-Blood
-          Prince</h3>
+        <h3 class="my-4" th:text="${artifact.title}">title unavailable</h3>
         <table class="table table-borderless text-table mb-4" id="mainInfo">
           <tbody>
           <tr>
@@ -57,8 +55,8 @@
             <td th:text="${artifact.publisher}">Bloomsbury</td>
           </tr>
           <tr>
-            <td class="w-25 key-text">Date:</td>
-            <td th:text="${artifact.releaseDateString}">2005</td>
+            <td class="w-25 key-text">Released:</td>
+            <td th:text="${artifact.releaseYear}">2005</td>
           </tr>
           <tr>
             <td class="w-25 key-text">Subject:</td>
@@ -106,8 +104,8 @@
           <a class="btn btn-outline-primary btn-block" href="#">Edit Artifact</a>
         </div>
         <div class="btn-gang d-flex justify-content-center flex-column">
-          <form action="/artifact" method="DELETE">
-
+          <form action="/artifact/delete" method="POST">
+            <input name="aID" th:value="${artifact.id}" type="hidden">
             <button class="btn btn-outline-warning btn-block" type="submit">Delete Artifact</button>
           </form>
           <a class="btn btn-outline-danger btn-block" href="#">Hide Artifact</a>

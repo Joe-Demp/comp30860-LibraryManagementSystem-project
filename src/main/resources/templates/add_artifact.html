@@ -1,0 +1,217 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta th:replace="common/standard_head.html">
+  <link href="css/layout.css" rel="stylesheet" type="text/css">
+  <!--  todo remove the below line for deployment -->
+  <link href="../static/css/layout.css" rel="stylesheet" type="text/css">
+  <title>Add Artifact</title>
+
+  <!--  todo remove below for deployment -->
+  <meta charset="UTF-8">
+  <link href="css/style.css" rel="stylesheet" type="text/css">
+  <!--  todo remove the below line for deployment -->
+  <link href="../static/css/style.css" rel="stylesheet" type="text/css">
+  <link crossorigin="anonymous" href="https://stackpath.bootstrapcdn.com/bootswatch/4.4.1/journal/bootstrap.min.css"
+        integrity="sha384-0d2eTc91EqtDkt3Y50+J9rW3tCXJWw6/lDgf1QNHLlV0fadTyvcA120WPsSOlwga" rel="stylesheet">
+</head>
+<body>
+<div th:replace="header.html">
+  <h1>HEADER Library Management System</h1>
+</div>
+<div class="container">
+  <div class="page-box my-4 px-5 pb-3 shadow-lg">
+    <h3 class="my-4">Add Artifact</h3>
+    <ul class="nav nav-tabs">
+      <li class="nav-item">
+        <a class="nav-link active" data-toggle="tab" href="#book">Book</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" data-toggle="tab" href="#cd">CD</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" data-toggle="tab" href="#comic">Comic</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" data-toggle="tab" href="#ebook">EBook</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" data-toggle="tab" href="#magazine">Magazine</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" data-toggle="tab" href="#periodical">Periodical</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" data-toggle="tab" href="#video">Video</a>
+      </li>
+    </ul>
+
+    <div class="tab-content" id="tab-content">
+      <div class="tab-pane fade active show m-2" id="book">
+        <form action="#" method="POST" th:action="@{/create/book}" th:object="${book}">
+          <div th:replace="common/form_fields.html"></div>
+
+          <!-- Book Fields -->
+          <div class="form-group row">
+            <label class="col-sm-2 col-form-label">ISBN:</label>
+            <div class="col-sm-10">
+              <input class="form-control" placeholder="Enter ISBN" th:field="*{ISBN}" type="text">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-sm-2 col-form-label">Number of Pages:</label>
+            <div class="col-sm-10">
+              <input class="form-control" min="1" placeholder="Enter number of pages" th:field="*{pages}" type="number">
+            </div>
+          </div>
+          <button class="btn btn-primary" type="submit">Submit</button>
+          <button class="btn btn-primary float-right" type="reset">Reset</button>
+        </form>
+      </div>
+
+      <div class="tab-pane fade m-2" id="cd">
+        <form action="#" method="POST" th:action="@{/create/cd}" th:object="${cd}">
+          <div th:replace="common/form_fields.html"></div>
+
+          <!-- CD Fields -->
+          <div class="form-group row">
+            <label class="col-sm-2 col-form-label">Runtime in minutes:</label>
+            <div class="col-sm-10">
+              <input class="form-control" placeholder="Enter runtime" th:field="*{runtimeMinutes}" type="number">
+            </div>
+          </div>
+          <button class="btn btn-primary" type="submit">Submit</button>
+          <button class="btn btn-primary float-right" type="reset">Reset</button>
+        </form>
+      </div>
+
+      <div class="tab-pane fade m-2" id="comic">
+        <form action="#" method="POST" th:action="@{/create/comic}" th:object="${comic}">
+          <div th:replace="common/form_fields.html"></div>
+
+          <!-- Comic Fields -->
+          <div class="form-group row">
+            <label class="col-sm-2 col-form-label">Issue:</label>
+            <div class="col-sm-10">
+              <input class="form-control" placeholder="Enter issue number" th:field="*{issue}" type="number">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-sm-2 col-form-label">Frequency:</label>
+            <div class="col-sm-10">
+              <input class="form-control" min="1" placeholder="Enter release frequency" th:field="*{frequency}"
+                     type="text">
+            </div>
+          </div>
+          <button class="btn btn-primary" type="submit">Submit</button>
+          <button class="btn btn-primary float-right" type="reset">Reset</button>
+        </form>
+      </div>
+
+      <div class="tab-pane fade m-2" id="ebook">
+        <form action="#" method="POST" th:action="@{/create/ebook}" th:object="${ebook}">
+          <div th:replace="common/form_fields.html"></div>
+
+          <!-- EBook Fields -->
+          <div class="form-group row">
+            <label class="col-sm-2 col-form-label">ISBN:</label>
+            <div class="col-sm-10">
+              <input class="form-control" placeholder="Enter ISBN" th:field="*{ISBN}" type="text">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-sm-2 col-form-label">Number of Pages:</label>
+            <div class="col-sm-10">
+              <input class="form-control" min="1" placeholder="Enter number of pages" th:field="*{pages}" type="number">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-sm-2 col-form-label">Hyperlink:</label>
+            <div class="col-sm-10">
+              <input class="form-control" min="1" placeholder="Enter link to EBook" th:field="*{hyperlink}" type="text">
+            </div>
+          </div>
+          <button class="btn btn-primary" type="submit">Submit</button>
+          <button class="btn btn-primary float-right" type="reset">Reset</button>
+        </form>
+      </div>
+
+
+      <div class="tab-pane fade m-2" id="magazine">
+        <form action="#" method="POST" th:action="@{/create/magazine}" th:object="${magazine}">
+          <div th:replace="common/form_fields.html"></div>
+
+          <!-- Magazine Fields -->
+          <div class="form-group row">
+            <label class="col-sm-2 col-form-label">Frequency:</label>
+            <div class="col-sm-10">
+              <input class="form-control" placeholder="Enter frequency" th:field="*{frequency}" type="text">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-sm-2 col-form-label">Issue Number:</label>
+            <div class="col-sm-10">
+              <input class="form-control" min="1" placeholder="Enter number of pages" th:field="*{issue}" type="number">
+            </div>
+          </div>
+          <button class="btn btn-primary" type="submit">Submit</button>
+          <button class="btn btn-primary float-right" type="reset">Reset</button>
+        </form>
+      </div>
+
+      <div class="tab-pane fade m-2" id="periodical">
+        <form action="#" method="POST" th:action="@{/create/periodical}" th:object="${periodical}">
+          <div th:replace="common/form_fields.html"></div>
+
+          <!-- Periodical Fields -->
+          <div class="form-group row">
+            <label class="col-sm-2 col-form-label">Frequency:</label>
+            <div class="col-sm-10">
+              <input class="form-control" placeholder="Enter frequency" th:field="*{frequency}" type="text">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-sm-2 col-form-label">Issue Number:</label>
+            <div class="col-sm-10">
+              <input class="form-control" min="1" placeholder="Enter number of pages" th:field="*{issue}" type="number">
+            </div>
+          </div>
+          <button class="btn btn-primary" type="submit">Submit</button>
+          <button class="btn btn-primary float-right" type="reset">Reset</button>
+        </form>
+      </div>
+
+      <div class="tab-pane fade m-2" id="video">
+        <form action="#" method="POST" th:action="@{/create/video}" th:object="${video}">
+          <div th:replace="common/form_fields.html"></div>
+
+          <!-- Video Fields -->
+          <div class="form-group row">
+            <label class="col-sm-2 col-form-label">Runtime in minutes:</label>
+            <div class="col-sm-10">
+              <input class="form-control" placeholder="Enter runtime" th:field="*{runtimeMinutes}" type="number">
+            </div>
+          </div>
+          <button class="btn btn-primary" type="submit">Submit</button>
+          <button class="btn btn-primary float-right" type="reset">Reset</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<div th:replace="footer.html">
+  <h1>FOOTER</h1>
+</div>
+<script crossorigin="anonymous"
+        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+        src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
+<script crossorigin="anonymous"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+<script crossorigin="anonymous"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+        src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+</body>
+</html>
