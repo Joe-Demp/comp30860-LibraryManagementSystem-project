@@ -4,6 +4,8 @@ import ie.ucd.DoHO.model.Contracts.Loan;
 import ie.ucd.DoHO.model.Contracts.Reservation;
 import ie.ucd.DoHO.model.Exceptions.ArtifactUnavailableException;
 import ie.ucd.DoHO.util.Formatter;
+import org.hibernate.search.annotations.Indexed;
+import org.hibernate.search.annotations.TermVector;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -17,6 +19,7 @@ import java.util.*;
  * Class to model common attributes of all Artifacts
  */
 @Entity
+@Indexed
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 public abstract class Artifact implements Serializable {
     private static final long serialVersionUID = 1L;
@@ -31,21 +34,27 @@ public abstract class Artifact implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    @Column
+    @org.hibernate.search.annotations.Field(termVector = TermVector.YES)
     private String title;
     @Column
+    @org.hibernate.search.annotations.Field(termVector = TermVector.YES)
     private String author;
     @Column
+    @org.hibernate.search.annotations.Field(termVector = TermVector.YES)
     private String publisher;
     @Column
     private Date releaseDate;
     @Column
+    @org.hibernate.search.annotations.Field(termVector = TermVector.YES)
     private String subject;
     @Column
+    @org.hibernate.search.annotations.Field(termVector = TermVector.YES)
     private String genre;
     @Column
+    @org.hibernate.search.annotations.Field(termVector = TermVector.YES)
     private String libraryLocation;
     @Column
+    @org.hibernate.search.annotations.Field(termVector = TermVector.YES)
     private String language;
     @Column
     private int totalStock;
@@ -55,6 +64,7 @@ public abstract class Artifact implements Serializable {
     private List<Reservation> reservations;
     @OneToMany(mappedBy = "artifact")
     private List<Loan> loans;
+
 
     public Artifact() {
     }

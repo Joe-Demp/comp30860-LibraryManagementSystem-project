@@ -1,0 +1,53 @@
+<a class="btn btn-primary btn-block" data-target="#editProfile" data-toggle="modal" type="button" href="/edit_profile">Edit Profile</a>
+<div class="modal text-center" id="editProfile">
+    <div class="modal-dialog" type="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Edit Profile</h5>
+                <button aria-label="Close" class="close" data-dismiss="modal" type="button">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="model-body">
+                <form action="/edit_profile" method="POST">
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-9" style="margin-left: 10%">
+                                <label class="col-form-label" for="newName">Full Name</label>
+                                <input class="form-control" id="newName" name="newName" placeholder="Name" type="text" th:value="${fullName}">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-9" style="margin-left: 10%">
+                                <label class="col-form-label" for="newUsername">Username</label>
+                                <input class="form-control" id="newUsername" name="newUsername" placeholder="Username" type="text" th:value="${username}">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-9" style="margin-left: 10%">
+                                <label class="col-form-label" for="newEmail">Email</label>
+                                <input class="form-control" id="newEmail" name="newEmail" placeholder="Email" type="email" th:value="${email}">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-9" style="margin-left: 10%">
+                                <label class="col-form-label" for="newPhoneNumber">Phone Number</label>
+                                <input class="form-control" id="newPhoneNumber" name="newPhoneNumber" placeholder="Phone Number" type="tel" th:value="${phoneNumber}">
+                            </div>
+                        </div>
+                        <div class="row text-center">
+                            <div class="col-10"></div>
+                            <div class="col" style="margin-top: 5%">
+                                <button class="btn btn-primary" type="submit">Submit</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" data-dismiss="modal" type="button">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+

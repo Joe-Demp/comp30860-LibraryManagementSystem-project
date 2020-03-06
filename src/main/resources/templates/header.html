@@ -8,9 +8,10 @@
       <ul class="navbar-nav ml-auto">
 
         <li class="nav-item">
-          <form class="form-inline">
+          <form class="form-inline" action="#" th:action="@{/search_artifact}" th:object="${artifact}">
             <div>
-              <input class="form-control mr-auto" placeholder="Search" type="search">
+              <input class="form-control mr-auto" placeholder="Search" type="search" name="search"
+                     id="search">
               <button class="btn btn-outline-info mr-auto" style="margin-left: auto; margin-right: auto;" type="submit">
                 Search
               </button>
@@ -29,11 +30,11 @@
 
         <div class="row">
           <li class="nav-item ">
-            <span th:if="${user == null}"><span th:include="login.html"></span></span>
+            <span th:if="${user == null}"><span th:include="modals/login.html"></span></span>
             <span th:if="${user != null}"><a class="btn btn-primary" href="/logout" type="button">Logout</a></span>
           </li>
           <li class="nav-item">
-            <span th:if="${user == null}"><span th:include="sign_up.html"></span></span>
+            <span th:if="${user == null}"><span th:include="modals/sign_up.html"></span></span>
           </li>
         </div>
       </ul>
