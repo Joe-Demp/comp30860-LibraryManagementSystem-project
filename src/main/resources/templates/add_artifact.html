@@ -29,7 +29,19 @@
         <a class="nav-link active" data-toggle="tab" href="#book">Book</a>
       </li>
       <li class="nav-item">
+        <a class="nav-link active" data-toggle="tab" href="#cd">CD</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link active" data-toggle="tab" href="#comic">Comic</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link active" data-toggle="tab" href="#ebook">EBook</a>
+      </li>
+      <li class="nav-item">
         <a class="nav-link" data-toggle="tab" href="#magazine">Magazine</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" data-toggle="tab" href="#periodical">Periodical</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" data-toggle="tab" href="#video">Video</a>
@@ -58,6 +70,74 @@
           <button class="btn btn-primary float-right" type="reset">Reset</button>
         </form>
       </div>
+
+      <div class="tab-pane fade active show m-2" id="cd">
+        <form action="#" method="POST" th:action="@{/create/cd}" th:object="${cd}">
+          <div th:replace="common/form_fields.html"></div>
+
+          <!-- CD Fields -->
+          <div class="form-group row">
+            <label class="col-sm-2 col-form-label">Runtime in minutes:</label>
+            <div class="col-sm-10">
+              <input class="form-control" placeholder="Enter runtime" th:field="*{runtimeMinutes}" type="text">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-sm-2 col-form-label">Number of Pages:</label>
+            <div class="col-sm-10">
+              <input class="form-control" min="1" placeholder="Enter number of pages" th:field="*{pages}" type="number">
+            </div>
+          </div>
+          <button class="btn btn-primary" type="submit">Submit</button>
+          <button class="btn btn-primary float-right" type="reset">Reset</button>
+        </form>
+      </div>
+
+      <div class="tab-pane fade active show m-2" id="book">
+        <form action="#" method="POST" th:action="@{/create/book}" th:object="${book}">
+          <div th:replace="common/form_fields.html"></div>
+
+          <!-- Book Fields -->
+          <div class="form-group row">
+            <label class="col-sm-2 col-form-label">ISBN:</label>
+            <div class="col-sm-10">
+              <input class="form-control" placeholder="Enter ISBN" th:field="*{ISBN}" type="text">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-sm-2 col-form-label">Number of Pages:</label>
+            <div class="col-sm-10">
+              <input class="form-control" min="1" placeholder="Enter number of pages" th:field="*{pages}" type="number">
+            </div>
+          </div>
+          <button class="btn btn-primary" type="submit">Submit</button>
+          <button class="btn btn-primary float-right" type="reset">Reset</button>
+        </form>
+      </div>
+
+      <div class="tab-pane fade active show m-2" id="book">
+        <form action="#" method="POST" th:action="@{/create/book}" th:object="${book}">
+          <div th:replace="common/form_fields.html"></div>
+
+          <!-- Book Fields -->
+          <div class="form-group row">
+            <label class="col-sm-2 col-form-label">ISBN:</label>
+            <div class="col-sm-10">
+              <input class="form-control" placeholder="Enter ISBN" th:field="*{ISBN}" type="text">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-sm-2 col-form-label">Number of Pages:</label>
+            <div class="col-sm-10">
+              <input class="form-control" min="1" placeholder="Enter number of pages" th:field="*{pages}" type="number">
+            </div>
+          </div>
+          <button class="btn btn-primary" type="submit">Submit</button>
+          <button class="btn btn-primary float-right" type="reset">Reset</button>
+        </form>
+      </div>
+
+
       <div class="tab-pane fade m-2" id="magazine">
         <form action="#" method="POST" th:action="@{/create/magazine}" th:object="${magazine}">
           <div th:replace="common/form_fields.html"></div>

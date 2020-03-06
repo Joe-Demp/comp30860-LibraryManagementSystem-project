@@ -1,7 +1,6 @@
 package ie.ucd.DoHO.model;
 
 import javax.persistence.Entity;
-import java.sql.Date;
 
 @Entity
 public class Magazine extends Periodical {

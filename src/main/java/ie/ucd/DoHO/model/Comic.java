@@ -6,6 +6,7 @@ import java.sql.Date;
 @Entity
 public class Comic extends Magazine {
     public Comic() {
+        setSubject("Comic");
     }
 
     public Comic(String title, String author, String publisher, Integer releaseDate, String genre,

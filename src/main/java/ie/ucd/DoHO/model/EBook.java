@@ -11,6 +11,7 @@ public class EBook extends Book {
     protected String hyperlink;
 
     public EBook() {
+        setSubject("Ebook");
     }
 
     public EBook(String title, String author, String publisher, Integer releaseDate,
