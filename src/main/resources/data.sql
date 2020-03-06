@@ -26,8 +26,8 @@ VALUES ('Book', 2, 'J.K. Rowling', 'Fantasy Fiction', 'English', 'A1001', 'Harpe
 ;
 
 INSERT INTO user(id, full_name, username, password, email, phone_number, role, created)
-VALUES (0, 'my name' ,'user1', 'password', 'user1@gmail.com', '+353 87 123 4567', 'admin', '2020-05-06'),
-       (1, 'saoirse Ronan','user2', 'password','user2@gmail.com', '+353 87 123 4567', 'admin', '2020-05-06'),
-       (2, 'hozier', 'user3','password', 'user3@gmail.com', '+353 87 123 4567', 'admin', '2020-05-06');
+VALUES (0, 'my name', 'user1', 'password', 'user1@gmail.com', '+353 87 123 4567', 'admin', '2020-05-06'),
+       (1, 'saoirse Ronan', 'user2', 'password', 'user2@gmail.com', '+353 87 123 4567', 'admin', '2020-05-06'),
+       (2, 'hozier', 'user3', 'password', 'user3@gmail.com', '+353 87 123 4567', 'member', '2020-05-06');
 
 
