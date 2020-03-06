@@ -67,4 +67,10 @@ public class LibrarianController {
         }
         return "index";
     }
+
+    @PostMapping("/artifact/edit")
+    public String editArtifact() {
+
+        return null;
+    }
 }
