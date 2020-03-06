@@ -35,10 +35,14 @@ public class AuthenticationController {
     @PostMapping("/login")
     public void doLogin(String username, String password, HttpServletResponse response) throws IOException {
         Optional<User> user = userRepository.findByUsernameAndPassword(username, password);
-        if (user.isPresent()) {
+        if (user.isPresent() && user.get().getRole().equals("admin")) {
+            userSession.setUser(user.get());
+            response.sendRedirect("/portal");
+        } else if (user.isPresent()) {
             userSession.setUser(user.get());
             response.sendRedirect("/");
-        } else {
+        }
+        else {
             userSession.setLoginFailed(true);
             response.sendRedirect("/login_main");
         }
