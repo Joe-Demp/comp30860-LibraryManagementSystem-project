@@ -80,9 +80,9 @@ public class GuestController {
     public String user(@RequestParam("id") Integer id, Model model, HttpServletResponse response) throws IOException {
         Optional<User> user = userRepository.findById(id);
 
-        if(user.isPresent() && user.get().getRole().equals("admin")) {
+      if(user.isPresent() && user.get().getRole().equals("admin")) {
           response.sendRedirect("/portal");
-        }
+      }
 
         List<Loan> loans = loanRepository.findByUserId(id);
 
@@ -109,6 +109,23 @@ public class GuestController {
         model.addAttribute("artifacts", searchResults);
         return "search_artifact.html";
     }
+
+    @GetMapping("/search_members")
+    public String displayMembers(@RequestParam(value = "searchMems", required = false) String query, Model model) {
+
+       System.out.println("query :" + query);
+        List<User> searchResults = null;
+        try {
+            searchResults = searchservice.fuzzySearchUser(query);
+            System.out.println(searchResults.size());
+        } catch (Exception ignored) {
+
+        }
+
+        model.addAttribute("users", searchResults);
+        return "search_users.html";
+    }
+
 
     //TODO Authentication to prompt user to enter current password before changing to new
     @PostMapping("/change_password")
