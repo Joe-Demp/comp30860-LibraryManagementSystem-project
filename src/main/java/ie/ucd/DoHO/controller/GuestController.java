@@ -69,8 +69,13 @@ public class GuestController {
     }
 
     @GetMapping("/user_profile")
-    public String user(@RequestParam("id") Integer id, Model model) {
+    public String user(@RequestParam("id") Integer id, Model model, HttpServletResponse response) throws IOException {
         Optional<User> user = userRepository.findById(id);
+
+      if(user.isPresent() && user.get().getRole().equals("admin")) {
+          response.sendRedirect("/portal");
+      }
+
         model.addAttribute("fullName", user.get().getFullName());
         model.addAttribute("username", user.get().getUsername());
         model.addAttribute("email", user.get().getEmail());
@@ -78,6 +83,11 @@ public class GuestController {
         model.addAttribute("id", user.get().getId());
         model.addAttribute("created", user.get().getCreated());
         return "user_profile";
+    }
+
+    @GetMapping("/portal")
+    public String librarianPortal() {
+        return "librarian_portal";
     }
 
     @GetMapping("/search_artifact")
