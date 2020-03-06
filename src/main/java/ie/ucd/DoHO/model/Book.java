@@ -1,9 +1,7 @@
 package ie.ucd.DoHO.model;
 
-import org.hibernate.search.annotations.Field;
 import org.hibernate.search.annotations.Indexed;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 
 @Entity
@@ -16,10 +14,10 @@ public class Book extends Artifact {
         setSubject("Book");
     }
 
-    public Book(String title, String author, String publisher, Integer releaseDate,
+    public Book(String title, String author, String publisher, Integer releaseYear,
                 String genre, String libraryLocation, String language, Integer totalStock,
                 String ISBN, Integer pages) {
-        super(title, author, publisher, releaseDate, "Book", genre, libraryLocation, language, totalStock);
+        super(title, author, publisher, releaseYear, "Book", genre, libraryLocation, language, totalStock);
         setISBN(ISBN);
         setPages(pages);
     }

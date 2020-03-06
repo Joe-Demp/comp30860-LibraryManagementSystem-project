@@ -1,10 +1,6 @@
 package ie.ucd.DoHO.controller;
 
-import ie.ucd.DoHO.model.Artifact;
-import ie.ucd.DoHO.model.ArtifactRepository;
-import ie.ucd.DoHO.model.User;
-import ie.ucd.DoHO.model.UserRepository;
-import ie.ucd.DoHO.model.HibernateSearchDao;
+import ie.ucd.DoHO.model.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -87,9 +83,10 @@ public class GuestController {
     @GetMapping("/search_artifact")
     public String displayArtifacts(@RequestParam(value="search",required = false)String query, Model model) {
         List<Artifact> searchResults = null;
-        try{
+        try {
             searchResults = searchservice.fuzzySearch(query);
-        }catch(Exception ex){}
+        } catch (Exception ignored) {
+        }
         
         model.addAttribute("artifacts", searchResults);
         return "search_artifact.html";
