@@ -87,10 +87,16 @@ public class GuestController {
         return "search_artifact.html";
     }
 
+
+    @GetMapping("/members")
+    public String allMembers(Model model) {
+        model.addAttribute("users", userRepository.findAll());
+        return "search_users.html";
+    }
+
     @GetMapping("/search_members")
     public String displayMembers(@RequestParam(value = "searchMems", required = false) String query, Model model) {
 
-       System.out.println("query :" + query);
         List<User> searchResults = null;
         try {
             searchResults = searchservice.fuzzySearchUser(query);
