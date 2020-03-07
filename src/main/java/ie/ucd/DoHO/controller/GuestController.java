@@ -29,20 +29,22 @@ public class GuestController {
     private LoanRepository loanRepository;
     @Autowired
     private ReservationRepository reservationRepository;
+    @Autowired
+    private HibernateSearchDao searchservice;
 
-    private HibernateSearchDao searchService;
     private Logger logger = LoggerFactory.getLogger(GuestController.class);
 
     @ModelAttribute
-    public void addAttributes(Model model){
+    public void addAttributes(Model model) {
         model.addAttribute("user", userSession.getUser());
     }
 
     @GetMapping("/")
     public String index(Model model) {
-        model.addAttribute("title", "Home");
-        if(userSession.getUser() != null)
+        if (userSession.getUser() != null){
             model.addAttribute("id", userSession.getUser().getId());
+        }
+        model.addAttribute("title", "Home");
         return "index";
     }
 
@@ -84,16 +86,31 @@ public class GuestController {
         return "search_artifact.html";
     }
 
+    @GetMapping("/catalogue/on_loan")
+    public String displayOnLoan(Model model) {
+
+        model.addAttribute("loans", loanRepository.findAll());
+        System.out.println(loanRepository.findAll().size());
+        return "loan_history.html";
+    }
+
+    @GetMapping("/catalogue/reserved")
+    public String displayReserved(Model model) {
+
+        model.addAttribute("reservations", reservationRepository.findAll());
+        return "reservations.html";
+    }
+
 
     @GetMapping("/search_artifact")
     public String displayArtifacts(@RequestParam(value="search",required = false)String query, Model model) {
         model.addAttribute("title", "Search Artifact");
         List<Artifact> searchResults = null;
         try {
-            searchResults = searchService.fuzzySearchArtifact(query);
+            searchResults = searchservice.fuzzySearchArtifact(query);
         } catch (Exception ignored) {
         }
-        
+
         model.addAttribute("artifacts", searchResults);
         return "search_artifact.html";
     }
@@ -111,7 +128,7 @@ public class GuestController {
         model.addAttribute("title", "Search Members");
         List<User> searchResults = null;
         try {
-            searchResults = searchService.fuzzySearchUser(query);
+            searchResults = searchservice.fuzzySearchUser(query);
             System.out.println(searchResults.size());
         } catch (Exception ignored) {
 
@@ -124,7 +141,7 @@ public class GuestController {
 
     //TODO Authentication to prompt user to enter current password before changing to new
     @PostMapping("/change_password")
-    public void changePassword(String newPassword, HttpServletResponse response) throws IOException{
+    public void changePassword(String newPassword, HttpServletResponse response) throws IOException {
         User user = userSession.getUser();
         user.setPassword(newPassword);
         userRepository.save(user);
@@ -133,7 +150,7 @@ public class GuestController {
 
 
     @PostMapping("/edit_profile")
-    public void editProfile(String newName, String newUsername, String newEmail, String newPhoneNumber, HttpServletResponse response) throws IOException{
+    public void editProfile(String newName, String newUsername, String newEmail, String newPhoneNumber, HttpServletResponse response) throws IOException {
         User user = userSession.getUser();
         Integer id = user.getId();
         user.setFullName(newName);
@@ -141,6 +158,6 @@ public class GuestController {
         user.setEmail(newEmail);
         user.setPhoneNumber(newPhoneNumber);
         userRepository.save(user);
-        response.sendRedirect("/user_profile?id="+id);
+        response.sendRedirect("/user_profile?id=" + id);
     }
 }

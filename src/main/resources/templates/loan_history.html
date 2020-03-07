@@ -1,8 +1,26 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="UTF-8">
+  <title>Loan History</title>
+  <link crossorigin="anonymous" href="https://stackpath.bootstrapcdn.com/bootswatch/4.4.1/journal/bootstrap.min.css"
+        integrity="sha384-0d2eTc91EqtDkt3Y50+J9rW3tCXJWw6/lDgf1QNHLlV0fadTyvcA120WPsSOlwga" rel="stylesheet">
+  <link href="css/style.css" rel="stylesheet">
+  <link href="css/layout.css" rel="stylesheet" type="text/css">
+
+  <!--  todo remove the below line for deployment
+   Note it should cause an error in the console when viewing page "through the application" as opposed to the raw html-->
+  <link href="../static/css/layout.css" rel="stylesheet" type="text/css">
+  <link href="css/style.css" rel="stylesheet" type="text/css">
+  <!--  todo remove the below line for deployment -->
+  <link href="../static/css/style.css" rel="stylesheet" type="text/css">
+
+
+
+</head>
+
 <div th:replace="common/standard_head.html"></div>
 <body>
-<nav th:replace="common/header.html"></nav>
 <div class="container ">
   <h2 class="text-center" style="margin:10px;">Loan History</h2>
   <table class="table table-striped table-bordered text-center">
@@ -11,32 +29,23 @@
       <th scope="col">Product ID</th>
       <th scope="col">Artifact Title</th>
       <th scope="col">Loan Date</th>
-      <th scope="col">Return Data</th>
+      <th scope="col">Return Date</th>
       <th scope="col">Overdue</th>
       <th scope="col">Comments</th>
     </tr>
     </thead>
     <tbody>
-    <tr>
-      <td>#1</td>
-      <td>Pride and Prejudice</td>
-      <td>01/03/2020</td>
-      <td>07/03/2020</td>
+    <tr th:each="loan : ${loans}">
+      <td th:text="${loan.id}"></td>
+      <td th:text="${loan.artifact.title}"></td>
+      <td th:text="${#dates.format(loan.created, 'MMMMM dd, YYYY')}"></td>
+      <td th:text="${#dates.format(loan.due, 'MMMMM dd, YYYY')}"></td>
       <td>NO</td>
       <td>N/A</td>
-    </tr>
-    <tr>
-      <td>#2</td>
-      <td>Some Book Name</td>
-      <td>01/01/2020</td>
-      <td>01/03/2020</td>
-      <td>Yes</td>
-      <td>Fine: $20</td>
     </tr>
     </tbody>
   </table>
 </div>
-
 
 <footer th:replace="common/footer.html"></footer>
 <script crossorigin="anonymous"
