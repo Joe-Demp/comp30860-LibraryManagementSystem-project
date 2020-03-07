@@ -1,6 +1,9 @@
 package ie.ucd.DoHO.controller;
 
+import ie.ucd.DoHO.model.Artifact;
 import ie.ucd.DoHO.model.Contracts.LoanRepository;
+import ie.ucd.DoHO.model.Contracts.Reservation;
+import ie.ucd.DoHO.model.Contracts.ReservationRepository;
 import ie.ucd.DoHO.model.User;
 import ie.ucd.DoHO.model.UserRepository;
 import org.slf4j.Logger;
@@ -24,6 +27,8 @@ public class UserController {
     private UserRepository userRepository;
     @Autowired
     private LoanRepository loanRepository;
+    @Autowired
+    private ReservationRepository resRepository;
     private Logger logger = LoggerFactory.getLogger(UserController.class);
 
     @GetMapping("/user_profile")
@@ -44,12 +49,23 @@ public class UserController {
         return "user_profile";
     }
 
+    /**
+     * One method to handle User reservations.<br>
+     * Members can reserve on their own behalf while librarians must specify a username
+     *
+     * @param res      the Reservation bean passed from the form
+     * @param username the name of the user the administrator wants to reserve for
+     * @return the profile page of the relevant user if logged in, the login page otherwise
+     */
     @PostMapping("/artifact/reserve")
-    public String reserve(@RequestParam("aID") Integer artifactId,
-                          @RequestParam("uName") String userName,
-                          HttpServletResponse response) {
+    public String reserve(@RequestParam(name = "artifact") Artifact artifact,
+                          @RequestParam(name = "user") User user,
+                          @RequestParam(name = "username") String username,
+                          HttpServletResponse response) throws IOException {
         if (userSession.isMember()) {
-
+            Reservation res = new Reservation(user, artifact);
+            resRepository.save(res);
+            response.sendRedirect("/user_profile");
         } else if (userSession.isAdmin()) {
 
         }

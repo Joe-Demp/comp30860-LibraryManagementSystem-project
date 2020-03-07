@@ -30,7 +30,7 @@ public class GuestController {
     @Autowired
     private ReservationRepository reservationRepository;
 
-    private HibernateSearchDao searchservice;
+    private HibernateSearchDao searchService;
     private Logger logger = LoggerFactory.getLogger(GuestController.class);
 
     @ModelAttribute
@@ -57,10 +57,15 @@ public class GuestController {
         if (artifact.isPresent()) {
             model.addAttribute("artifact", artifact.get());
             model.addAttribute("additionalDetails", artifact.get().getAdditionalDetails());
+            model.addAttribute("reservation", new Reservation());
 
             if (userSession.isAdmin()) {
                 model.addAttribute("isAdmin", true);
                 model.addAttribute("artifactForm", new ArtifactForm());
+            } else if (userSession.isMember()) {
+                model.addAttribute("isMember", true);
+            } else {
+                model.addAttribute("isGuest", true);
             }
         } else {
             // todo return a proper error page here
@@ -79,7 +84,7 @@ public class GuestController {
     public String displayArtifacts(@RequestParam(value="search",required = false)String query, Model model) {
         List<Artifact> searchResults = null;
         try {
-            searchResults = searchservice.fuzzySearchArtifact(query);
+            searchResults = searchService.fuzzySearchArtifact(query);
         } catch (Exception ignored) {
         }
         
@@ -93,7 +98,7 @@ public class GuestController {
        System.out.println("query :" + query);
         List<User> searchResults = null;
         try {
-            searchResults = searchservice.fuzzySearchUser(query);
+            searchResults = searchService.fuzzySearchUser(query);
             System.out.println(searchResults.size());
         } catch (Exception ignored) {
 
