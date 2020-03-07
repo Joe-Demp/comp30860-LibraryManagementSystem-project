@@ -122,6 +122,10 @@ public class User implements Serializable {
         return this.role.equals("admin");
     }
 
+    public boolean isMember() {
+        return this.role.equals("member");
+    }
+
     @Override
     public String toString() {
         return "{" +

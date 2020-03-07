@@ -27,10 +27,10 @@ public class UserSession {
     }
 
     public boolean isAdmin() {
-        return user != null && user.getRole().equals("admin");
+        return user != null && user.isAdmin();
     }
 
     public boolean isMember() {
-        return user != null && user.getRole().equals("member");
+        return user != null && user.isMember();
     }
 }

@@ -36,43 +36,58 @@ public class UserController {
     private Logger logger = LoggerFactory.getLogger(UserController.class);
 
     @ModelAttribute
-    public void addAttributes(Model model){
+    public void addAttributes(Model model) {
         model.addAttribute("user", userSession.getUser());
     }
 
+    /**
+     * @param id the id of the user profile you want to pull up
+     */
     @GetMapping("/user_profile")
     public String user(@RequestParam("id") Integer id, Model model, HttpServletResponse response) throws IOException {
         model.addAttribute("title", "Profile");
-        Optional<User> user = userRepository.findById(id);
+        Optional<User> optionalUser = userRepository.findById(id);
+        User actor = userSession.getUser();
 
-        if (user.isPresent() && user.get().getRole().equals("admin")) {
-            response.sendRedirect("/portal?id="+id);
-        }
+        if (optionalUser.isPresent()) {
+            User user = optionalUser.get();
 
-        if(user.isPresent() && !(user.get().getId().equals(id))) {
-            response.sendRedirect("/");
+            if (actor.isAdmin()) {
+                // if they look for their own profile, give them the portal
+                // otherwise let them view the user's profile
+                if (actor.getId().equals(id)) {
+                    response.sendRedirect("/portal?id=" + id);
+                }
+            } else if (actor.isMember()) {
+                // if they look for a profile that's not theirs give them the index
+                if (!actor.getId().equals(id)) {
+                    response.sendRedirect("/");
+                }
+            }
+
+            model.addAttribute("fullName", optionalUser.get().getFullName());
+            model.addAttribute("username", optionalUser.get().getUsername());
+            model.addAttribute("email", optionalUser.get().getEmail());
+            model.addAttribute("phoneNumber", optionalUser.get().getPhoneNumber());
+            model.addAttribute("id", optionalUser.get().getId());
+            model.addAttribute("created", optionalUser.get().getCreated());
+            model.addAttribute("loans", loanRepository.findByUserId(optionalUser.get().getId()));
+            model.addAttribute("reservations", reservationRepository.findByUserId(optionalUser.get().getId()));
+            return "user_profile";
         }
-        model.addAttribute("fullName", user.get().getFullName());
-        model.addAttribute("username", user.get().getUsername());
-        model.addAttribute("email", user.get().getEmail());
-        model.addAttribute("phoneNumber", user.get().getPhoneNumber());
-        model.addAttribute("id", user.get().getId());
-        model.addAttribute("created", user.get().getCreated());
-        model.addAttribute("loans", loanRepository.findByUserId(user.get().getId()));
-        model.addAttribute("reservations", reservationRepository.findByUserId(user.get().getId()));
-        return "user_profile";
+        return "errors/no_such_user";
     }
 
     /**
      * One method to handle User reservations.<br>
      * Members can reserve on their own behalf while librarians must specify a username
      *
-     * @param artifact
-     * @param user
+     * @param artifact the Artifact to be reserved
+     * @param user the user who wants to have the Artifact reserved
      * @param username the name of the user the administrator wants to reserve for
-     * @param response
+     * @param response an HttpServletResponse
      * @return the profile page of the relevant user if logged in, the login page otherwise
-     * @throws IOException
+     * @throws IOException from the HttpServletResponse
      */
     @PostMapping("/artifact/reserve")
     public String reserve(@RequestParam(name = "artifact") Artifact artifact,
@@ -90,6 +105,9 @@ public class UserController {
         return "login_main";
     }
 
+    /**
+     * Helper function to reserve Artifacts for a user by an admin
+     */
     private String adminReserve(String username, Artifact artifact, HttpServletResponse response)
             throws IOException {
         Optional<User> optionalUser = userRepository.findByUsername(username);
