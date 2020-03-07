@@ -6,7 +6,7 @@ import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.Calendar;
+import java.time.Instant;
 import java.util.Date;
 
 @Entity
@@ -28,10 +28,15 @@ public class Loan implements Serializable {
     public Loan() {
     }
 
+    /**
+     * Note: this constructor alters Artifact
+     * todo see if the above fact is true
+     */
     public Loan(User user, Artifact artifact, Date due) {
         setUser(user);
         setArtifact(artifact);
         setDue(due);
+        artifact.loan();
     }
 
     public Integer getId() {
@@ -82,11 +87,20 @@ public class Loan implements Serializable {
         this.returned = returned;
     }
 
+    public boolean doReturn() {
+        if (this.returned == null) {
+            this.returned = Date.from(Instant.now());
+            artifact.receive();
+            return true;
+        }
+        return false;
+    }
+
     public boolean isActive() {
         return returned == null;
     }
 
     public boolean isOverdue() {
-        return due.before(Calendar.getInstance().getTime());
+        return due.before(Date.from(Instant.now()));
     }
 }

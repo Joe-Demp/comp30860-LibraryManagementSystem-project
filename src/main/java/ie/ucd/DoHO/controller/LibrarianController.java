@@ -3,7 +3,6 @@ package ie.ucd.DoHO.controller;
 import ie.ucd.DoHO.model.*;
 import ie.ucd.DoHO.model.Contracts.Loan;
 import ie.ucd.DoHO.model.Contracts.LoanRepository;
-import ie.ucd.DoHO.model.Contracts.Reservation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,9 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.time.Instant;
-import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -105,6 +102,32 @@ public class LibrarianController {
         Loan loan = new Loan(user, artifact, inTwoWeeks);
         loanRepository.save(loan);
         response.sendRedirect("/user_profile?id=" + user.getId());
+    }
+
+    @PostMapping("/artifact/receive")
+    public String receive(@RequestParam("username") String username,
+                          @RequestParam("artifact") Artifact artifact,
+                          HttpServletResponse response) throws IOException {
+        Optional<User> optionalUser = userRepository.findByUsername(username);
+
+        if (optionalUser.isPresent()) {
+            User loaner = optionalUser.get();
+
+            // Check reservee is not an admin
+            if (loaner.isAdmin()) {
+                logger.info("user " + username + " is an admin");
+                return "/errors/librarian_reservation";
+            } else if (loanedAlready(loaner, artifact)) {
+                logger.info("user " + username + " has already loaned " + artifact.getTitle());
+                return "/errors/reserved_already";
+            }
+
+            loanForUser(loaner, artifact, response);
+        } else {
+            logger.info("user " + username + " does not exist");
+            response.sendRedirect("/error/user_not_found?name=" + username);
+        }
+        return null;
     }
 
     @GetMapping("/create")

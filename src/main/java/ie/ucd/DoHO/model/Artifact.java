@@ -2,15 +2,13 @@ package ie.ucd.DoHO.model;
 
 import ie.ucd.DoHO.model.Contracts.Loan;
 import ie.ucd.DoHO.model.Contracts.Reservation;
-import ie.ucd.DoHO.model.Exceptions.ArtifactUnavailableException;
 import ie.ucd.DoHO.util.Formatter;
+import org.hibernate.search.annotations.Field;
 import org.hibernate.search.annotations.Indexed;
 import org.hibernate.search.annotations.TermVector;
-import org.hibernate.search.annotations.Field;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.sql.Date;
 import java.util.*;
 
 /**
@@ -226,8 +224,6 @@ public abstract class Artifact implements Serializable {
     public void loan() {
         if (stockOnLoan < totalStock) {
             stockOnLoan++;
-        } else {
-            throw new ArtifactUnavailableException(getTitle() + " is unavailable.");
         }
     }
 
