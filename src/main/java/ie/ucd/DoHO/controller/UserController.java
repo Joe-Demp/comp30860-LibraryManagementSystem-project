@@ -28,9 +28,12 @@ public class UserController {
         Optional<User> user = userRepository.findById(id);
 
         if (user.isPresent() && user.get().getRole().equals("admin")) {
-            response.sendRedirect("/portal");
+            response.sendRedirect("/portal?id="+id);
         }
 
+        if(user.isPresent() && !(user.get().getId().equals(id))) {
+            response.sendRedirect("/");
+        }
         model.addAttribute("fullName", user.get().getFullName());
         model.addAttribute("username", user.get().getUsername());
         model.addAttribute("email", user.get().getEmail());

@@ -34,8 +34,14 @@ public class LibrarianController {
     }
 
     @GetMapping("/portal")
-    public String portal() {
+    public String portal(@RequestParam("id") Integer id, Model model) {
         if (userSession.isAdmin()) {
+            model.addAttribute("fullName", userSession.getUser().getFullName());
+            model.addAttribute("username", userSession.getUser().getUsername());
+            model.addAttribute("email", userSession.getUser().getEmail());
+            model.addAttribute("phoneNumber", userSession.getUser().getPhoneNumber());
+            model.addAttribute("id", userSession.getUser().getId());
+            model.addAttribute("created", userSession.getUser().getCreated());
             return "librarian_portal";
         }
         return "login_main";

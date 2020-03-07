@@ -37,7 +37,7 @@ public class AuthenticationController {
         Optional<User> user = userRepository.findByUsernameAndPassword(username, password);
         if (user.isPresent() && user.get().getRole().equals("admin")) {
             userSession.setUser(user.get());
-            response.sendRedirect("/portal");
+            response.sendRedirect("/portal?id="+user.get().getId());
         } else if (user.isPresent()) {
             userSession.setUser(user.get());
             response.sendRedirect("/");
