@@ -10,7 +10,6 @@ import org.hibernate.search.annotations.TermVector;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.lang.reflect.Field;
-import java.sql.Date;
 import java.util.*;
 
 /**
@@ -57,7 +56,7 @@ public abstract class Artifact implements Serializable {
     @org.hibernate.search.annotations.Field(termVector = TermVector.YES)
     private String language;
     @Column
-    private int totalStock;
+    private int totalStock = 0;
     @Column
     private int stockOnLoan = 0;
     @OneToMany(mappedBy = "artifact")
@@ -84,6 +83,18 @@ public abstract class Artifact implements Serializable {
         setLibraryLocation(libraryLocation);
         setLanguage(language);
         setTotalStock(totalStock);
+    }
+
+    public Artifact(ArtifactForm form) {
+        setTitle(form.title);
+        setAuthor(form.author);
+        setPublisher(form.publisher);
+        setReleaseYear(form.releaseYear);
+        setSubject(form.subject);
+        setGenre(form.genre);
+        setLibraryLocation(form.libraryLocation);
+        setLanguage(form.language);
+        setTotalStock(form.totalStock);
     }
 
     public Integer getId() {
@@ -163,6 +174,12 @@ public abstract class Artifact implements Serializable {
     }
 
     public void setTotalStock(int totalStock) {
+        // If stockOnLoan is less than the new totalStock
+        //  reduce stockOnLoan to the new value too
+        // todo implement a method to release some loans if the library decreases total stock
+        if (this.stockOnLoan > totalStock) {
+            stockOnLoan = totalStock;
+        }
         this.totalStock = totalStock;
     }
 
@@ -212,8 +229,6 @@ public abstract class Artifact implements Serializable {
     public void receive() {
         if (stockOnLoan > 0) {
             stockOnLoan++;
-        } else {
-            throw new ArtifactUnavailableException(getTitle() + " is not currently out on loan.");
         }
     }
 }

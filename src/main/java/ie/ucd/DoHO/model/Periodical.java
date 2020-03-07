@@ -2,7 +2,6 @@ package ie.ucd.DoHO.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import java.sql.Date;
 
 @Entity
 public class Periodical extends Artifact {
@@ -12,6 +11,7 @@ public class Periodical extends Artifact {
     protected int issue;
 
     public Periodical() {
+        setSubject("Periodical");
     }
 
     public Periodical(String title, String author, String publisher, Integer releaseDate, String genre,
@@ -20,6 +20,12 @@ public class Periodical extends Artifact {
         super(title, author, publisher, releaseDate, "Periodical", genre, libraryLocation, language, totalStock);
         setFrequency(frequency);
         setIssue(issue);
+    }
+
+    public Periodical(ArtifactForm form) {
+        super(form);
+        setFrequency(form.frequency);
+        setIssue(form.issue);
     }
 
     public String getFrequency() {

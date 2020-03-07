@@ -3,7 +3,6 @@ package ie.ucd.DoHO.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import java.sql.Date;
 
 @Entity
 public class EBook extends Book {
@@ -18,8 +17,14 @@ public class EBook extends Book {
                  String genre, String libraryLocation, String language, int totalStock,
                  String ISBN, int pages, String hyperlink) {
         super(title, author, publisher, releaseDate, genre, libraryLocation, language, totalStock, ISBN, pages);
-        setSubject("E-Book");
+        setSubject("EBook");
         setHyperlink(hyperlink);
+    }
+
+    public EBook(ArtifactForm form) {
+        super(form);
+        setSubject("EBook");
+        setHyperlink(form.hyperlink);
     }
 
     public String getHyperlink() {

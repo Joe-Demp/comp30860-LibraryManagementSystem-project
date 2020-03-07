@@ -13,12 +13,16 @@ public class Video extends Artifact {
         setSubject("Video");
     }
 
+    public Video(ArtifactForm form) {
+        setRuntimeMinutes(form.runtimeMinutes);
+    }
+
     public Integer getRuntimeMinutes() {
         return runtimeMinutes;
     }
 
     public void setRuntimeMinutes(Integer runtimeMinutes) {
-        this.runtimeMinutes = runtimeMinutes;
+        this.runtimeMinutes = runtimeMinutes > 0 ? runtimeMinutes : 0;
     }
 
     public String runtimeString() {

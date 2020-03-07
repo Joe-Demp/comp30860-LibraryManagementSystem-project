@@ -1,10 +1,7 @@
 package ie.ucd.DoHO.controller;
 
 import ie.ucd.DoHO.model.*;
-import ie.ucd.DoHO.model.Contracts.Loan;
-import ie.ucd.DoHO.model.Contracts.LoanRepository;
-import ie.ucd.DoHO.model.Contracts.Reservation;
-import ie.ucd.DoHO.model.Contracts.ReservationRepository;
+import ie.ucd.DoHO.model.Contracts.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -61,8 +58,10 @@ public class GuestController {
             model.addAttribute("artifact", artifact.get());
             model.addAttribute("additionalDetails", artifact.get().getAdditionalDetails());
 
-            model.addAttribute("isAdmin", userSession.isAdmin());
-            logger.info("In viewArtifact: user=" + userSession.getUser() + " isAdmin=" + userSession.isAdmin());
+            if (userSession.isAdmin()) {
+                model.addAttribute("isAdmin", true);
+                model.addAttribute("artifactForm", new ArtifactForm());
+            }
         } else {
             // todo return a proper error page here
             return "404";
@@ -74,28 +73,6 @@ public class GuestController {
     public String displayUsers(Model model){
         model.addAttribute("users",userRepository.findAll());
         return "search_users.html";
-    }
-
-    @GetMapping("/user_profile")
-    public String user(@RequestParam("id") Integer id, Model model, HttpServletResponse response) throws IOException {
-        Optional<User> user = userRepository.findById(id);
-
-      if(user.isPresent() && user.get().getRole().equals("admin")) {
-          response.sendRedirect("/portal");
-      }
-
-        List<Loan> loans = loanRepository.findByUserId(id);
-
-
-        model.addAttribute("fullName", user.get().getFullName());
-        model.addAttribute("username", user.get().getUsername());
-        model.addAttribute("email", user.get().getEmail());
-        model.addAttribute("phoneNumber", user.get().getPhoneNumber());
-        model.addAttribute("id", user.get().getId());
-        model.addAttribute("created", user.get().getCreated());
-        model.addAttribute("loans", loans);
-
-        return "user_profile";
     }
 
     @GetMapping("/search_artifact")
