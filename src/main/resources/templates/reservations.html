@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+
+<head>
+    <link crossorigin="anonymous" href="https://stackpath.bootstrapcdn.com/bootswatch/4.4.1/journal/bootstrap.min.css"
+          integrity="sha384-0d2eTc91EqtDkt3Y50+J9rW3tCXJWw6/lDgf1QNHLlV0fadTyvcA120WPsSOlwga" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet" type="text/css">
+    <!--  todo remove the below line for deployment -->
+    <link href="../static/css/style.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+<nav th:replace="header.html"></nav>
+<div class="container">
+
+    <table class="table" style="margin-top: 10%">
+        <thead>
+        <th>Reservation</th>
+        <th>User</th>
+        <th>Artifact</th>
+        </thead>
+        <tbody>
+        <tr th:each="reservation : ${reservations}">
+            <th scope="row" th:text="${reservation.id}"></th>
+            <td th:text="${reservation.user.username}"></td>
+            <td th:text="${reservation.artifact.title}"></td>
+            <td>
+                <a class="btn btn-primary" th:href="@{/artifact(id=${reservation.artifact.id})}">view</a>
+            </td>
+        </tr>
+
+    </table>
+
+</div>
+
+<div th:replace="footer.html"></div>
+
+<script + crossorigin="anonymous"
+        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+        src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
+<script crossorigin="anonymous"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+<script crossorigin="anonymous"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+        src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+</body>
+</html>
