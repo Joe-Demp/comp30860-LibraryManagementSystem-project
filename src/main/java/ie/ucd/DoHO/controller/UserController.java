@@ -2,9 +2,7 @@ package ie.ucd.DoHO.controller;
 
 import antlr.debug.MessageAdapter;
 import ie.ucd.DoHO.model.Artifact;
-import ie.ucd.DoHO.model.Contracts.LoanRepository;
-import ie.ucd.DoHO.model.Contracts.ReservationRepository;
-import ie.ucd.DoHO.model.Contracts.Reservation;
+import ie.ucd.DoHO.model.Contracts.*;
 import ie.ucd.DoHO.model.Contracts.ReservationRepository;
 import ie.ucd.DoHO.model.Message;
 import ie.ucd.DoHO.model.MessageRepository;
@@ -24,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.text.ParseException;
 import java.util.List;
 import java.util.Optional;
 
@@ -50,7 +49,7 @@ public class UserController {
      * @param id the id of the user profile you want to pull up
      */
     @GetMapping("/user_profile")
-    public String user(@RequestParam("id") Integer id, Model model, HttpServletResponse response) throws IOException {
+    public String user(@RequestParam("id") Integer id, Model model, HttpServletResponse response) throws IOException, ParseException {
         model.addAttribute("title", "Profile");
         Optional<User> optionalUser = userRepository.findById(id);
         User actor = userSession.getUser();
@@ -69,6 +68,10 @@ public class UserController {
                 if (!actor.getId().equals(id)) {
                     response.sendRedirect("/");
                 }
+            }
+            //TEST
+            for(Loan loan : loanRepository.findAll()){
+                System.out.println(loan.status());
             }
 
             model.addAttribute("fullName", optionalUser.get().getFullName());

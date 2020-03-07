@@ -6,8 +6,12 @@ import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Locale;
+import java.util.concurrent.TimeUnit;
 
 @Entity
 public class Loan implements Serializable {
@@ -33,6 +37,25 @@ public class Loan implements Serializable {
         setArtifact(artifact);
         // todo consider the possibility of having a standard loan period here and computing due
         setDue(due);
+    }
+
+    public String status() throws ParseException {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
+        Date dueDate = sdf.parse(getDue().toString().substring(0,10));
+        Date returnedDate;
+        if(returned != null){
+            returnedDate = sdf.parse(getReturned().toString().substring(0,10));
+            long diffInMillies = dueDate.getTime() - returnedDate.getTime() ;
+            long diff = TimeUnit.DAYS.convert(diffInMillies, TimeUnit.MILLISECONDS);
+            if(diff >= 0){
+                return "RETURNED";
+            }
+            else{
+                return "OVERDUE";
+            }
+        }else{
+            return "DUE";
+        }
     }
 
     public Integer getId() {
