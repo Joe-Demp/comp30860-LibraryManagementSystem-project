@@ -43,3 +43,9 @@ footer {
         width: 85px;
     }
 }
+
+a, a:hover {
+    text-decoration: none !important;
+    text-decoration-line: none !important;
+    color: black;
+}

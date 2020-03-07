@@ -79,7 +79,7 @@ public class GuestController {
     public String displayArtifacts(@RequestParam(value="search",required = false)String query, Model model) {
         List<Artifact> searchResults = null;
         try {
-            searchResults = searchservice.fuzzySearch(query);
+            searchResults = searchservice.fuzzySearchArtifact(query);
         } catch (Exception ignored) {
         }
         
