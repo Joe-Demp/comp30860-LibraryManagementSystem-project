@@ -90,18 +90,6 @@
               <td th:if="${loan.returned == null}" th:text="'DUE ' + ${#dates.format(loan.due, 'dd-MMMMM YYYY')}"></td>
               <td th:if="${loan.returned != null}" th:text="'RETURNED ' + ${#dates.format(loan.returned, 'dd-MMMMM YYYY')}" ></td>
             </tr>
-        <!--    <tr>
-              <td>Programming Pearls</td>
-              <td>Jon Bentley</td>
-              <td>23-Dec 2019</td>
-              <td>RETURNED 10-Jan 2020</td>
-            </tr>
-            <tr>
-              <td>Harry Potter and the Order of the Phoenix</td>
-              <td>J.K. Rowling</td>
-              <td>11-Dec 2019</td>
-              <td>OVERDUE 17 days</td>
-            </tr>-->
             </tbody>
           </table>
         </div>

@@ -75,6 +75,15 @@ public class GuestController {
         return "search_users.html";
     }
 
+
+    @GetMapping("/catalogue")
+    public String displayCatalogue(Model model) {
+
+        model.addAttribute("artifacts", artifactRepository.findAll());
+        return "search_artifact.html";
+    }
+
+
     @GetMapping("/search_artifact")
     public String displayArtifacts(@RequestParam(value="search",required = false)String query, Model model) {
         List<Artifact> searchResults = null;
