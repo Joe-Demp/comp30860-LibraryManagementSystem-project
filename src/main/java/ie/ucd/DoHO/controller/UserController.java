@@ -72,7 +72,9 @@ public class UserController {
         } else if (userSession.isAdmin()) {
             Optional<User> optionalUser = userRepository.findByUsername(username);
             if (optionalUser.isPresent()) {
-
+                Reservation res = new Reservation(optionalUser.get(), artifact);
+                resRepository.save(res);
+                response.sendRedirect("/user_profile?id=" + optionalUser.get().getId());
             } else {
                 response.sendRedirect("errors/");
             }
