@@ -70,39 +70,17 @@ public class GuestController {
         return "artifact";
     }
 
-    @GetMapping("/search_user")
-    public String displayUsers(Model model){
-        model.addAttribute("users",userRepository.findAll());
+    @GetMapping("/members")
+    public String displayUsers(Model model) {
+        model.addAttribute("users", userRepository.findAll());
         return "search_users.html";
-    }
-
-    @GetMapping("/user_profile")
-    public String user(@RequestParam("id") Integer id, Model model, HttpServletResponse response) throws IOException {
-        Optional<User> user = userRepository.findById(id);
-
-      if(user.isPresent() && user.get().getRole().equals("admin")) {
-          response.sendRedirect("/portal");
-      }
-
-        List<Loan> loans = loanRepository.findByUserId(id);
-
-
-        model.addAttribute("fullName", user.get().getFullName());
-        model.addAttribute("username", user.get().getUsername());
-        model.addAttribute("email", user.get().getEmail());
-        model.addAttribute("phoneNumber", user.get().getPhoneNumber());
-        model.addAttribute("id", user.get().getId());
-        model.addAttribute("created", user.get().getCreated());
-        model.addAttribute("loans", loans);
-
-        return "user_profile";
     }
 
     @GetMapping("/search_artifact")
     public String displayArtifacts(@RequestParam(value="search",required = false)String query, Model model) {
         List<Artifact> searchResults = null;
         try {
-            searchResults = searchservice.fuzzySearch(query);
+            searchResults = searchservice.fuzzySearchArtifact(query);
         } catch (Exception ignored) {
         }
         
