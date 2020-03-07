@@ -10,7 +10,6 @@ import org.hibernate.search.annotations.TermVector;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.lang.reflect.Field;
-import java.sql.Date;
 import java.util.*;
 
 /**
@@ -84,6 +83,18 @@ public abstract class Artifact implements Serializable {
         setLibraryLocation(libraryLocation);
         setLanguage(language);
         setTotalStock(totalStock);
+    }
+
+    public Artifact(ArtifactForm form) {
+        setTitle(form.title);
+        setAuthor(form.author);
+        setPublisher(form.publisher);
+        setReleaseYear(form.releaseYear);
+        setSubject(form.subject);
+        setGenre(form.genre);
+        setLibraryLocation(form.libraryLocation);
+        setLanguage(form.language);
+        setTotalStock(form.totalStock);
     }
 
     public Integer getId() {

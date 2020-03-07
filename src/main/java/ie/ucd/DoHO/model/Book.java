@@ -22,6 +22,12 @@ public class Book extends Artifact {
         setPages(pages);
     }
 
+    public Book(ArtifactForm form) {
+        super(form);
+        setISBN(form.ISBN);
+        setPages(form.pages);
+    }
+
     public String getISBN() {
         return ISBN;
     }

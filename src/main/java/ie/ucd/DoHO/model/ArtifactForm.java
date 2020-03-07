@@ -1,25 +1,30 @@
 package ie.ucd.DoHO.model;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 /**
  * An object to hold Artifact attributes from forms
  */
 public class ArtifactForm {
-    private Integer id;
-    private String title;
-    private String author;
-    private String publisher;
-    private Integer releaseYear;
-    private String subject;
-    private String genre;
-    private String libraryLocation;
-    private String language;
-    private int totalStock;
-    private String ISBN;
-    private Integer pages;
-    private Integer runtimeMinutes;
-    private String hyperlink;
-    private String frequency;
-    private int issue;
+    private static Logger logger = LoggerFactory.getLogger(ArtifactForm.class);
+
+    protected Integer id;
+    protected String title;
+    protected String author;
+    protected String publisher;
+    protected Integer releaseYear;
+    protected String subject;
+    protected String genre;
+    protected String libraryLocation;
+    protected String language;
+    protected int totalStock;
+    protected String ISBN;
+    protected Integer pages;
+    protected Integer runtimeMinutes;
+    protected String hyperlink;
+    protected String frequency;
+    protected int issue;
 
     public Integer getId() {
         return id;

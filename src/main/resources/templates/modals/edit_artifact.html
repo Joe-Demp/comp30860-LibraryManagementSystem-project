@@ -2,118 +2,128 @@
  Return each field and handle the edit in the controller -->
 <a class="btn btn-outline-primary btn-block" data-target="#edit-artifact" data-toggle="modal" href="/edit_artifact"
    type="button" xmlns:th="http://www.w3.org/1999/xhtml">Edit Artifact</a>
-<div class="modal text-center" id="edit-artifact">
-  <div class="modal-dialog">
+<div class="modal" id="edit-artifact">
+  <div class="modal-dialogue modal-dialogue-centered modal-lg">
     <div class="modal-content">
+
       <div class="modal-header">
         <h5 class="modal-title">Edit Artifact</h5>
         <button aria-label="Close" class="close" data-dismiss="modal" type="button">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <div class="model-body">
+
+      <div class="modal-body">
         <form action="#" method="POST" th:action="@{/artifact/edit}" th:object="${artifactForm}">
-          <input th:field="*{id}" th:value="${artifact.id}" type="hidden">
+          <input name="id" th:value="${artifact.id}" type="hidden">
 
           <div class="form-group row" id="title">
-            <label class="col-sm-2 col-form-label">Title:</label>
-            <div class="col-sm-10">
-              <input class="form-control" placeholder="Enter title" th:field="*{title}" type="text">
+            <label class="col-sm-3 col-form-label">Title:</label>
+            <div class="col-sm-9">
+              <input class="form-control" name="title" th:value="${artifact.title}" type="text">
             </div>
           </div>
           <div class="form-group row" id="author">
-            <label class="col-sm-2 col-form-label">Author:</label>
-            <div class="col-sm-10">
-              <input class="form-control" placeholder="Enter author" th:field="*{author}" type="text">
+            <label class="col-sm-3 col-form-label">Author:</label>
+            <div class="col-sm-9">
+              <input class="form-control" name="author" th:value="${artifact.author}" type="text">
             </div>
           </div>
           <div class="form-group row" id="publisher">
-            <label class="col-sm-2 col-form-label">Publisher:</label>
-            <div class="col-sm-10">
-              <input class="form-control" placeholder="Enter publisher" th:field="*{publisher}" type="text">
+            <label class="col-sm-3 col-form-label">Publisher:</label>
+            <div class="col-sm-9">
+              <input class="form-control" name="publisher" th:value="${artifact.publisher}" type="text">
             </div>
           </div>
           <div class="form-group row" id="releaseYear">
-            <label class="col-sm-2 col-form-label">Release Year:</label>
-            <div class="col-sm-10">
-              <input class="form-control" placeholder="Enter release year" th:field="*{releaseYear}" type="text">
+            <label class="col-sm-3 col-form-label">Release Year:</label>
+            <div class="col-sm-9">
+              <input class="form-control" min="1" name="releaseYear" th:value="${artifact.releaseYear}" type="number">
             </div>
           </div>
           <!-- It is not possible to turn an artifact from one subject to another -->
-          <input th:field="*{subject}" th:value="${artifact.subject}" type="hidden">
+          <input name="subject" th:value="${artifact.subject}" type="hidden">
 
           <div class="form-group row" id="genre">
-            <label class="col-sm-2 col-form-label">Genre:</label>
-            <div class="col-sm-10">
-              <input class="form-control" placeholder="Enter genre" th:field="*{genre}" type="text">
+            <label class="col-sm-3 col-form-label">Genre:</label>
+            <div class="col-sm-9">
+              <input class="form-control" name="genre" th:value="${artifact.genre}" type="text">
             </div>
           </div>
           <div class="form-group row" id="libraryLocation">
-            <label class="col-sm-2 col-form-label">Library Location:</label>
-            <div class="col-sm-10">
-              <input class="form-control" placeholder="Enter library location" th:field="*{libraryLocation}"
+            <label class="col-sm-3 col-form-label">Library Location:</label>
+            <div class="col-sm-9">
+              <input class="form-control" name="libraryLocation" th:value="${artifact.libraryLocation}"
                      type="text">
             </div>
           </div>
           <div class="form-group row" id="language">
-            <label class="col-sm-2 col-form-label">Language:</label>
-            <div class="col-sm-10">
-              <input class="form-control" placeholder="Enter language" th:field="*{language}" type="text">
+            <label class="col-sm-3 col-form-label">Language:</label>
+            <div class="col-sm-9">
+              <input class="form-control" name="language" th:value="${artifact.language}" type="text">
             </div>
           </div>
           <div class="form-group row" id="totalStock">
-            <label class="col-sm-2 col-form-label">Total Stock:</label>
-            <div class="col-sm-10">
-              <input class="form-control" placeholder="Enter total stock" th:field="*{totalStock}" type="text">
+            <label class="col-sm-3 col-form-label">Total Stock:</label>
+            <div class="col-sm-9">
+              <input class="form-control" min="1" name="totalStock" th:value="${artifact.totalStock}" type="number">
             </div>
           </div>
           <div class="form-group row" id="ISBN">
-            <label class="col-sm-2 col-form-label">ISBN:</label>
-            <div class="col-sm-10">
-              <input class="form-control" placeholder="Enter ISBN" th:field="*{ISBN}" type="text">
+            <label class="col-sm-3 col-form-label">ISBN:</label>
+            <div class="col-sm-9">
+              <input class="form-control" name="ISBN" th:value="${artifact.ISBN}" type="text">
             </div>
           </div>
           <div class="form-group row" id="pages">
-            <label class="col-sm-2 col-form-label">Pages:</label>
-            <div class="col-sm-10">
-              <input class="form-control" placeholder="Enter pages" th:field="*{pages}" type="text">
+            <label class="col-sm-3 col-form-label">Pages:</label>
+            <div class="col-sm-9">
+              <input class="form-control" name="pages" th:value="${artifact.pages}" type="number">
             </div>
           </div>
-          <div class="form-group row" id="runtimeMinutes">
-            <label class="col-sm-2 col-form-label">Runtime in Minutes:</label>
-            <div class="col-sm-10">
-              <input class="form-control" placeholder="Enter runtime minutes" th:field="*{runtimeMinutes}" type="text">
+          <div class="form-group row" id="runtimeMinutes"
+               th:if="${artifact.subject == 'CD'} or ${artifact.subject == 'Video'}">
+            <label class="col-sm-3 col-form-label">Runtime in Minutes:</label>
+            <div class="col-sm-9">
+              <input class="form-control" min="1" name="runtimeMinutes" th:value="${artifact.runtimeMinutes}"
+                     type="number">
             </div>
           </div>
-          <div class="form-group row" id="hyperlink">
-            <label class="col-sm-2 col-form-label">Hyperlink:</label>
-            <div class="col-sm-10">
-              <input class="form-control" placeholder="Enter hyperlink" th:field="*{hyperlink}" type="text">
+          <div class="form-group row" id="hyperlink" th:if="${artifact.subject == 'EBook'}">
+            <label class="col-sm-3 col-form-label">Hyperlink:</label>
+            <div class="col-sm-9">
+              <input class="form-control" name="hyperlink" th:value="${artifact.hyperlink}" type="text">
             </div>
           </div>
-          <div class="form-group row" id="frequency">
-            <label class="col-sm-2 col-form-label">Frequency:</label>
-            <div class="col-sm-10">
-              <input class="form-control" placeholder="Enter frequency" th:field="*{frequency}" type="text">
+          <div class="form-group row"
+               id="frequency" th:if="${artifact.subject == 'Periodical'} or ${artifact.subject == 'Magazine'}
+          or ${artifact.subject == 'Comic'}">
+            <label class="col-sm-3 col-form-label">Frequency:</label>
+            <div class="col-sm-9">
+              <input class="form-control" name="frequency" th:value="${artifact.frequency}" type="text">
             </div>
           </div>
-          <div class="form-group row" id="issue">
-            <label class="col-sm-2 col-form-label">Issue:</label>
-            <div class="col-sm-10">
-              <input class="form-control" placeholder="Enter issue" th:field="*{issue}" type="text">
+          <div class="form-group row" id="issue" th:if="${artifact.subject == 'Periodical'} or ${artifact.subject == 'Magazine'}
+          or ${artifact.subject == 'Comic'}">
+            <label class="col-sm-3 col-form-label">Issue:</label>
+            <div class="col-sm-9">
+              <input class="form-control" min="1" name="issue" th:value="${artifact.issue}" type="number">
             </div>
           </div>
 
-          <div class="row text-center">
-            <div class="col-10"></div>
-            <div class="col" style="margin-top: 5%">
+          <div class="row text-center py-3">
+            <div class="col-sm-3">
               <button class="btn btn-primary" type="submit">Submit</button>
+            </div>
+            <div class="col-sm-6"></div>
+            <div class="col-sm-3">
+              <button class="btn btn-primary" data-dismiss="modal" type="button">Close</button>
             </div>
           </div>
         </form>
       </div>
       <div class="modal-footer">
-        <button class="btn btn-secondary" data-dismiss="modal" type="button">Close</button>
+
       </div>
     </div>
   </div>
