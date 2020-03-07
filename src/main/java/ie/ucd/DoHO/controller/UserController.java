@@ -53,9 +53,12 @@ public class UserController {
      * One method to handle User reservations.<br>
      * Members can reserve on their own behalf while librarians must specify a username
      *
-     * @param res      the Reservation bean passed from the form
+     * @param artifact
+     * @param user
      * @param username the name of the user the administrator wants to reserve for
+     * @param response
      * @return the profile page of the relevant user if logged in, the login page otherwise
+     * @throws IOException
      */
     @PostMapping("/artifact/reserve")
     public String reserve(@RequestParam(name = "artifact") Artifact artifact,
@@ -65,10 +68,19 @@ public class UserController {
         if (userSession.isMember()) {
             Reservation res = new Reservation(user, artifact);
             resRepository.save(res);
-            response.sendRedirect("/user_profile");
+            response.sendRedirect("/user_profile?id=" + user.getId());
         } else if (userSession.isAdmin()) {
 
         }
         return "login_main";
     }
+
+    /**
+     * Returns a user with the given name if there is one
+     * @param name the name of the user you are looking for
+     * @return the User with username 'name', otherwise null
+     */
+//    private User findUserByName(String name) {
+//
+//    }
 }
