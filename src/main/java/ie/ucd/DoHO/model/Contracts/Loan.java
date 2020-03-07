@@ -31,7 +31,6 @@ public class Loan implements Serializable {
     public Loan(User user, Artifact artifact, Date due) {
         setUser(user);
         setArtifact(artifact);
-        // todo consider the possibility of having a standard loan period here and computing due
         setDue(due);
     }
 

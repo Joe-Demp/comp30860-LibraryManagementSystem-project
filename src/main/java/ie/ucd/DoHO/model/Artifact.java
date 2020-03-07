@@ -219,6 +219,10 @@ public abstract class Artifact implements Serializable {
         return additionals;
     }
 
+    public boolean isAvailable() {
+        return stockOnLoan < totalStock;
+    }
+
     public void loan() {
         if (stockOnLoan < totalStock) {
             stockOnLoan++;
@@ -229,7 +233,7 @@ public abstract class Artifact implements Serializable {
 
     public void receive() {
         if (stockOnLoan > 0) {
-            stockOnLoan++;
+            stockOnLoan--;
         }
     }
 }
