@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletResponse;
@@ -17,6 +18,8 @@ import java.util.Optional;
 
 @Controller
 public class UserController {
+    @Autowired
+    private UserSession userSession;
     @Autowired
     private UserRepository userRepository;
     @Autowired
@@ -39,5 +42,17 @@ public class UserController {
         model.addAttribute("created", user.get().getCreated());
         model.addAttribute("loans", loanRepository.findByUserId(user.get().getId()));
         return "user_profile";
+    }
+
+    @PostMapping("/artifact/reserve")
+    public String reserve(@RequestParam("aID") Integer artifactId,
+                          @RequestParam("uName") String userName,
+                          HttpServletResponse response) {
+        if (userSession.isMember()) {
+
+        } else if (userSession.isAdmin()) {
+
+        }
+        return "login_main";
     }
 }

@@ -21,7 +21,6 @@ public class Reservation implements Serializable {
     private Artifact artifact;
     @CreationTimestamp
     private Date created;
-    private boolean active = true;
 
     public Reservation(User user, Artifact artifact) {
         setUser(user);
@@ -61,13 +60,5 @@ public class Reservation implements Serializable {
 
     public void setCreated(Date created) {
         this.created = created;
-    }
-
-    public boolean isActive() {
-        return active;
-    }
-
-    public void setInactive() {
-        this.active = false;
     }
 }
