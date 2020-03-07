@@ -35,6 +35,7 @@ public class LibrarianController {
 
     @GetMapping("/portal")
     public String portal(@RequestParam("id") Integer id, Model model) {
+        model.addAttribute("title", "Librarian Portal");
         if (userSession.isAdmin()) {
             model.addAttribute("fullName", userSession.getUser().getFullName());
             model.addAttribute("username", userSession.getUser().getUsername());
@@ -49,6 +50,7 @@ public class LibrarianController {
 
     @GetMapping("/create")
     public String addArtifact(Model model) {
+        model.addAttribute("title", "Create Artifact");
         if (userSession.isAdmin()) {
             model.addAttribute("book", new Book());
             model.addAttribute("cd", new CD());

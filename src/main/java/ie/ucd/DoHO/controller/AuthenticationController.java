@@ -20,12 +20,14 @@ public class AuthenticationController {
 
     @GetMapping("/login_main")
     public String login_main(Model model) {
+        model.addAttribute("title", "Login");
         model.addAttribute("error", "Username or Password not correct. Please try again.");
         return "login_main.html";
     }
 
     @GetMapping("/login")
     public String login(Model model) {
+
         if (userSession.isLoginFailed()) {
             userSession.setLoginFailed(false);
         }
@@ -55,7 +57,8 @@ public class AuthenticationController {
     }
 
     @GetMapping("/sign_up")
-    public String signUp() {
+    public String signUp(Model model) {
+        model.addAttribute("title", "Sign Up");
         return "sign_up.html";
     }
 

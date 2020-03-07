@@ -40,19 +40,22 @@ public class GuestController {
 
     @GetMapping("/")
     public String index(Model model) {
+        model.addAttribute("title", "Home");
         if(userSession.getUser() != null)
             model.addAttribute("id", userSession.getUser().getId());
         return "index";
     }
 
     @GetMapping("/loan_history")
-    public String loan_history() {
+    public String loan_history(Model model) {
+        model.addAttribute("title", "Loan History");
         return "loan_history";
     }
 
     @GetMapping("/artifact")
     public String viewArtifact(@RequestParam(name = "id") Integer id, Model model)
             throws IOException {
+        model.addAttribute("title", "Artifact");
         Optional<Artifact> artifact = artifactRepository.findById(id);
         if (artifact.isPresent()) {
             model.addAttribute("artifact", artifact.get());
@@ -71,7 +74,7 @@ public class GuestController {
 
     @GetMapping("/catalogue")
     public String displayCatalogue(Model model) {
-
+        model.addAttribute("title", "Catalogue");
         model.addAttribute("artifacts", artifactRepository.findAll());
         return "search_artifact.html";
     }
@@ -79,6 +82,7 @@ public class GuestController {
 
     @GetMapping("/search_artifact")
     public String displayArtifacts(@RequestParam(value="search",required = false)String query, Model model) {
+        model.addAttribute("title", "Search Artifact");
         List<Artifact> searchResults = null;
         try {
             searchResults = searchservice.fuzzySearchArtifact(query);
@@ -92,13 +96,14 @@ public class GuestController {
 
     @GetMapping("/members")
     public String allMembers(Model model) {
+        model.addAttribute("title", "Members");
         model.addAttribute("users", userRepository.findAll());
         return "search_users.html";
     }
 
     @GetMapping("/search_members")
     public String displayMembers(@RequestParam(value = "searchMems", required = false) String query, Model model) {
-
+        model.addAttribute("title", "Search Members");
         List<User> searchResults = null;
         try {
             searchResults = searchservice.fuzzySearchUser(query);

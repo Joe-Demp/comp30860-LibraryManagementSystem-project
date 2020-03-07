@@ -36,6 +36,7 @@ public class UserController {
 
     @GetMapping("/user_profile")
     public String user(@RequestParam("id") Integer id, Model model, HttpServletResponse response) throws IOException {
+        model.addAttribute("title", "Profile");
         Optional<User> user = userRepository.findById(id);
 
         if (user.isPresent() && user.get().getRole().equals("admin")) {
