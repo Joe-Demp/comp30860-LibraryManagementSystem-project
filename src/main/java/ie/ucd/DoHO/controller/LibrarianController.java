@@ -26,6 +26,8 @@ public class LibrarianController {
     private UserRepository userRepository;
     @Autowired
     private ArtifactRepository artifactRepository;
+    @Autowired
+    private MessageRepository messageRepository;
     private static Logger logger = LoggerFactory.getLogger(LibrarianController.class);
 
     @ModelAttribute
@@ -43,6 +45,8 @@ public class LibrarianController {
             model.addAttribute("phoneNumber", userSession.getUser().getPhoneNumber());
             model.addAttribute("id", userSession.getUser().getId());
             model.addAttribute("created", userSession.getUser().getCreated());
+            model.addAttribute("messages", messageRepository.findAll());
+
             return "librarian_portal";
         }
         return "login_main";
@@ -119,5 +123,10 @@ public class LibrarianController {
                 throw new IllegalArgumentException("ArtifactForm in editArtifact has an invalid subject: " + form.getSubject());
         }
         return artifact;
+    }
+    @GetMapping("/delete_message")
+    public void deleteMessage(@RequestParam("id") Integer id, HttpServletResponse response) throws IOException {
+        messageRepository.deleteById(id);
+        response.sendRedirect("/portal?id="+userSession.getUser().getId());
     }
 }

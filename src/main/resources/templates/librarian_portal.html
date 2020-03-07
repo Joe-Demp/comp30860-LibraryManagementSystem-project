@@ -51,8 +51,7 @@
     }
   </style>
 
-<div id="header" th:replace="common/header.html">
-</div>
+<div id="header" th:replace="common/header.html"></div>
 <!-- sidenav made with the help of https://bootstrapious.com/p/bootstrap-sidebar -->
 <div class="wrapper">
   <nav class="px-3 bg-primary" id="sidebar">
@@ -140,15 +139,65 @@
                 Infraction Control
                 <span class="badge badge-primary badge-pill">2</span>
               </a>
-              <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center"
+              <!--<a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center"
                  href="#">
                 Messages
                 <span class="badge badge-primary badge-pill">2</span>
-              </a>
+              </a>-->
             </div>
           </div>
         </div>
+        <div class="col-lg-6">
+          <table class="table table-striped text-center">
+            <h4>Messages</h4>
+            <thead>
+            <th scope="col">Id</th>
+            <th scope="col">Date</th>
+            <th scope="col">Email</th>
+            <th scope="col">Subject</th>
+            <th scope="col"></th>
+            </thead>
+            <tbody th:each="message : ${messages}">
+            <tr>
+              <td  name="id" th:text="${message.id}"></td>
+              <td th:text="${#dates.format(message.created, 'dd-MMM YYYY')}"></td>
+              <td style="max-width:140px;" class="text"  th:text="${message.email}"></td>
+              <td style="max-width:140px;" class="text"  th:text="${message.subject}"></td>
+              <td><button class="btn btn-outline-primary" data-target="#message" data-toggle="modal" type="button">
+                View Full
+              </button>
+                <div class="modal" id="message">
+                  <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title">Message</h5>
+                        <button aria-label="Close" class="close" data-dismiss="modal" type="button">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                      <div class="modal-body">
+                        <label>Name</label>
+                        <p th:text="${message.name}"></p><hr/>
+                        <label>Email</label>
+                        <p th:text="${message.email}"></p><hr/>
+                        <label>Subject</label>
+                        <p th:text="${message.subject}"></p><hr/>
+                        <label>Message</label>
+                        <p th:text="${message.content}"></p><hr/>
+                      </div>
+                      <div class="modal-footer">
+                        <a class="btn btn-primary" type="submit" th:href="@{/delete_message(id=${message.id})}">Delete</a>
+                        <button class="btn btn-secondary" data-dismiss="modal" type="button">Close</button>
+                      </div>
+                    </div>
+                  </div>
+                </div></td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
+
     </div>
   </div>
 </div>

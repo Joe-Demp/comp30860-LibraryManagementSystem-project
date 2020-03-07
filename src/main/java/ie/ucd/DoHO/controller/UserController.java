@@ -1,7 +1,10 @@
 package ie.ucd.DoHO.controller;
 
+import antlr.debug.MessageAdapter;
 import ie.ucd.DoHO.model.Contracts.LoanRepository;
 import ie.ucd.DoHO.model.Contracts.ReservationRepository;
+import ie.ucd.DoHO.model.Message;
+import ie.ucd.DoHO.model.MessageRepository;
 import ie.ucd.DoHO.model.User;
 import ie.ucd.DoHO.model.UserRepository;
 import org.slf4j.Logger;
@@ -11,6 +14,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletResponse;
@@ -27,6 +31,8 @@ public class UserController {
     private LoanRepository loanRepository;
     @Autowired
     private ReservationRepository reservationRepository;
+    @Autowired
+    private MessageRepository messageRepository;
     private Logger logger = LoggerFactory.getLogger(UserController.class);
 
     @ModelAttribute
@@ -56,4 +62,13 @@ public class UserController {
         model.addAttribute("reservations", reservationRepository.findByUserId(user.get().getId()));
         return "user_profile";
     }
+
+
+    @PostMapping("/message")
+    public void newMessage(String name, String email, String subject, String content, HttpServletResponse response) throws IOException{
+        Message message = new Message(name, email, subject, content);
+        messageRepository.save(message);
+        response.sendRedirect("/");
+    }
+
 }

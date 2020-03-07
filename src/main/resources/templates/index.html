@@ -37,13 +37,13 @@
     <div class="col-md-4 shadow-lg">
       <h2 class="text-center">Contact Us</h2>
       <p class="text-center">Got a question? Send us a message!</p>
-      <form class="text-center" id="contact-form" method="POST" name="contact-form">
-        <input class="form-control contact-form" id="name" name="name" placeholder="Name" type="text">
-        <input class="form-control contact-form" id="email" name="email" placeholder="Email" type="text">
-        <input class="form-control contact-form" id="subject" name="subject" placeholder="Subject" type="text">
-        <textarea class="form-control contact-form" id="message" name="message" placeholder="Message"
+      <form class="text-center" id="contact-form" method="POST" action="/message" name="contact-form">
+        <input class="form-control contact-form" id="name" name="name" placeholder="Name" type="text" maxlength="255">
+        <input class="form-control contact-form" id="email" name="email" placeholder="Email" type="text" maxlength="255">
+        <input class="form-control contact-form" id="subject" name="subject" placeholder="Subject" type="text" maxlength="255">
+        <textarea class="form-control contact-form" id="message" name="content" placeholder="Message"
                   style="max-height:150px;"
-                  type="text-area"></textarea>
+                  type="text-area" maxlength="255"></textarea>
         <button class="btn btn-info center-block contact-form" type="submit">Send</button>
       </form>
     </div>

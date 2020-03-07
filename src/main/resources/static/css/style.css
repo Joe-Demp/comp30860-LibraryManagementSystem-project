@@ -49,3 +49,9 @@ a, a:hover {
     text-decoration-line: none !important;
     color: black;
 }
+.modal-body p {
+    word-wrap: break-word;
+}
+.text {
+    word-wrap: break-word;
+}
