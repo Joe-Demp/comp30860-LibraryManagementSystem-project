@@ -24,7 +24,7 @@ public class ArtifactController {
             throws IOException {
         if (userSession.isAdmin()) {
             artifactRepository.save(book);
-            response.sendRedirect("/artifact?aID=" + book.getId());
+            response.sendRedirect("/artifact?id=" + book.getId());
         }
         return "login_main";
     }
@@ -35,7 +35,7 @@ public class ArtifactController {
             throws IOException {
         if (userSession.isAdmin()) {
             artifactRepository.save(cd);
-            response.sendRedirect("/artifact?aID=" + cd.getId());
+            response.sendRedirect("/artifact?id=" + cd.getId());
         }
         return "login_main";
     }
@@ -46,7 +46,7 @@ public class ArtifactController {
             throws IOException {
         if (userSession.isAdmin()) {
             artifactRepository.save(comic);
-            response.sendRedirect("/artifact?aID=" + comic.getId());
+            response.sendRedirect("/artifact?id=" + comic.getId());
         }
         return "login_main";
     }
@@ -57,7 +57,7 @@ public class ArtifactController {
             throws IOException {
         if (userSession.isAdmin()) {
             artifactRepository.save(eBook);
-            response.sendRedirect("/artifact?aID=" + eBook.getId());
+            response.sendRedirect("/artifact?id=" + eBook.getId());
         }
         return "login_main";
     }
@@ -68,7 +68,7 @@ public class ArtifactController {
             throws IOException {
         if (userSession.isAdmin()) {
             artifactRepository.save(magazine);
-            response.sendRedirect("/artifact?aID=" + magazine.getId());
+            response.sendRedirect("/artifact?id=" + magazine.getId());
         }
         return "login_main";
     }
@@ -79,7 +79,7 @@ public class ArtifactController {
             throws IOException {
         if (userSession.isAdmin()) {
             artifactRepository.save(periodical);
-            response.sendRedirect("/artifact?aID=" + periodical.getId());
+            response.sendRedirect("/artifact?id=" + periodical.getId());
         }
         return "login_main";
     }
@@ -90,7 +90,7 @@ public class ArtifactController {
             throws IOException {
         if (userSession.isAdmin()) {
             artifactRepository.save(video);
-            response.sendRedirect("/artifact?aID=" + video.getId());
+            response.sendRedirect("/artifact?id=" + video.getId());
         }
         return "login_main";
     }
