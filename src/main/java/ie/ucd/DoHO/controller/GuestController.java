@@ -57,7 +57,6 @@ public class GuestController {
                 model.addAttribute("isAdmin", true);
                 model.addAttribute("artifactForm", new ArtifactForm());
             }
-            logger.info("In viewArtifact: user=" + userSession.getUser() + " isAdmin=" + userSession.isAdmin());
         } else {
             // todo return a proper error page here
             return "404";
