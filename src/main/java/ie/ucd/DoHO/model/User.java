@@ -118,6 +118,10 @@ public class User implements Serializable {
         return loans;
     }
 
+    public boolean isAdmin() {
+        return this.role.equals("admin");
+    }
+
     @Override
     public String toString() {
         return "{" +

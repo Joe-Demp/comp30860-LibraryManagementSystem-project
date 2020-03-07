@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.List;
 import java.util.Optional;
 
 @Controller
@@ -72,38 +73,49 @@ public class UserController {
                           @RequestParam(name = "username") String username,
                           HttpServletResponse response) throws IOException {
         if (userSession.isMember()) {
-            Reservation res = new Reservation(user, artifact);
-            resRepository.save(res);
-            response.sendRedirect("/user_profile?id=" + user.getId());
-        } else if (userSession.isAdmin()) {
-            Optional<User> optionalUser = userRepository.findByUsername(username);
-
-            if (optionalUser.isPresent()) {
-                User reservee = optionalUser.get();
-
-                // Check reservee is not an admin
-                if (!reservee.getRole().equals("member")) {
-                    logger.info("user " + username + " is an admin");
-                    return "/errors/librarian_reservation";
-                }
-
-                Reservation res = new Reservation(reservee, artifact);
-                resRepository.save(res);
-                response.sendRedirect("/user_profile?id=" + reservee.getId());
-            } else {
-                logger.info("user " + username + " does not exist");
-                response.sendRedirect("/error/no_such_user?uname=" + username);
+            if (reservedAlready(user, artifact)) {
+                return "errors/reserved_already";
             }
+            reserveForUser(user, artifact, response);
+        } else if (userSession.isAdmin()) {
+            return adminReserve(username, artifact, response);
         }
         return "login_main";
     }
 
-    /**
-     * Returns a user with the given name if there is one
-     * @param name the name of the user you are looking for
-     * @return the User with username 'name', otherwise null
-     */
-//    private User findUserByName(String name) {
-//
-//    }
+    private String adminReserve(String username, Artifact artifact, HttpServletResponse response)
+            throws IOException {
+        Optional<User> optionalUser = userRepository.findByUsername(username);
+
+        if (optionalUser.isPresent()) {
+            User reservee = optionalUser.get();
+
+            // Check reservee is not an admin
+            if (reservee.isAdmin()) {
+                logger.info("user " + username + " is an admin");
+                return "/errors/librarian_reservation";
+            } else if (reservedAlready(reservee, artifact)) {
+                logger.info("user " + username + " has already reserved " + artifact.getTitle());
+                return "/errors/reserved_already";
+            }
+
+            reserveForUser(reservee, artifact, response);
+        } else {
+            logger.info("user " + username + " does not exist");
+            response.sendRedirect("/error/no_such_user?uname=" + username);
+        }
+        return "login_main";
+    }
+
+    private void reserveForUser(User user, Artifact artifact, HttpServletResponse response)
+            throws IOException {
+        Reservation res = new Reservation(user, artifact);
+        resRepository.save(res);
+        response.sendRedirect("/user_profile?id=" + user.getId());
+    }
+
+    private boolean reservedAlready(User user, Artifact artifact) {
+        List<Reservation> resList = resRepository.findByUserAndArtifact(user, artifact);
+        return !resList.isEmpty();
+    }
 }
