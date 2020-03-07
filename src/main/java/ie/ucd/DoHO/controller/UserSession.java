@@ -1,6 +1,5 @@
 package ie.ucd.DoHO.controller;
 
-
 import ie.ucd.DoHO.model.User;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.annotation.SessionScope;
@@ -29,5 +28,9 @@ public class UserSession {
 
     public boolean isAdmin() {
         return user != null && user.getRole().equals("admin");
+    }
+
+    public boolean isMember() {
+        return user != null && user.getRole().equals("member");
     }
 }

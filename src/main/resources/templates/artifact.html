@@ -89,7 +89,20 @@
     <div class="col-lg-1"></div>
     <div class="col-lg-3" id="control">
       <div class="d-flex justify-content-center flex-column page-box shadow-lg my-4 p-3">
-        <a class="btn btn-primary btn-lg btn-block my-2" href="#">Reserve it</a>
+        <form action="/artifact/reserve" method="POST" th:if="${isMember}">
+          <input name="artifact" th:value="${artifact.id}" type="hidden">
+          <input name="user" th:value="${user.id}" type="hidden">
+          <input name="username" th:value="${user.username}" type="hidden">
+          <button class="btn btn-primary btn-lg btn-block my-2" type="submit">Reserve</button>
+        </form>
+        <form action="/artifact/reserve" method="POST" th:if="${isAdmin}">
+          <button class="btn btn-primary btn-lg btn-block my-2" type="submit">Reserve</button>
+          <input name="artifact" th:value="${artifact.id}" type="hidden">
+          <input name="user" th:value="${null}" type="hidden">
+          <label for="username">Reserving for:</label>
+          <input id=username name="username" placeholder="Username" type="text">
+        </form>
+        <a class="btn btn-primary btn-lg btn-block my-2" href="/login_main" th:if="${isGuest}">Reserve it</a>
         <p style="text-align: center;">0 copies available currently</p>
         <p style="text-align: center;">Next available on 23-Feb 2020</p>
       </div>
