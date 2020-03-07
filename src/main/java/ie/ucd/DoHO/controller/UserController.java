@@ -70,7 +70,12 @@ public class UserController {
             resRepository.save(res);
             response.sendRedirect("/user_profile?id=" + user.getId());
         } else if (userSession.isAdmin()) {
+            Optional<User> optionalUser = userRepository.findByUsername(username);
+            if (optionalUser.isPresent()) {
 
+            } else {
+                response.sendRedirect("errors/");
+            }
         }
         return "login_main";
     }
