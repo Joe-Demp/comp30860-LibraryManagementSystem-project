@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -30,6 +31,11 @@ public class UserController {
     @Autowired
     private ReservationRepository resRepository;
     private Logger logger = LoggerFactory.getLogger(UserController.class);
+
+    @ModelAttribute
+    public void addAttributes(Model model) {
+        model.addAttribute("user", userSession.getUser());
+    }
 
     @GetMapping("/user_profile")
     public String user(@RequestParam("id") Integer id, Model model, HttpServletResponse response) throws IOException {
@@ -71,12 +77,22 @@ public class UserController {
             response.sendRedirect("/user_profile?id=" + user.getId());
         } else if (userSession.isAdmin()) {
             Optional<User> optionalUser = userRepository.findByUsername(username);
+
             if (optionalUser.isPresent()) {
-                Reservation res = new Reservation(optionalUser.get(), artifact);
+                User reservee = optionalUser.get();
+
+                // Check reservee is not an admin
+                if (!reservee.getRole().equals("member")) {
+                    logger.info("user " + username + " is an admin");
+                    return "/errors/librarian_reservation";
+                }
+
+                Reservation res = new Reservation(reservee, artifact);
                 resRepository.save(res);
-                response.sendRedirect("/user_profile?id=" + optionalUser.get().getId());
+                response.sendRedirect("/user_profile?id=" + reservee.getId());
             } else {
-                response.sendRedirect("errors/");
+                logger.info("user " + username + " does not exist");
+                response.sendRedirect("/error/no_such_user?uname=" + username);
             }
         }
         return "login_main";
