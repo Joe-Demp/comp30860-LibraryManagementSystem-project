@@ -1,10 +1,7 @@
 package ie.ucd.DoHO.controller;
 
 import ie.ucd.DoHO.model.*;
-import ie.ucd.DoHO.model.Contracts.Loan;
-import ie.ucd.DoHO.model.Contracts.LoanRepository;
-import ie.ucd.DoHO.model.Contracts.Reservation;
-import ie.ucd.DoHO.model.Contracts.ReservationRepository;
+import ie.ucd.DoHO.model.Contracts.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -61,8 +58,10 @@ public class GuestController {
             model.addAttribute("artifact", artifact.get());
             model.addAttribute("additionalDetails", artifact.get().getAdditionalDetails());
 
-            model.addAttribute("isAdmin", userSession.isAdmin());
-            logger.info("In viewArtifact: user=" + userSession.getUser() + " isAdmin=" + userSession.isAdmin());
+            if (userSession.isAdmin()) {
+                model.addAttribute("isAdmin", true);
+                model.addAttribute("artifactForm", new ArtifactForm());
+            }
         } else {
             // todo return a proper error page here
             return "404";

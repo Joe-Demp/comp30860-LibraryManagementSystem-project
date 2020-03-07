@@ -33,6 +33,10 @@
     p {
       margin: 0.1rem 0 !important;
     }
+
+    .modal {
+      margin: 2rem 7rem;
+    }
   </style>
 </head>
 <body>
@@ -97,18 +101,18 @@
       </div>
       <div class="d-flex justify-content-center flex-column page-box shadow-lg my-4 p-3" id="admin-panel"
            th:if="${isAdmin}">
-        <a class="btn btn-primary btn-lg btn-block mt-2 mb-4" href="#">Receive</a>
+        <a class="btn btn-primary btn-lg btn-block mt-2" href="#">Check-Out</a>
+        <a class="btn btn-primary btn-lg btn-block mb-4" href="#">Receive</a>
         <h4 style="text-align: center;">Options</h4>
         <div class="btn-gang d-flex justify-content-center flex-column">
           <a class="btn btn-outline-primary btn-block" href="#">View Reservations</a>
-          <a class="btn btn-outline-primary btn-block" href="#">Edit Artifact</a>
+          <div th:replace="modals/edit_artifact.html">Edit Artifact goes here</div>
         </div>
         <div class="btn-gang d-flex justify-content-center flex-column">
           <form action="/artifact/delete" method="POST">
             <input name="aID" th:value="${artifact.id}" type="hidden">
             <button class="btn btn-outline-warning btn-block" type="submit">Delete Artifact</button>
           </form>
-          <a class="btn btn-outline-danger btn-block" href="#">Hide Artifact</a>
         </div>
       </div>
     </div>

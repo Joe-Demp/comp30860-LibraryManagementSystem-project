@@ -13,14 +13,20 @@ public class CD extends Artifact {
         setSubject("CD");
     }
 
+    public CD(ArtifactForm form) {
+        super(form);
+        setRuntimeMinutes(runtimeMinutes);
+    }
+
     public Integer getRuntimeMinutes() {
         return runtimeMinutes;
     }
 
     public void setRuntimeMinutes(Integer runtimeMinutes) {
-        this.runtimeMinutes = runtimeMinutes;
+        this.runtimeMinutes = runtimeMinutes > 0 ? runtimeMinutes : 0;
     }
 
+    // todo test this
     public String runtimeString() {
         Duration d = Duration.ofMinutes(runtimeMinutes);
         return Formatter.toDurationString(d);

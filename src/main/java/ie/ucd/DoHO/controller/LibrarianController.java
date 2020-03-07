@@ -6,6 +6,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -25,7 +26,7 @@ public class LibrarianController {
     private UserRepository userRepository;
     @Autowired
     private ArtifactRepository artifactRepository;
-    private Logger logger = LoggerFactory.getLogger(LibrarianController.class);
+    private static Logger logger = LoggerFactory.getLogger(LibrarianController.class);
 
     @ModelAttribute
     public void addAttributes(Model model) {
@@ -66,5 +67,49 @@ public class LibrarianController {
             response.sendRedirect("/portal");
         }
         return "index";
+    }
+
+    @PostMapping("/artifact/edit")
+    public String editArtifact(@ModelAttribute ArtifactForm form, BindingResult errors,
+                               Model model, HttpServletResponse response)
+            throws IOException {
+        if (userSession.isAdmin()) {
+            Artifact artifact = makeNewArtifact(form);
+            artifactRepository.deleteById(form.getId());
+            artifactRepository.save(artifact);
+
+            response.sendRedirect("/artifact?id=" + artifact.getId());
+        }
+        return "login_main";
+    }
+
+    public Artifact makeNewArtifact(ArtifactForm form) {
+        Artifact artifact;
+        switch (form.getSubject()) {
+            case "Book":
+                artifact = new Book(form);
+                break;
+            case "CD":
+                artifact = new CD(form);
+                break;
+            case "Comic":
+                artifact = new Comic(form);
+                break;
+            case "EBook":
+                artifact = new EBook(form);
+                break;
+            case "Magazine":
+                artifact = new Magazine(form);
+                break;
+            case "Periodical":
+                artifact = new Periodical(form);
+                break;
+            case "Video":
+                artifact = new Video(form);
+                break;
+            default:
+                throw new IllegalArgumentException("ArtifactForm in editArtifact has an invalid subject: " + form.getSubject());
+        }
+        return artifact;
     }
 }
