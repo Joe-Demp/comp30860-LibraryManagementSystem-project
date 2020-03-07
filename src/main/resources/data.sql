@@ -33,7 +33,9 @@ VALUES (0, 'my name' ,'user1', 'password', 'user1@gmail.com', '+353 87 123 4567'
        (2, 'hozier', 'NinaCriedPower','password', 'hozier@gmail.com', '+353 87 123 4567', 'admin', '2020-05-06');
 
 INSERT INTO reservation(id, active, created, artifact_id, user_id)
-VALUES (0, true, '2020-05-06', 2, 0);
+VALUES (0, true, '2020-05-06', 2, 0),
+    (1, true, '2020-07-06', 4, 0),
+    (2, false, '2020-01-12', 5, 0);
 
 INSERT INTO loan(id, created, due, returned, artifact_id, user_id)
 VALUES  (0, '2020-05-06', '2020-06-06', '2020-08-06', 2, 0),

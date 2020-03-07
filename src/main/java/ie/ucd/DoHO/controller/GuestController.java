@@ -69,13 +69,6 @@ public class GuestController {
         return "artifact";
     }
 
-    @GetMapping("/search_user")
-    public String displayUsers(Model model){
-        model.addAttribute("users",userRepository.findAll());
-        return "search_users.html";
-    }
-
-
     @GetMapping("/catalogue")
     public String displayCatalogue(Model model) {
 
