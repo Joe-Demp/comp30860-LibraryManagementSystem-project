@@ -2,18 +2,9 @@
 <html lang="en"
       xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org">
-<head>
-  <meta charset="UTF-8">
-  <!-- todo change this to portal user.name -->
-  <title>Portal - Librarian</title>
-  <link href="css/layout.css" rel="stylesheet" type="text/css">
-  <!--  todo remove the below line for deployment
-   Note it should cause an error in the console when viewing page "through the application" as opposed to the raw html-->
-  <link href="../static/css/layout.css" rel="stylesheet" type="text/css">
-  <link href="css/style.css" rel="stylesheet" type="text/css">
-  <!--  todo remove the below line for deployment -->
-  <link href="../static/css/style.css" rel="stylesheet" type="text/css">
+<div th:replace="common/standard_head.html"></div>
 
+<body>
   <style>
     .wrapper {
       display: flex;
@@ -60,11 +51,7 @@
     }
   </style>
 
-  <link crossorigin="anonymous" href="https://stackpath.bootstrapcdn.com/bootswatch/4.4.1/journal/bootstrap.min.css"
-        integrity="sha384-0d2eTc91EqtDkt3Y50+J9rW3tCXJWw6/lDgf1QNHLlV0fadTyvcA120WPsSOlwga" rel="stylesheet">
-</head>
-<body>
-<div id="header" th:replace="header.html">
+<div id="header" th:replace="common/header.html">
 </div>
 <!-- sidenav made with the help of https://bootstrapious.com/p/bootstrap-sidebar -->
 <div class="wrapper">
@@ -165,7 +152,7 @@
     </div>
   </div>
 </div>
-<div id="footer" th:replace="footer.html">
+<div id="footer" th:replace="common/footer.html">
 </div>
 <script crossorigin="anonymous"
         integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"

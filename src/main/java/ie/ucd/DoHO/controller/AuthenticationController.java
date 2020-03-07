@@ -20,12 +20,14 @@ public class AuthenticationController {
 
     @GetMapping("/login_main")
     public String login_main(Model model) {
+        model.addAttribute("title", "Login");
         model.addAttribute("error", "Username or Password not correct. Please try again.");
         return "login_main.html";
     }
 
     @GetMapping("/login")
     public String login(Model model) {
+
         if (userSession.isLoginFailed()) {
             userSession.setLoginFailed(false);
         }
@@ -40,7 +42,7 @@ public class AuthenticationController {
             response.sendRedirect("/portal?id="+user.get().getId());
         } else if (user.isPresent()) {
             userSession.setUser(user.get());
-            response.sendRedirect("/");
+            response.sendRedirect("/user_profile?id="+user.get().getId());
         }
         else {
             userSession.setLoginFailed(true);
@@ -55,7 +57,8 @@ public class AuthenticationController {
     }
 
     @GetMapping("/sign_up")
-    public String signUp() {
+    public String signUp(Model model) {
+        model.addAttribute("title", "Sign Up");
         return "sign_up.html";
     }
 
@@ -63,6 +66,7 @@ public class AuthenticationController {
     public void signup(String username, String password, String email, String phoneNumber, String fullName, HttpServletResponse response) throws IOException{
         User user = new User(fullName, username, password, email, phoneNumber, "member");
         userRepository.save(user);
-        response.sendRedirect("/");
+        userSession.setUser(user);
+        response.sendRedirect("/user_profile?id="+user.getId());
     }
 }

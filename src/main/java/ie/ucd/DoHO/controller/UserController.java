@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletResponse;
@@ -19,6 +20,8 @@ import java.util.Optional;
 @Controller
 public class UserController {
     @Autowired
+    private UserSession userSession;
+    @Autowired
     private UserRepository userRepository;
     @Autowired
     private LoanRepository loanRepository;
@@ -26,8 +29,14 @@ public class UserController {
     private ReservationRepository reservationRepository;
     private Logger logger = LoggerFactory.getLogger(UserController.class);
 
+    @ModelAttribute
+    public void addAttributes(Model model){
+        model.addAttribute("user", userSession.getUser());
+    }
+
     @GetMapping("/user_profile")
     public String user(@RequestParam("id") Integer id, Model model, HttpServletResponse response) throws IOException {
+        model.addAttribute("title", "Profile");
         Optional<User> user = userRepository.findById(id);
 
         if (user.isPresent() && user.get().getRole().equals("admin")) {

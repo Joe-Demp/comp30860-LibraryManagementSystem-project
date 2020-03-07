@@ -1,15 +1,8 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
-
-<head>
-  <link crossorigin="anonymous" href="https://stackpath.bootstrapcdn.com/bootswatch/4.4.1/journal/bootstrap.min.css"
-        integrity="sha384-0d2eTc91EqtDkt3Y50+J9rW3tCXJWw6/lDgf1QNHLlV0fadTyvcA120WPsSOlwga" rel="stylesheet">
-  <link href="css/style.css" rel="stylesheet" type="text/css">
-  <!--  todo remove the below line for deployment -->
-  <link href="../static/css/style.css" rel="stylesheet" type="text/css">
-</head>
+<div th:replace="common/standard_head.html"></div>
 <body>
-<nav th:replace="header.html"></nav>
+<nav th:replace="common/header.html"></nav>
 <div class="container">
 
   <table class="table" style="margin-top: 10%">
@@ -31,7 +24,7 @@
 
 </div>
 
-<div th:replace="footer.html"></div>
+<div th:replace="common/footer.html"></div>
 
 <script + crossorigin="anonymous"
         integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"

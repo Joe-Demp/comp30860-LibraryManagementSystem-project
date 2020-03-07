@@ -2,21 +2,9 @@
 <html lang="en"
       xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org">
-<head>
-  <meta charset="UTF-8">
-  <title>User</title>
-  <link href="css/layout.css" rel="stylesheet" type="text/css">
-  <!--  todo remove the below line for deployment -->
-  <link href="../static/css/layout.css" rel="stylesheet" type="text/css">
-  <link href="css/style.css" rel="stylesheet" type="text/css">
-  <!--  todo remove the below line for deployment -->
-  <link href="../static/css/style.css" rel="stylesheet" type="text/css">
-
-  <link crossorigin="anonymous" href="https://stackpath.bootstrapcdn.com/bootswatch/4.4.1/journal/bootstrap.min.css"
-        integrity="sha384-0d2eTc91EqtDkt3Y50+J9rW3tCXJWw6/lDgf1QNHLlV0fadTyvcA120WPsSOlwga" rel="stylesheet">
-</head>
+<div th:replace="common/standard_head.html"></div>
 <body>
-<div id="header" th:replace="header.html">
+<div id="header" th:replace="common/header.html">
   <h1>HEADER Library Management System</h1>
 </div>
 <div class="container" id="grid">
@@ -60,40 +48,15 @@
       <div class="page-box shadow-lg" id="control">
         <table id="button-table">
           <tr>
-            <td><span th:include="modals/edit_profile.html"></span></td>
-            <td><a class="btn btn-primary btn-block" href="#">Catalogue</a></td>
+              <td><span th:include="modals/edit_profile.html"></span></td>
+              <td><span th:include="modals/change_password.html"></span></td>
           </tr>
           <tr>
-            <td><span th:include="modals/change_password.html"></span></td>
-            <td><a class="btn btn-primary btn-block" href="#">View Requests</a></td>
+              <td colspan="2"><a class="btn btn-primary btn-block" href="\catalogue">Catalogue</a></td>
           </tr>
         </table>
       </div>
     </div>
-
-    <div class="col-lg-7" id="loans" style="max-height: 100%;">
-      <div class="page-box my-4 p-2 shadow-lg">
-        <div style="overflow-y: scroll;">
-          <table class="table table-striped" id="loan-table">
-            <thead>
-            <tr>
-              <th>Title</th>
-              <th>Author</th>
-              <th>Checked Out</th>
-              <th>Status</th>
-            </tr>
-            </thead>
-            <tbody th:each="loan : ${loans}">
-            <tr>
-              <td th:text="${loan.artifact.title}"></td>
-              <td th:text="${loan.artifact.author}"></td>
-              <td th:text="${#dates.format(loan.created, 'dd-MMMMM YYYY')}"></td>
-              <td th:if="${loan.returned == null}" th:text="'DUE ' + ${#dates.format(loan.due, 'dd-MMMMM YYYY')}"></td>
-              <td th:if="${loan.returned != null}" th:text="'RETURNED ' + ${#dates.format(loan.returned, 'dd-MMMMM YYYY')}" ></td>
-            </tr>
-            </tbody>
-          </table>
-
 
     <div class="tab-content col-lg-7" style="width:100%; margin:0px; padding:0px;">
       <div class="row" style="margin:0px; padding:0px;">
@@ -162,9 +125,9 @@
     </div>
   </div>
 </div>
-<div id="footer" th:replace="footer.html">
-  <h1>FOOTER</h1>
-</div>
+<footer th:replace="common/footer.html"></footer>
+
+
 <script type="text/javascript">
   $('#myTab a').on('click', function(e) {
     e.preventDefault()

@@ -2,23 +2,10 @@
 <html lang="en"
       xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org">
-<head>
-  <meta th:replace="common/standard_head.html">
-  <link href="css/layout.css" rel="stylesheet" type="text/css">
-  <!--  todo remove the below line for deployment -->
-  <link href="../static/css/layout.css" rel="stylesheet" type="text/css">
-  <title>Add Artifact</title>
+<div th:replace="common/standard_head.html"></div>
 
-  <!--  todo remove below for deployment -->
-  <meta charset="UTF-8">
-  <link href="css/style.css" rel="stylesheet" type="text/css">
-  <!--  todo remove the below line for deployment -->
-  <link href="../static/css/style.css" rel="stylesheet" type="text/css">
-  <link crossorigin="anonymous" href="https://stackpath.bootstrapcdn.com/bootswatch/4.4.1/journal/bootstrap.min.css"
-        integrity="sha384-0d2eTc91EqtDkt3Y50+J9rW3tCXJWw6/lDgf1QNHLlV0fadTyvcA120WPsSOlwga" rel="stylesheet">
-</head>
 <body>
-<div th:replace="header.html">
+<div th:replace="common/header.html">
   <h1>HEADER Library Management System</h1>
 </div>
 <div class="container">
@@ -201,7 +188,7 @@
     </div>
   </div>
 </div>
-<div th:replace="footer.html">
+<div th:replace="common/footer.html">
   <h1>FOOTER</h1>
 </div>
 <script crossorigin="anonymous"

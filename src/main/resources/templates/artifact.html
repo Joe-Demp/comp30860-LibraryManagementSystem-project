@@ -2,15 +2,9 @@
 <html lang="en"
       xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org">
-<head>
-  <!--/*@thymesVar id="artifact" type="java"*/-->
-  <title th:text="${artifact.title}">Artifact</title>
+<div th:replace="common/standard_head.html"></div>
 
-  <meta th:replace="common/standard_head.html">
-  <link href="css/layout.css" rel="stylesheet" type="text/css">
-  <!--  todo remove the below line for deployment -->
-  <link href="../static/css/layout.css" rel="stylesheet" type="text/css">
-
+<body>
   <style>
     .page-box {
       border: 1px solid black;
@@ -38,9 +32,9 @@
       margin: 2rem 7rem;
     }
   </style>
-</head>
-<body>
-<div th:replace="header.html">
+
+
+<div th:replace="common/header.html">
   <h1>HEADER Library Management System</h1>
 </div>
 <div class="container" id="grid">
@@ -118,7 +112,8 @@
     </div>
   </div>
 </div>
-<div th:replace="footer.html">
+
+<div th:replace="common/footer.html">
 </div>
 <script crossorigin="anonymous"
         integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
