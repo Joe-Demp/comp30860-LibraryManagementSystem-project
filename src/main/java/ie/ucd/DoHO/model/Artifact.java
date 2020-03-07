@@ -6,10 +6,11 @@ import ie.ucd.DoHO.model.Exceptions.ArtifactUnavailableException;
 import ie.ucd.DoHO.util.Formatter;
 import org.hibernate.search.annotations.Indexed;
 import org.hibernate.search.annotations.TermVector;
+import org.hibernate.search.annotations.Field;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.lang.reflect.Field;
+import java.sql.Date;
 import java.util.*;
 
 /**
@@ -33,27 +34,27 @@ public abstract class Artifact implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    @org.hibernate.search.annotations.Field(termVector = TermVector.YES)
+    @Field(termVector = TermVector.YES)
     private String title;
     @Column
-    @org.hibernate.search.annotations.Field(termVector = TermVector.YES)
+    @Field(termVector = TermVector.YES)
     private String author;
     @Column
-    @org.hibernate.search.annotations.Field(termVector = TermVector.YES)
+    @Field(termVector = TermVector.YES)
     private String publisher;
     @Column
     private Integer releaseYear;
     @Column
-    @org.hibernate.search.annotations.Field(termVector = TermVector.YES)
+    @Field(termVector = TermVector.YES)
     private String subject;
     @Column
-    @org.hibernate.search.annotations.Field(termVector = TermVector.YES)
+    @Field(termVector = TermVector.YES)
     private String genre;
     @Column
-    @org.hibernate.search.annotations.Field(termVector = TermVector.YES)
+    @Field(termVector = TermVector.YES)
     private String libraryLocation;
     @Column
-    @org.hibernate.search.annotations.Field(termVector = TermVector.YES)
+    @Field(termVector = TermVector.YES)
     private String language;
     @Column
     private int totalStock = 0;
@@ -201,7 +202,7 @@ public abstract class Artifact implements Serializable {
 
     public Map<String, String> getAdditionalDetails() {
         Map<String, String> additionals = new HashMap<>();
-        for (Field field : this.getClass().getDeclaredFields()) {
+        for (java.lang.reflect.Field field : this.getClass().getDeclaredFields()) {
             String fieldString = field.getName();
             if (!primaryFields.contains(fieldString)) {
                 try {
