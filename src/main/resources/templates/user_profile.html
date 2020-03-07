@@ -106,7 +106,6 @@
                   <th>Title</th>
                   <th>Author</th>
                   <th>Reserved</th>
-                  <th>Active</th>
                 </tr>
                 </thead>
                 <tbody th:each="reservation : ${reservations}">
@@ -114,7 +113,6 @@
                     <td  style="width:25%;" th:text="${reservation.artifact.title}"></td>
                     <td  style="width:25%;"  th:text="${reservation.artifact.author}"></td>
                     <td  style="width:25%;"  th:text="${#dates.format(reservation.created, 'dd-MMMMM YYYY')}"></td>
-                    <td  style="width:25%;" th:text="${reservation.active}"></td>
                   </tr>
                 </tbody>
               </table>
@@ -130,7 +128,7 @@
 
 <script type="text/javascript">
   $('#myTab a').on('click', function(e) {
-    e.preventDefault()
+    e.preventDefault();
     $(this).tab('show')
   })
 </script>

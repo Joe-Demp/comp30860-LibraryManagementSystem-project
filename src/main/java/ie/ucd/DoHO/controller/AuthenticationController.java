@@ -19,7 +19,10 @@ public class AuthenticationController {
     private UserRepository userRepository;
 
     @GetMapping("/login_main")
-    public String login_main(Model model) {
+    public String login_main(Model model, HttpServletResponse response) throws IOException {
+        if (userSession.getUser() != null) {
+            response.sendRedirect("/user_profile?id=" + userSession.getUser().getId());
+        }
         model.addAttribute("title", "Login");
         model.addAttribute("error", "Username or Password not correct. Please try again.");
         return "login_main.html";

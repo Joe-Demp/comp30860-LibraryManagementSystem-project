@@ -124,6 +124,12 @@ public class LibrarianController {
         }
         return artifact;
     }
+
+    @GetMapping("/error/no_such_user")
+    public String noSuchUser(@RequestParam(name = "uname") String username, Model model) {
+        model.addAttribute("name", username);
+        return "errors/no_such_user";
+    }
     @GetMapping("/delete_message")
     public void deleteMessage(@RequestParam("id") Integer id, HttpServletResponse response) throws IOException {
         messageRepository.deleteById(id);

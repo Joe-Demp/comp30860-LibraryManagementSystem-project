@@ -6,9 +6,9 @@ import javax.persistence.Entity;
 @Entity
 public class Periodical extends Artifact {
     @Column
-    protected String frequency;
+    protected String frequency = "Monthly";
     @Column
-    protected int issue;
+    protected int issue = 0;
 
     public Periodical() {
         setSubject("Periodical");

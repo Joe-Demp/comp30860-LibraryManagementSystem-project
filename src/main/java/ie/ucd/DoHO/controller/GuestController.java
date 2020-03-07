@@ -41,13 +41,10 @@ public class GuestController {
 
     @GetMapping("/")
     public String index(Model model) {
-
         if (userSession.getUser() != null){
             model.addAttribute("id", userSession.getUser().getId());
         }
-
         model.addAttribute("title", "Home");
-
         return "index";
     }
 
@@ -65,10 +62,15 @@ public class GuestController {
         if (artifact.isPresent()) {
             model.addAttribute("artifact", artifact.get());
             model.addAttribute("additionalDetails", artifact.get().getAdditionalDetails());
+            model.addAttribute("reservation", new Reservation());
 
             if (userSession.isAdmin()) {
                 model.addAttribute("isAdmin", true);
                 model.addAttribute("artifactForm", new ArtifactForm());
+            } else if (userSession.isMember()) {
+                model.addAttribute("isMember", true);
+            } else {
+                model.addAttribute("isGuest", true);
             }
         } else {
             // todo return a proper error page here

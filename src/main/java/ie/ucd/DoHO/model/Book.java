@@ -7,8 +7,8 @@ import javax.persistence.Entity;
 @Entity
 @Indexed
 public class Book extends Artifact {
-    protected String ISBN;
-    protected Integer pages;
+    protected String ISBN = "";
+    protected Integer pages = 0;
 
     public Book() {
         setSubject("Book");

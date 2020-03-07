@@ -18,14 +18,14 @@ public class User implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    private String fullName;
+    private String fullName = "";
     @Field(termVector = TermVector.YES)
-    private String username;
-    private String password;
+    private String username = "";
+    private String password = "";
     @Field(termVector = TermVector.YES)
-    private String email;
-    private String phoneNumber;
-    private String role;
+    private String email = "";
+    private String phoneNumber = "";
+    private String role = "";
     @CreationTimestamp
     private Date created;
     @OneToMany(mappedBy = "user")
@@ -116,6 +116,14 @@ public class User implements Serializable {
 
     public List<Loan> getLoans() {
         return loans;
+    }
+
+    public boolean isAdmin() {
+        return this.role.equals("admin");
+    }
+
+    public boolean isMember() {
+        return this.role.equals("member");
     }
 
     @Override
