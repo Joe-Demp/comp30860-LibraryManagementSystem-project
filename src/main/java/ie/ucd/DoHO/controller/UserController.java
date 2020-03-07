@@ -1,5 +1,6 @@
 package ie.ucd.DoHO.controller;
 
+import ie.ucd.DoHO.model.Contracts.LoanRepository;
 import ie.ucd.DoHO.model.User;
 import ie.ucd.DoHO.model.UserRepository;
 import org.slf4j.Logger;
@@ -18,6 +19,8 @@ import java.util.Optional;
 public class UserController {
     @Autowired
     private UserRepository userRepository;
+    @Autowired
+    private LoanRepository loanRepository;
     private Logger logger = LoggerFactory.getLogger(UserController.class);
 
     @GetMapping("/user_profile")
@@ -34,6 +37,7 @@ public class UserController {
         model.addAttribute("phoneNumber", user.get().getPhoneNumber());
         model.addAttribute("id", user.get().getId());
         model.addAttribute("created", user.get().getCreated());
+        model.addAttribute("loans", loanRepository.findByUserId(user.get().getId()));
         return "user_profile";
     }
 }
