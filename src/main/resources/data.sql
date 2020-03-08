@@ -28,14 +28,16 @@ VALUES ('Book', 1, 'Jane Austin', 'Classic Regency Novel', 'English', 'A1000', '
 ;
 
 INSERT INTO user(id, full_name, username, password, email, phone_number, role, created)
-VALUES (0, 'my name' ,'user1', 'password', 'user1@gmail.com', '+353 87 123 4567', 'member', '2020-05-06'),
-       (1, 'saoirse Ronan','saoirseRon94', 'password','saoirseRonan@gmail.com', '+353 87 123 4567', 'admin', '2020-05-06'),
-       (2, 'hozier', 'NinaCriedPower','password', 'hozier@gmail.com', '+353 87 123 4567', 'admin', '2020-05-06');
+VALUES (0, 'my name', 'user1', 'password', 'user1@gmail.com', '+353 87 123 4567', 'member', '2020-05-06'),
+       (1, 'saoirse Ronan', 'saoirseRon94', 'password', 'saoirseRonan@gmail.com', '+353 87 123 4567', 'admin',
+        '2020-05-06'),
+       (2, 'hozier', 'NinaCriedPower', 'password', 'hozier@gmail.com', '+353 87 123 4567', 'admin', '2020-05-06'),
+       (3, 'Barak Obama', 'admin', 'password', 'barak@gmail.com', '+353 87 123 4567', 'admin', '2020-05-06');
 
 INSERT INTO reservation(id, created, artifact_id, user_id)
 VALUES (0, '2020-05-06', 2, 0),
-    (1, '2020-07-06', 4, 0),
-    (2, '2020-01-12', 5, 0);
+       (1, '2020-07-06', 4, 0),
+       (2, '2020-01-12', 5, 0);
 
 INSERT INTO loan(id, created, due, returned, artifact_id, user_id)
 VALUES (0, '2020-05-06', '2020-06-06', '2020-08-06', 2, 0),
