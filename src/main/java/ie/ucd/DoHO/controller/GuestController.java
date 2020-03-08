@@ -11,10 +11,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.thymeleaf.model.IModel;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.time.DayOfWeek;
+import java.time.LocalTime;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -31,6 +33,8 @@ public class GuestController {
     @Autowired
     private ReservationRepository reservationRepository;
     @Autowired
+    private OpeningHoursRepository openingHoursRepository;
+    @Autowired
     private HibernateSearchDao searchservice;
 
     private Logger logger = LoggerFactory.getLogger(GuestController.class);
@@ -42,10 +46,12 @@ public class GuestController {
 
     @GetMapping("/")
     public String index(Model model) {
-        if (userSession.getUser() != null){
+        if (userSession.getUser() != null) {
             model.addAttribute("id", userSession.getUser().getId());
         }
         model.addAttribute("title", "Home");
+
+        addAllDays();
         return "index";
     }
 
@@ -160,5 +166,20 @@ public class GuestController {
         user.setPhoneNumber(newPhoneNumber);
         userRepository.save(user);
         response.sendRedirect("/user_profile?id=" + id);
+    }
+
+    private void addAllDays() {
+        OpeningHours[] hours = new OpeningHours[]{
+                new OpeningHours(DayOfWeek.MONDAY, LocalTime.NOON, LocalTime.MIDNIGHT),
+                new OpeningHours(DayOfWeek.TUESDAY, LocalTime.NOON, LocalTime.MIDNIGHT),
+                new OpeningHours(DayOfWeek.WEDNESDAY, LocalTime.NOON, LocalTime.MIDNIGHT),
+                new OpeningHours(DayOfWeek.THURSDAY, LocalTime.NOON, LocalTime.MIDNIGHT),
+                new OpeningHours(DayOfWeek.FRIDAY, LocalTime.NOON, LocalTime.MIDNIGHT),
+                new OpeningHours(DayOfWeek.SATURDAY, LocalTime.NOON, LocalTime.MIDNIGHT),
+                new OpeningHours(DayOfWeek.SUNDAY, LocalTime.NOON, LocalTime.MIDNIGHT)
+        };
+
+        List<OpeningHours> hoursList = Arrays.asList(hours);
+        openingHoursRepository.saveAll(hoursList);
     }
 }
