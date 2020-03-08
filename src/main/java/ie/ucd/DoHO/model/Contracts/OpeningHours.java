@@ -5,7 +5,6 @@ import ie.ucd.DoHO.util.Formatter;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import java.time.DayOfWeek;
-import java.time.Instant;
 import java.time.LocalTime;
 
 @Entity
@@ -57,10 +56,5 @@ public class OpeningHours {
 
     public void setClosing(LocalTime closing) {
         this.closing = closing;
-    }
-
-    public boolean openNow() {
-        LocalTime now = LocalTime.from(Instant.now());
-        return now.isAfter(this.opening) && now.isBefore(this.closing);
     }
 }

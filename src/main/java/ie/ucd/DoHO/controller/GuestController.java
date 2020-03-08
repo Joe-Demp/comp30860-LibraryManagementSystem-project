@@ -2,6 +2,7 @@ package ie.ucd.DoHO.controller;
 
 import ie.ucd.DoHO.model.*;
 import ie.ucd.DoHO.model.Contracts.*;
+import ie.ucd.DoHO.util.Formatter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +16,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.time.DayOfWeek;
+import java.time.Instant;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.Arrays;
 import java.util.List;
@@ -52,7 +55,39 @@ public class GuestController {
         model.addAttribute("title", "Home");
 
         addAllDays();
+        model.addAttribute("openingHours", openingHoursRepository.findAll());
+        model.addAttribute("open-string", openString());
+
         return "index";
+    }
+
+    public boolean openNow() {
+        LocalDateTime today = LocalDateTime.from(Instant.now());
+        DayOfWeek dayOfWeek = DayOfWeek.from(today);
+        LocalTime time = LocalTime.from(today);
+        Optional<OpeningHours> optionalOpen = openingHoursRepository.findById(dayOfWeek);
+
+        if (optionalOpen.isPresent()) {
+            OpeningHours open = optionalOpen.get();
+            return time.isAfter(open.getOpening()) && time.isBefore(open.getClosing());
+        }
+        return false;
+    }
+
+    public String openString() {
+        LocalDateTime today = LocalDateTime.from(Instant.now());
+        DayOfWeek dayOfWeek = DayOfWeek.from(today);
+
+        if (openNow()) {
+            Optional<OpeningHours> optionalOpen = openingHoursRepository.findById(dayOfWeek);
+            if (optionalOpen.isPresent()) {
+                OpeningHours open = optionalOpen.get();
+                return "Open now until: " + Formatter.toTimeString(open.getClosing());
+            }
+        } else {
+            return "We're closed!";
+        }
+        return null;
     }
 
     @GetMapping("/loan_history")
