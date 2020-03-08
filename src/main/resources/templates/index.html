@@ -24,7 +24,10 @@
     </div>
     <div class="col-md-4" style="padding:0px;">
       <div class="card shadow-lg">
-        <h1 class="card-header text-center">OPEN until 5pm today</h1>
+        <h1 class="card-header text-center" th:text="${openString}">OPEN until 5pm today</h1>
+        <p th:each="oHour : ${openingHours}">
+          <span th:text="${oHour.asString}"></span>
+        </p>
       </div>
       <div class="card">
         <h3 class="card-header text-center">About Us</h3>
