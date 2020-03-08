@@ -28,7 +28,14 @@ VALUES ('Book', 1, 'Jane Austin', 'Classic Regency Novel', 'English', 'A1000', '
 INSERT INTO artifact(dtype, id, title,author, genre, language, library_location, publisher, release_year,
                      subject, runtime_minutes,total_stock, stock_on_loan)
                      VALUES ( 'CD',12,'The Planets, Op. 32','Gustav Holtz', 'Classical', 'N/A','A1001', 'Berliner Philharmoniker',
-                             '1918','CD', 52, 1,0);
+                             '1918','CD', 52, 1,0),( 'CD',13,'Shostakovich 5th Symphony','Shostakovich',
+                            'Classical', 'N/A','A1001', 'Berliner Philharmoniker','1937','CD', 52, 1,0),
+                            ( 'Video',16,'Spirited Away','Hayao Miyazaki', 'Coming of age', 'japanese','A1001', 'Studio Ghibli',
+                            '2001','Video', 125, 1,0);
+INSERT INTO artifact(dtype,id,title,author,genre,language,library_location,publisher,release_year, subject, frequency, total_stock,
+stock_on_loan, issue) VALUES ('Magazine',14,'threads','multiple authors','crafts','english','A1001','Tauton Press','1972',
+                       'Magazine','monthly',3,2,223),('Comic',15,'Journey into Mystery','multiple authors','fantasy','english','A1001','Marvel','2015',
+                      'Comic','monthly',1,0,12);
 
 INSERT INTO user(id, full_name, username, password, email, phone_number, role, created)
 VALUES (1, 'my name', 'user1', 'password', 'user1@gmail.com', '+353 87 123 4567', 'member', '2020-05-06'),
