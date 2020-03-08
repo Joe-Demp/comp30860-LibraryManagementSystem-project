@@ -10,6 +10,6 @@ services:
       MYSQL_PASSWORD: password
       MYSQL_ROOT_PASSWORD: password
   web:
-    image: LMS:latest
+    image: doho:latest
     ports:
       - 8080:8080

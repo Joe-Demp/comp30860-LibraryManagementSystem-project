@@ -28,24 +28,24 @@ VALUES ('Book', 1, 'Jane Austin', 'Classic Regency Novel', 'English', 'A1000', '
 ;
 
 INSERT INTO user(id, full_name, username, password, email, phone_number, role, created)
-VALUES (0, 'my name', 'user1', 'password', 'user1@gmail.com', '+353 87 123 4567', 'member', '2020-05-06'),
-       (1, 'saoirse Ronan', 'saoirseRon94', 'password', 'saoirseRonan@gmail.com', '+353 87 123 4567', 'admin',
+VALUES (1, 'my name', 'user1', 'password', 'user1@gmail.com', '+353 87 123 4567', 'member', '2020-05-06'),
+       (2, 'saoirse Ronan', 'saoirseRon94', 'password', 'saoirseRonan@gmail.com', '+353 87 123 4567', 'admin',
         '2020-05-06'),
-       (2, 'hozier', 'NinaCriedPower', 'password', 'hozier@gmail.com', '+353 87 123 4567', 'admin', '2020-05-06'),
-       (3, 'Barak Obama', 'admin', 'password', 'barak@gmail.com', '+353 87 123 4567', 'admin', '2020-05-06');
+       (3, 'hozier', 'NinaCriedPower', 'password', 'hozier@gmail.com', '+353 87 123 4567', 'admin', '2020-05-06'),
+       (4, 'Barak Obama', 'admin', 'password', 'barak@gmail.com', '+353 87 123 4567', 'admin', '2020-05-06');
 
 INSERT INTO reservation(id, created, artifact_id, user_id)
-VALUES (0, '2020-05-06', 2, 0),
-       (1, '2020-07-06', 4, 0),
-       (2, '2020-01-12', 5, 0);
+VALUES (1, '2020-05-06', 2, 1),
+       (2, '2020-07-06', 4, 1),
+       (3, '2020-01-12', 5, 1);
 
 INSERT INTO loan(id, created, due, returned, artifact_id, user_id)
-VALUES (0, '2020-05-06', '2020-06-01', '2020-08-06', 2, 0),
-       (1, '2020-07-06', '2020-06-02', null, 8, 0),
-       (2, '2020-05-06', '2020-06-03', '2020-08-06', 7, 0),
-       (3, '2020-05-06', '2020-06-04', '2020-08-09', 10, 0),
-       (4, '2020-05-06', '2020-06-05', '2020-08-06', 11, 0),
-       (5, '2020-05-06', '2020-06-06', '2020-10-06', 6, 0),
-       (6, '2020-05-06', '2020-06-07', '2020-08-06', 2, 1),
-       (7, '2020-02-02', '2020-02-08', null, 3, 0);
+VALUES (8, '2020-05-06', '2020-06-01', '2020-08-06', 2, 1),
+       (1, '2020-07-06', '2020-06-02', null, 8, 1),
+       (2, '2020-05-06', '2020-06-03', '2020-08-06', 7, 1),
+       (3, '2020-05-06', '2020-06-04', '2020-08-09', 10, 1),
+       (4, '2020-05-06', '2020-06-05', '2020-08-06', 11, 1),
+       (5, '2020-05-06', '2020-06-06', '2020-10-06', 6, 1),
+       (6, '2020-05-06', '2020-06-07', '2020-08-06', 2, 2),
+       (7, '2020-02-02', '2020-02-08', null, 3, 1);
 
