@@ -1,11 +1,13 @@
 package ie.ucd.DoHO.model;
 
 import ie.ucd.DoHO.util.Formatter;
+import org.hibernate.search.annotations.Indexed;
 
 import javax.persistence.Entity;
 import java.time.Duration;
 
 @Entity
+@Indexed
 public class CD extends Artifact {
     protected Integer runtimeMinutes = 0;
 
@@ -17,6 +19,14 @@ public class CD extends Artifact {
         super(form);
         setRuntimeMinutes(runtimeMinutes);
     }
+
+    public CD(String title, String author, String publisher, Integer releaseYear,
+                String genre, String libraryLocation, String language, Integer totalStock,
+                Integer runtimeMinutes) {
+        super(title, author, publisher, releaseYear, "CD", genre, libraryLocation, language, totalStock);
+            setRuntimeMinutes(runtimeMinutes);
+    }
+
 
     public Integer getRuntimeMinutes() {
         return runtimeMinutes;

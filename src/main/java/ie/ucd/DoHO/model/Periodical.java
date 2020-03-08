@@ -1,9 +1,12 @@
 package ie.ucd.DoHO.model;
 
+import org.hibernate.search.annotations.Indexed;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 
 @Entity
+@Indexed
 public class Periodical extends Artifact {
     @Column
     protected String frequency = "Monthly";

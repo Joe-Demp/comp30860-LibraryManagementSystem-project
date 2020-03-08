@@ -1,11 +1,13 @@
 package ie.ucd.DoHO.model;
 
 import ie.ucd.DoHO.util.Formatter;
+import org.hibernate.search.annotations.Indexed;
 
 import javax.persistence.Entity;
 import java.time.Duration;
 
 @Entity
+@Indexed
 public class Video extends Artifact {
     protected Integer runtimeMinutes = 0;
 

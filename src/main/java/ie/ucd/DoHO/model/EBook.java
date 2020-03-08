@@ -1,10 +1,13 @@
 package ie.ucd.DoHO.model;
 
 
+import org.hibernate.search.annotations.Indexed;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 
 @Entity
+@Indexed
 public class EBook extends Book {
     @Column
     protected String hyperlink;

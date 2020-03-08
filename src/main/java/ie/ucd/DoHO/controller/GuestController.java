@@ -104,6 +104,10 @@ public class GuestController {
 
     @GetMapping("/search_artifact")
     public String displayArtifacts(@RequestParam(value="search",required = false)String query, Model model) {
+
+        if(query.isEmpty()){
+            return "search_artifact.html";
+        }
         model.addAttribute("title", "Search Artifact");
         List<Artifact> searchResults = null;
         try {
@@ -111,6 +115,7 @@ public class GuestController {
         } catch (Exception ignored) {
         }
 
+        System.out.println(searchResults.size());
         model.addAttribute("artifacts", searchResults);
         return "search_artifact.html";
     }
@@ -125,11 +130,14 @@ public class GuestController {
 
     @GetMapping("/search_members")
     public String displayMembers(@RequestParam(value = "searchMems", required = false) String query, Model model) {
+
+        if(query.isEmpty()){
+            return "search_users.html";
+        }
         model.addAttribute("title", "Search Members");
         List<User> searchResults = null;
         try {
             searchResults = searchservice.fuzzySearchUser(query);
-            System.out.println(searchResults.size());
         } catch (Exception ignored) {
 
         }

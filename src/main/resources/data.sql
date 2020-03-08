@@ -24,8 +24,12 @@ VALUES ('Book', 1, 'Jane Austin', 'Classic Regency Novel', 'English', 'A1000', '
        ('Book', 10, 'Cecelia Aherne', 'Romance', 'English', 'A1001', 'Harper', 2012, 'Book', 'P.S. I Love You',
         '10002345', 534, 5, 2),
        ('Book', 11, 'Elizabeth Gilbert', 'Romance', 'English', 'A1001', 'Harper', 2012, 'Book',
-        'Eat, Pray, Love', '10002345', 534, 5, 2)
-;
+        'Eat, Pray, Love', '10002345', 534, 5, 2);
+
+INSERT INTO artifact(dtype, id, title,author, genre, language, library_location, publisher, release_year,
+                     subject, runtime_minutes,total_stock, stock_on_loan)
+                     VALUES ( 'CD',12,'The Planets, Op. 32','Gustav Holtz', 'Classical', 'N/A','A1001', 'Berliner Philharmoniker',
+                             '1918','CD', 52, 1,0);
 
 INSERT INTO user(id, full_name, username, password, email, phone_number, role, created)
 VALUES (0, 'my name' ,'user1', 'password', 'user1@gmail.com', '+353 87 123 4567', 'member', '2020-05-06'),
