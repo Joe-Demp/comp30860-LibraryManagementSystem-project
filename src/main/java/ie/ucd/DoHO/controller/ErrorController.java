@@ -15,14 +15,30 @@ public class ErrorController {
                         @RequestParam("msg") String message,
                         Model model, HttpServletResponse response) {
         model.addAttribute("message", message);
-        return "errors/error";
+        return "errors/error?title=" + title + "&msg=" + message;
     }
 
     @GetMapping("/error/user_not_found")
     public void userNotFound(@RequestParam("name") String name, HttpServletResponse response)
             throws IOException {
         response.sendRedirect(
-                "/error?title='User not found'&msg='No such user:" + name + "'"
+                "/error?title=UserNotFound&msg=NoSuchUser:" + name
+        );
+    }
+
+    @GetMapping("/error/invalid_admin")
+    public void invalidAdminAction(@RequestParam("name") String name, HttpServletResponse response)
+            throws IOException {
+        response.sendRedirect(
+                "/error?title=InvalidUser&msg=" + name + "isAdmin."
+        );
+    }
+
+    @GetMapping("/error/loan_not_found")
+    public void invalidUserForReceive(HttpServletResponse response)
+            throws IOException {
+        response.sendRedirect(
+                "/error?title=LoanNotFound&msg=LoanNotFound'"
         );
     }
 }

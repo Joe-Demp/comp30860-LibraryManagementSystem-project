@@ -105,29 +105,32 @@ public class LibrarianController {
     }
 
     @PostMapping("/artifact/receive")
-    public String receive(@RequestParam("username") String username,
-                          @RequestParam("artifact") Artifact artifact,
-                          HttpServletResponse response) throws IOException {
+    public void receive(@RequestParam("username") String username,
+                        @RequestParam("artifact") Artifact artifact,
+                        HttpServletResponse response) throws IOException {
         Optional<User> optionalUser = userRepository.findByUsername(username);
 
         if (optionalUser.isPresent()) {
             User loaner = optionalUser.get();
-
             // Check reservee is not an admin
             if (loaner.isAdmin()) {
                 logger.info("user " + username + " is an admin");
-                return "/errors/librarian_reservation";
-            } else if (loanedAlready(loaner, artifact)) {
-                logger.info("user " + username + " has already loaned " + artifact.getTitle());
-                return "/errors/reserved_already";
+                response.sendRedirect("/error/invalid_receive?name=" + username);
             }
 
-            loanForUser(loaner, artifact, response);
+            List<Loan> loans = loanRepository.findByUserAndArtifact(loaner, artifact);
+            Loan target = loans.stream().filter(Loan::isActive).findFirst().orElse(null);
+            if (target != null) {
+                target.doReturn();
+                loanRepository.save(target);
+                response.sendRedirect("/user_profile?id=" + loaner.getId());
+            } else {
+                response.sendRedirect("/error/loan_not_found");
+            }
         } else {
             logger.info("user " + username + " does not exist");
             response.sendRedirect("/error/user_not_found?name=" + username);
         }
-        return null;
     }
 
     @GetMapping("/create")
