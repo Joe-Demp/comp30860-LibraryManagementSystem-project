@@ -6,11 +6,12 @@ import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.Calendar;
+import java.time.Instant;
+import java.util.Comparator;
 import java.util.Date;
 
 @Entity
-public class Loan implements Serializable {
+public class Loan implements Serializable, Comparable<Loan> {
     private static final long serialVersionUID = 1L;
 
     @Id
@@ -24,15 +25,67 @@ public class Loan implements Serializable {
     private Date created;
     private Date due;
     private Date returned;
+    private Status status;
 
     public Loan() {
     }
 
+    /**
+     * Note: this constructor alters Artifact
+     */
     public Loan(User user, Artifact artifact, Date due) {
         setUser(user);
         setArtifact(artifact);
-        // todo consider the possibility of having a standard loan period here and computing due
         setDue(due);
+        artifact.loan();
+        computeStatus();
+    }
+
+    /**
+     * Compares this object with the specified object for order.  Returns a
+     * negative integer, zero, or a positive integer as this object is less
+     * than, equal to, or greater than the specified object.
+     *
+     * @return a negative integer, zero, or a positive integer as this object
+     * is less than, equal to, or greater than the specified object.
+     * @throws NullPointerException if the specified object is null
+     * @throws ClassCastException   if the specified object's type prevents it
+     *                              from being compared to this object.
+     */
+    @Override
+    public int compareTo(Loan other) {
+        this.computeStatus();
+        other.computeStatus();
+
+        // If both have the same status, then compare due dates
+        if (this.status == other.status) {
+            if (this.status == Status.DUE) {
+                // Artifacts due with sooner due dates will rise to the top
+                return this.due.compareTo(other.due);
+            } else {
+                // Overdue and Returned artifacts have later dates first
+                return -this.due.compareTo(other.due);
+            }
+        }
+        // Otherwise compare by status
+        return this.status.getValue() - other.status.getValue();
+    }
+
+    public void computeStatus() {
+        if (isActive()) {
+            if (isOverdue()) {
+                this.status = Status.OVERDUE;
+            } else {
+                this.status = Status.DUE;
+            }
+        } else {
+            this.status = Status.RETURNED;
+        }
+    }
+
+    public String status() {
+        computeStatus();
+        return this.status.toString();
     }
 
     public Integer getId() {
@@ -83,11 +136,46 @@ public class Loan implements Serializable {
         this.returned = returned;
     }
 
+    public Status getStatus() {
+        return status;
+    }
+
+    public boolean doReturn() {
+        if (this.returned == null) {
+            this.returned = Date.from(Instant.now());
+            artifact.receive();
+            return true;
+        }
+        return false;
+    }
+
     public boolean isActive() {
         return returned == null;
     }
 
     public boolean isOverdue() {
-        return due.before(Calendar.getInstance().getTime());
+        return due.before(Date.from(Instant.now()));
+    }
+
+    public enum Status {
+        OVERDUE(0, "OVERDUE"),
+        DUE(1, "DUE"),
+        RETURNED(2, "RETURNED");
+
+        private final int value;
+        private final String string;
+
+        Status(int value, String string) {
+            this.value = value;
+            this.string = string;
+        }
+
+        public int getValue() {
+            return value;
+        }
+
+        public String toString() {
+            return string;
+        }
     }
 }

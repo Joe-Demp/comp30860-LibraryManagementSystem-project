@@ -9,7 +9,7 @@ import java.io.Serializable;
 import java.util.Date;
 
 @Entity
-public class Reservation implements Serializable {
+public class Reservation implements Serializable, Comparable<Reservation> {
     private static final long serialVersionUID = 1L;
 
     @Id
@@ -60,5 +60,10 @@ public class Reservation implements Serializable {
 
     public void setCreated(Date created) {
         this.created = created;
+    }
+
+    @Override
+    public int compareTo(Reservation other) {
+        return this.created.compareTo(other.created);
     }
 }

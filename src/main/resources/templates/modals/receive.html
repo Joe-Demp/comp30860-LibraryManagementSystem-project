@@ -1,0 +1,38 @@
+<div class="modal" id="receive">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <div class="modal-header">
+        <h5 class="modal-title">Receiving <span th:text="${artifact.title}"></span></h5>
+        <button aria-label="Close" class="close" data-dismiss="modal" type="button">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+
+      <form action="/artifact/receive" method="POST">
+        <div class="container">
+          <div class="row">
+            <div class="form-group">
+              <label for="receive-user">For user:</label>
+              <input class="form-control" id="receive-user" name="username" placeholder="User returning item"
+                     type="text">
+              <input name="artifact" th:value="${artifact.id}" type="hidden">
+            </div>
+          </div>
+        </div>
+
+
+        <div class="row text-center py-3">
+          <div class="col-sm-3">
+            <button class="btn btn-primary" type="submit">Submit</button>
+          </div>
+          <div class="col-sm-6"></div>
+          <div class="col-sm-3">
+            <button class="btn btn-primary" data-dismiss="modal" type="button">Close</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+</div>

@@ -1,12 +1,10 @@
 package ie.ucd.DoHO.controller;
 
-import ie.ucd.DoHO.model.Artifact;
+import ie.ucd.DoHO.model.*;
+import ie.ucd.DoHO.model.Contracts.Loan;
 import ie.ucd.DoHO.model.Contracts.LoanRepository;
-import ie.ucd.DoHO.model.Contracts.ReservationRepository;
 import ie.ucd.DoHO.model.Contracts.Reservation;
 import ie.ucd.DoHO.model.Contracts.ReservationRepository;
-import ie.ucd.DoHO.model.User;
-import ie.ucd.DoHO.model.UserRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,12 +12,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.text.ParseException;
 import java.util.List;
 import java.util.Optional;
 
@@ -33,18 +31,22 @@ public class UserController {
     private LoanRepository loanRepository;
     @Autowired
     private ReservationRepository reservationRepository;
+    @Autowired
+    private MessageRepository messageRepository;
     private Logger logger = LoggerFactory.getLogger(UserController.class);
 
     @ModelAttribute
-    public void addAttributes(Model model) {
+    public void addAttributes(Model model){
         model.addAttribute("user", userSession.getUser());
     }
+
+
 
     /**
      * @param id the id of the user profile you want to pull up
      */
     @GetMapping("/user_profile")
-    public String user(@RequestParam("id") Integer id, Model model, HttpServletResponse response) throws IOException {
+    public String user(@RequestParam("id") Integer id, Model model, HttpServletResponse response) throws IOException, ParseException {
         model.addAttribute("title", "Profile");
         Optional<User> optionalUser = userRepository.findById(id);
         User actor = userSession.getUser();
@@ -64,6 +66,11 @@ public class UserController {
                     response.sendRedirect("/");
                 }
             }
+            List<Loan> loans = loanRepository.findAll();
+            loans.sort(Loan::compareTo);
+
+            List<Reservation> reservations = reservationRepository.findByUserId(user.getId());
+            reservations.sort(Reservation::compareTo);
 
             model.addAttribute("fullName", optionalUser.get().getFullName());
             model.addAttribute("username", optionalUser.get().getUsername());
@@ -71,8 +78,8 @@ public class UserController {
             model.addAttribute("phoneNumber", optionalUser.get().getPhoneNumber());
             model.addAttribute("id", optionalUser.get().getId());
             model.addAttribute("created", optionalUser.get().getCreated());
-            model.addAttribute("loans", loanRepository.findByUserId(optionalUser.get().getId()));
-            model.addAttribute("reservations", reservationRepository.findByUserId(optionalUser.get().getId()));
+            model.addAttribute("loans", loans);
+            model.addAttribute("reservations", reservations);
             return "user_profile";
         }
         return "errors/no_such_user";
@@ -143,4 +150,13 @@ public class UserController {
         List<Reservation> resList = reservationRepository.findByUserAndArtifact(user, artifact);
         return !resList.isEmpty();
     }
+
+
+    @PostMapping("/message")
+    public void newMessage(String name, String email, String subject, String content, HttpServletResponse response) throws IOException{
+        Message message = new Message(name, email, subject, content);
+        messageRepository.save(message);
+        response.sendRedirect("/");
+    }
+
 }

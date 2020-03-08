@@ -5,33 +5,33 @@
 <div th:replace="common/standard_head.html"></div>
 
 <body>
-  <style>
-    .page-box {
-      border: 1px solid black;
-      border-radius: 5px;
-    }
+<style>
+  .page-box {
+    border: 1px solid black;
+    border-radius: 5px;
+  }
 
-    tr > td {
-      font-weight: bold;
-    }
+  tr > td {
+    font-weight: bold;
+  }
 
-    td ~ td {
-      font-weight: normal;
-    }
+  td ~ td {
+    font-weight: normal;
+  }
 
-    .btn-gang {
-      margin-top: 1rem;
-      margin-bottom: 1rem;
-    }
+  .btn-gang {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+  }
 
-    p {
-      margin: 0.1rem 0 !important;
-    }
+  p {
+    margin: 0.1rem 0 !important;
+  }
 
-    .modal {
-      margin: 2rem 7rem;
-    }
-  </style>
+  .modal {
+    margin: 2rem 7rem;
+  }
+</style>
 
 
 <div th:replace="common/header.html">
@@ -108,8 +108,8 @@
       </div>
       <div class="d-flex justify-content-center flex-column page-box shadow-lg my-4 p-3" id="admin-panel"
            th:if="${isAdmin}">
-        <a class="btn btn-primary btn-lg btn-block mt-2" href="#">Check-Out</a>
-        <a class="btn btn-primary btn-lg btn-block mb-4" href="#">Receive</a>
+        <a class="btn btn-primary btn-lg btn-block mt-2" data-toggle="modal" href="#loan">Check-Out</a>
+        <a class="btn btn-primary btn-lg btn-block mt-2" data-toggle="modal" href="#receive">Receive</a>
         <h4 style="text-align: center;">Options</h4>
         <div class="btn-gang d-flex justify-content-center flex-column">
           <a class="btn btn-outline-primary btn-block" href="#">View Reservations</a>
@@ -125,9 +125,9 @@
     </div>
   </div>
 </div>
-
-<div th:replace="common/footer.html">
-</div>
+<div th:replace="modals/loan.html"></div>
+<div th:replace="modals/receive.html"></div>
+<div th:replace="common/footer.html"></div>
 <script crossorigin="anonymous"
         integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
         src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>

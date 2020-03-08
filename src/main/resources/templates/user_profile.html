@@ -87,8 +87,7 @@
                   <td th:text="${loan.artifact.title}"></td>
                   <td th:text="${loan.artifact.author}"></td>
                   <td th:text="${#dates.format(loan.created, 'dd-MMMMM YYYY')}"></td>
-                  <td th:if="${loan.returned == null}" th:text="'DUE ' + ${#dates.format(loan.due, 'dd-MMMMM YYYY')}"></td>
-                  <td th:if="${loan.returned != null}" th:text="'RETURNED ' + ${#dates.format(loan.returned, 'dd-MMMMM YYYY')}" ></td>
+                  <td th:text="${loan.status} + ' ' + ${#dates.format(loan.due, 'dd-MMMMM YYYY')}"></td>
                 </tr>
                 </tbody>
               </table>

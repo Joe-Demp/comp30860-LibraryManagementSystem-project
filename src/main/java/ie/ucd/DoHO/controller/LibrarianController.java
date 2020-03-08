@@ -1,6 +1,8 @@
 package ie.ucd.DoHO.controller;
 
 import ie.ucd.DoHO.model.*;
+import ie.ucd.DoHO.model.Contracts.Loan;
+import ie.ucd.DoHO.model.Contracts.LoanRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +16,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.time.Instant;
+import java.time.temporal.ChronoUnit;
+import java.util.Date;
+import java.util.List;
+import java.util.Optional;
 
 /**
  * A controller to support privileged actions only available to a librarian (admin)
@@ -25,7 +32,11 @@ public class LibrarianController {
     @Autowired
     private UserRepository userRepository;
     @Autowired
+    private LoanRepository loanRepository;
+    @Autowired
     private ArtifactRepository artifactRepository;
+    @Autowired
+    private MessageRepository messageRepository;
     private static Logger logger = LoggerFactory.getLogger(LibrarianController.class);
 
     @ModelAttribute
@@ -43,9 +54,87 @@ public class LibrarianController {
             model.addAttribute("phoneNumber", userSession.getUser().getPhoneNumber());
             model.addAttribute("id", userSession.getUser().getId());
             model.addAttribute("created", userSession.getUser().getCreated());
+            model.addAttribute("messages", messageRepository.findAll());
+
             return "librarian_portal";
         }
         return "login_main";
+    }
+
+    @PostMapping("/artifact/loan")
+    public String loan(@RequestParam("username") String username,
+                       @RequestParam("artifact") Artifact artifact,
+                       HttpServletResponse response) throws IOException {
+        if (artifact.isAvailable()) {
+            Optional<User> optionalUser = userRepository.findByUsername(username);
+
+            if (optionalUser.isPresent()) {
+                User loaner = optionalUser.get();
+
+                // Check reservee is not an admin
+                if (loaner.isAdmin()) {
+                    logger.info("user " + username + " is an admin");
+                    return "/errors/librarian_reservation";
+                } else if (loanedAlready(loaner, artifact)) {
+                    logger.info("user " + username + " has already loaned " + artifact.getTitle());
+                    return "/errors/reserved_already";
+                }
+
+                loanForUser(loaner, artifact, response);
+            } else {
+                logger.info("user " + username + " does not exist");
+                response.sendRedirect("/error/user_not_found?name=" + username);
+            }
+        }
+        return "errors/artifact_unavailable";
+    }
+
+    private boolean loanedAlready(User user, Artifact artifact) {
+        List<Loan> loans = loanRepository.findByUserAndArtifact(user, artifact);
+        for (Loan loan : loans) {
+            if (loan.isActive()) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private void loanForUser(User user, Artifact artifact, HttpServletResponse response)
+            throws IOException {
+        Date inTwoWeeks = Date.from(Instant.now().plus(14, ChronoUnit.DAYS));
+
+        Loan loan = new Loan(user, artifact, inTwoWeeks);
+        loanRepository.save(loan);
+        response.sendRedirect("/user_profile?id=" + user.getId());
+    }
+
+    @PostMapping("/artifact/receive")
+    public void receive(@RequestParam("username") String username,
+                        @RequestParam("artifact") Artifact artifact,
+                        HttpServletResponse response) throws IOException {
+        Optional<User> optionalUser = userRepository.findByUsername(username);
+
+        if (optionalUser.isPresent()) {
+            User loaner = optionalUser.get();
+            // Check reservee is not an admin
+            if (loaner.isAdmin()) {
+                logger.info("user " + username + " is an admin");
+                response.sendRedirect("/error/invalid_receive?name=" + username);
+            }
+
+            List<Loan> loans = loanRepository.findByUserAndArtifact(loaner, artifact);
+            Loan target = loans.stream().filter(Loan::isActive).findFirst().orElse(null);
+            if (target != null) {
+                target.doReturn();
+                loanRepository.save(target);
+                response.sendRedirect("/user_profile?id=" + loaner.getId());
+            } else {
+                response.sendRedirect("/error/loan_not_found");
+            }
+        } else {
+            logger.info("user " + username + " does not exist");
+            response.sendRedirect("/error/user_not_found?name=" + username);
+        }
     }
 
     @GetMapping("/create")
@@ -121,9 +210,9 @@ public class LibrarianController {
         return artifact;
     }
 
-    @GetMapping("/error/no_such_user")
-    public String noSuchUser(@RequestParam(name = "uname") String username, Model model) {
-        model.addAttribute("name", username);
-        return "errors/no_such_user";
+    @GetMapping("/delete_message")
+    public void deleteMessage(@RequestParam("id") Integer id, HttpServletResponse response) throws IOException {
+        messageRepository.deleteById(id);
+        response.sendRedirect("/portal?id="+userSession.getUser().getId());
     }
 }
