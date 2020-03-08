@@ -26,7 +26,6 @@ public class Loan implements Serializable, Comparable<Loan> {
     private Date due;
     private Date returned;
     private Status status;
-    public static Comparator<Loan> loanComparator = Loan::compareTo;
 
     public Loan() {
     }

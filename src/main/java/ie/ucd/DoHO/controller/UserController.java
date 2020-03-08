@@ -69,6 +69,9 @@ public class UserController {
             List<Loan> loans = loanRepository.findAll();
             loans.sort(Loan::compareTo);
 
+            List<Reservation> reservations = reservationRepository.findByUserId(user.getId());
+            reservations.sort(Reservation::compareTo);
+
             model.addAttribute("fullName", optionalUser.get().getFullName());
             model.addAttribute("username", optionalUser.get().getUsername());
             model.addAttribute("email", optionalUser.get().getEmail());
@@ -76,7 +79,7 @@ public class UserController {
             model.addAttribute("id", optionalUser.get().getId());
             model.addAttribute("created", optionalUser.get().getCreated());
             model.addAttribute("loans", loans);
-            model.addAttribute("reservations", reservationRepository.findByUserId(optionalUser.get().getId()));
+            model.addAttribute("reservations", reservations);
             return "user_profile";
         }
         return "errors/no_such_user";
