@@ -34,7 +34,7 @@ public class IndexGreeter {
         return allOpeningHours.stream()
                 .filter(openingHours -> openingHours.getDay() == todayOfWeek)
                 .findFirst()
-                .orElseThrow(() -> new RuntimeException(todayOfWeek.toString() + " Not found in allOpeningHours"));
+                .orElse(new OpeningHours());
     }
 
     private OpeningHours nextOpenDay() {

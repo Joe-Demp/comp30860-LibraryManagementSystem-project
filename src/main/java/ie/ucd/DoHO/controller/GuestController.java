@@ -51,7 +51,7 @@ public class GuestController {
         }
         model.addAttribute("title", "Home");
 
-        addAllDays();
+//        addAllDays();
         IndexGreeter greeter = new IndexGreeter(openingHoursRepository.findAll());
         model.addAttribute("openingHours", greeter.getAllOpeningHours());
         model.addAttribute("openString", greeter.openString());

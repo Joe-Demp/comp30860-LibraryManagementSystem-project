@@ -77,8 +77,10 @@ public class OpeningHours implements Comparable<OpeningHours> {
     }
 
     public String toString() {
-        return getDayString() + ": " + Formatter.toTimeString(opening) +
-                " to " + Formatter.toTimeString(closing);
+        if (isOpenToday()) {
+            return Formatter.toTimeString(opening) + " to " + Formatter.toTimeString(closing);
+        }
+        return "closed";
     }
 
     public String getAsString() {
