@@ -7,6 +7,7 @@ import org.hibernate.annotations.CreationTimestamp;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.Instant;
+import java.util.Calendar;
 import java.util.Comparator;
 import java.util.Date;
 
@@ -157,6 +158,18 @@ public class Loan implements Serializable, Comparable<Loan> {
         return due.before(Date.from(Instant.now()));
     }
 
+    public void renew(){
+        Date currentDue = getDue();
+        System.out.println(currentDue);
+        Calendar c = Calendar.getInstance();
+        c.setTime(currentDue);
+        c.add(Calendar.DATE, 7);
+        Date newDue = c.getTime();
+        System.out.println(newDue);
+        setDue(newDue);
+
+    }
+
     public enum Status {
         OVERDUE(0, "OVERDUE"),
         DUE(1, "DUE"),
@@ -177,5 +190,7 @@ public class Loan implements Serializable, Comparable<Loan> {
         public String toString() {
             return string;
         }
+
+
     }
 }

@@ -159,4 +159,18 @@ public class UserController {
         response.sendRedirect("/");
     }
 
+    @GetMapping("/renew_loan")
+    public void renewLoan(@RequestParam("id") Integer id, Model model, HttpServletResponse response) throws IOException {
+        Optional<Loan> loan = loanRepository.findById(id);
+        if(loan.get().status().equals("DUE") && reservationRepository.findByArtifactId(loan.get().getArtifact().getId()).isEmpty()){
+            System.out.println("IT IS DUE");
+            loan.get().renew();
+            loanRepository.save(loan.get());
+        }else {
+            model.addAttribute("error", "Unavailable");
+        }
+
+        response.sendRedirect("/user_profile?id="+userSession.getUser().getId());
+    }
+
 }

@@ -14,8 +14,8 @@
     </div>
   </div>
   <div class="row" id="content">
-    <div class="col-lg-5" id="profile" style="display: block;">
-      <div class="page-box my-4 px-5 py-3 shadow-lg" id="info">
+    <div  class="col-lg-5" id="profile" style="display: block;">
+      <div class="page-box my-4 px-5 py-3 shadow-lg table-wrapper-scroll-y my-custom-scrollbar" id="info">
         <table class="table table-borderless text-table" id="mainInfo">
           <tbody>
           <tr>
@@ -76,19 +76,24 @@
               <table class="table table-striped" id="loan-table" style="margin:0px;">
                 <thead>
                 <tr>
-                  <th>Title</th>
-                  <th>Author</th>
-                  <th>Checked Out</th>
-                  <th>Status</th>
+                    <th>Title</th>
+                    <th>Author</th>
+                    <th>Checked Out</th>
+                    <th>Status</th>
+                    <th></th>
                 </tr>
                 </thead>
                 <tbody th:each="loan : ${loans}">
                 <tr>
-                  <td th:text="${loan.artifact.title}"></td>
-                  <td th:text="${loan.artifact.author}"></td>
-                  <td th:text="${#dates.format(loan.created, 'dd-MMMMM YYYY')}"></td>
-                  <td th:text="${loan.status} + ' ' + ${#dates.format(loan.due, 'dd-MMMMM YYYY')}"></td>
+
+                    <td th:text="${loan.artifact.title}"></td>
+                    <td th:text="${loan.artifact.author}"></td>
+                    <td th:text="${#dates.format(loan.created, 'dd-MMMMM YYYY')}"></td>
+                    <td th:text="${loan.status} + ' ' + ${#dates.format(loan.due, 'dd-MMMMM YYYY')}"></td>
+                    <td><a class="btn btn-primary" type="button"  th:href="@{/renew_loan(id=${loan.id})}">Renew</a></td>
+                    <td th:text="${error}"></td>
                 </tr>
+
                 </tbody>
               </table>
             </div>

@@ -24,7 +24,7 @@ li .btn {
     font-size: 1.2em;
 }
 
-footer {
+#footer {
     margin-top: 10px;
     background-color: #3f3f3f;
     color: #f0f0f0;
@@ -54,4 +54,12 @@ a, a:hover {
 }
 .text {
     word-wrap: break-word;
+}
+.my-custom-scrollbar {
+    position: relative;
+    height: 200px;
+    overflow: auto;
+}
+.table-wrapper-scroll-y {
+    display: block;
 }
