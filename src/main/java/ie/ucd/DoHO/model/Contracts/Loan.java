@@ -28,6 +28,10 @@ public class Loan implements Serializable, Comparable<Loan> {
     private Date returned;
     private Status status;
 
+
+    private boolean renewable;
+
+
     public Loan() {
     }
 
@@ -40,6 +44,7 @@ public class Loan implements Serializable, Comparable<Loan> {
         setDue(due);
         artifact.loan();
         computeStatus();
+        computeRenewable();
     }
 
     /**
@@ -84,6 +89,17 @@ public class Loan implements Serializable, Comparable<Loan> {
         }
     }
 
+    public void computeRenewable(){
+        if(status.equals("DUE")){
+            setRenewable(true);
+        }
+        else{
+            setRenewable(false);
+        }
+    }
+
+
+
     public String status() {
         computeStatus();
         return this.status.toString();
@@ -111,6 +127,14 @@ public class Loan implements Serializable, Comparable<Loan> {
 
     public void setArtifact(Artifact artifact) {
         this.artifact = artifact;
+    }
+
+    public boolean isRenewable() {
+        return renewable;
+    }
+
+    public void setRenewable(boolean renewable) {
+        this.renewable = renewable;
     }
 
     public Date getCreated() {

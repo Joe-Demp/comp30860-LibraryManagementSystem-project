@@ -80,6 +80,8 @@ public class UserController {
             model.addAttribute("created", optionalUser.get().getCreated());
             model.addAttribute("loans", loans);
             model.addAttribute("reservations", reservations);
+
+            model.addAttribute("error", "Unavailable");
             return "user_profile";
         }
         return "errors/no_such_user";
@@ -162,15 +164,14 @@ public class UserController {
     @GetMapping("/renew_loan")
     public void renewLoan(@RequestParam("id") Integer id, Model model, HttpServletResponse response) throws IOException {
         Optional<Loan> loan = loanRepository.findById(id);
-        if(loan.get().status().equals("DUE") && reservationRepository.findByArtifactId(loan.get().getArtifact().getId()).isEmpty()){
+        if(loan.get().isRenewable() && reservationRepository.findByArtifactId(loan.get().getArtifact().getId()).isEmpty()) {
             System.out.println("IT IS DUE");
             loan.get().renew();
+            loan.get().setRenewable(false);
             loanRepository.save(loan.get());
-        }else {
-            model.addAttribute("error", "Unavailable");
-        }
+            response.sendRedirect("/user_profile?id="+userSession.getUser().getId());
 
-        response.sendRedirect("/user_profile?id="+userSession.getUser().getId());
+        }
     }
 
 }

@@ -85,13 +85,11 @@
                 </thead>
                 <tbody th:each="loan : ${loans}">
                 <tr>
-
                     <td th:text="${loan.artifact.title}"></td>
                     <td th:text="${loan.artifact.author}"></td>
                     <td th:text="${#dates.format(loan.created, 'dd-MMMMM YYYY')}"></td>
                     <td th:text="${loan.status} + ' ' + ${#dates.format(loan.due, 'dd-MMMMM YYYY')}"></td>
-                    <td><a class="btn btn-primary" type="button"  th:href="@{/renew_loan(id=${loan.id})}">Renew</a></td>
-                    <td th:text="${error}"></td>
+                    <td ><a class="btn btn-primary" type="button" th:if="${loan.renewable}" th:href="@{/renew_loan(id=${loan.id})}">Renew</a></td>
                 </tr>
 
                 </tbody>

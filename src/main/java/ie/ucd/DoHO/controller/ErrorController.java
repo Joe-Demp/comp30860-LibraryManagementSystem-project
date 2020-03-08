@@ -41,4 +41,9 @@ public class ErrorController {
                 "/error?title=LoanNotFound&msg=LoanNotFound'"
         );
     }
+
+    @GetMapping("/error/already_reserved")
+    public void invalidLoanRenewal(HttpServletResponse response) throws IOException{
+            response.sendRedirect("/error?title=InvalidRenewal&msg=CannotRenewLoan");
+    }
 }
