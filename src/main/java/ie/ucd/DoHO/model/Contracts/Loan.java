@@ -6,19 +6,12 @@ import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Comparator;
 import java.time.Instant;
+import java.util.Comparator;
 import java.util.Date;
-import java.util.Locale;
-import java.util.concurrent.TimeUnit;
-
-import static java.lang.System.currentTimeMillis;
 
 @Entity
-public class Loan implements Serializable {
+public class Loan implements Serializable, Comparable<Loan> {
     private static final long serialVersionUID = 1L;
 
     @Id
@@ -32,55 +25,68 @@ public class Loan implements Serializable {
     private Date created;
     private Date due;
     private Date returned;
-
-    public enum Status {
-        OVERDUE(0),
-        DUE(1),
-        RETURNED(2);
-
-        private final int value;
-        private Status(int value){
-            this.value = value;
-        }
-        public int getValue(){
-            return value;
-        }
-    }
-
     private Status status;
+    public static Comparator<Loan> loanComparator = Loan::compareTo;
 
     public Loan() {
     }
 
     /**
      * Note: this constructor alters Artifact
-     * todo see if the above fact is true
      */
     public Loan(User user, Artifact artifact, Date due) {
         setUser(user);
         setArtifact(artifact);
         setDue(due);
         artifact.loan();
+        computeStatus();
     }
 
-    public String status() throws ParseException {
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
-        Date dueDate = sdf.parse(getDue().toString().substring(0,10));
-        if(returned != null){
-            status = Status.RETURNED;
-            return "RETURNED";
-        }else{
-            long diffInMillies = dueDate.getTime() - currentTimeMillis() ;
-            long diff = TimeUnit.DAYS.convert(diffInMillies, TimeUnit.MILLISECONDS);
-            if(diff < 0){
-                status = Status.OVERDUE;
-                return "OVERDUE";
-            }
-            else{
-                status = Status.DUE;
-                return "DUE";
+    /**
+     * Compares this object with the specified object for order.  Returns a
+     * negative integer, zero, or a positive integer as this object is less
+     * than, equal to, or greater than the specified object.
+     *
+     * @return a negative integer, zero, or a positive integer as this object
+     * is less than, equal to, or greater than the specified object.
+     * @throws NullPointerException if the specified object is null
+     * @throws ClassCastException   if the specified object's type prevents it
+     *                              from being compared to this object.
+     */
+    @Override
+    public int compareTo(Loan other) {
+        this.computeStatus();
+        other.computeStatus();
+
+        // If both have the same status, then compare due dates
+        if (this.status == other.status) {
+            if (this.status == Status.DUE) {
+                // Artifacts due with sooner due dates will rise to the top
+                return this.due.compareTo(other.due);
+            } else {
+                // Overdue and Returned artifacts have later dates first
+                return -this.due.compareTo(other.due);
             }
         }
+        // Otherwise compare by status
+        return this.status.getValue() - other.status.getValue();
+    }
+
+    public void computeStatus() {
+        if (isActive()) {
+            if (isOverdue()) {
+                this.status = Status.OVERDUE;
+            } else {
+                this.status = Status.DUE;
+            }
+        } else {
+            this.status = Status.RETURNED;
+        }
+    }
+
+    public String status() {
+        computeStatus();
+        return this.status.toString();
     }
 
     public Integer getId() {
@@ -127,12 +133,12 @@ public class Loan implements Serializable {
         return returned;
     }
 
-    public Status getStatus() {
-        return status;
-    }
-
     public void setReturned(Date returned) {
         this.returned = returned;
+    }
+
+    public Status getStatus() {
+        return status;
     }
 
     public boolean doReturn() {
@@ -150,5 +156,27 @@ public class Loan implements Serializable {
 
     public boolean isOverdue() {
         return due.before(Date.from(Instant.now()));
+    }
+
+    public enum Status {
+        OVERDUE(0, "OVERDUE"),
+        DUE(1, "DUE"),
+        RETURNED(2, "RETURNED");
+
+        private final int value;
+        private final String string;
+
+        Status(int value, String string) {
+            this.value = value;
+            this.string = string;
+        }
+
+        public int getValue() {
+            return value;
+        }
+
+        public String toString() {
+            return string;
+        }
     }
 }

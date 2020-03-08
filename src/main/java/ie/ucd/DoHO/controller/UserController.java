@@ -1,13 +1,10 @@
 package ie.ucd.DoHO.controller;
 
-import antlr.debug.MessageAdapter;
-import ie.ucd.DoHO.model.Artifact;
-import ie.ucd.DoHO.model.Contracts.*;
+import ie.ucd.DoHO.model.*;
+import ie.ucd.DoHO.model.Contracts.Loan;
+import ie.ucd.DoHO.model.Contracts.LoanRepository;
+import ie.ucd.DoHO.model.Contracts.Reservation;
 import ie.ucd.DoHO.model.Contracts.ReservationRepository;
-import ie.ucd.DoHO.model.Message;
-import ie.ucd.DoHO.model.MessageRepository;
-import ie.ucd.DoHO.model.User;
-import ie.ucd.DoHO.model.UserRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,15 +12,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.text.ParseException;
-import java.util.*;
+import java.util.List;
+import java.util.Optional;
 
 @Controller
 public class UserController {
@@ -71,27 +67,7 @@ public class UserController {
                 }
             }
             List<Loan> loans = loanRepository.findAll();
-            loans.sort(new Comparator<Loan>() {
-                @Override
-                public int compare(Loan o1, Loan o2) {
-                    try {
-                        o1.status();
-                        o2.status();
-                        if(o1.getStatus().getValue() == o2.getStatus().getValue()){
-                            return 0;
-                        }else if(o1.getStatus().getValue() > o2.getStatus().getValue()){
-                            return 1;
-                        }else {
-                            return -1;
-                        }
-                    }
-                    catch (ParseException e){
-                        e.printStackTrace();
-                        System.err.println("Could not parse date");
-                    }
-                    return 0;
-                }
-            });
+            loans.sort(Loan::compareTo);
 
             model.addAttribute("fullName", optionalUser.get().getFullName());
             model.addAttribute("username", optionalUser.get().getUsername());
