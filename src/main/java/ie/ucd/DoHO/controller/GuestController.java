@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.time.DayOfWeek;
-import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.Arrays;
@@ -62,7 +61,7 @@ public class GuestController {
     }
 
     public boolean openNow() {
-        LocalDateTime today = LocalDateTime.from(Instant.now());
+        LocalDateTime today = LocalDateTime.now();
         DayOfWeek dayOfWeek = DayOfWeek.from(today);
         LocalTime time = LocalTime.from(today);
         Optional<OpeningHours> optionalOpen = openingHoursRepository.findById(dayOfWeek);
@@ -75,7 +74,7 @@ public class GuestController {
     }
 
     public String openString() {
-        LocalDateTime today = LocalDateTime.from(Instant.now());
+        LocalDateTime today = LocalDateTime.now();
         DayOfWeek dayOfWeek = DayOfWeek.from(today);
 
         if (openNow()) {

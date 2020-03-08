@@ -62,12 +62,19 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-thymeleaf</artifactId>
 		</dependency>
+		<!--		todo Remove below for deployment-->
 		<dependency>
 			<groupId>com.h2database</groupId>
 			<artifactId>h2</artifactId>
 			<scope>runtime</scope>
 			<version>1.4.200</version>
 		</dependency>
+		<!--		<dependency>-->
+		<!--			<groupId>mysql</groupId>-->
+		<!--			<artifactId>mysql-connector-java</artifactId>-->
+		<!--			<version>8.0.17</version>-->
+		<!--		</dependency>-->
+
 
 		<dependency>
 			<groupId>org.hibernate</groupId>
