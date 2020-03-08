@@ -6,7 +6,7 @@
 <div class="container" style="padding-top: 20px;">
   <div class="row" style="padding: 10px;">
     <div class="col-md-4" style="padding:0px;margin:0px;">
-      <div class="card shadow-lg" style="width:100% padding:0; margin:0;">
+      <div class="card shadow-lg" style="width:100%; padding:0; margin:0;">
         <h3 class="card-header text-center">Where can you find us</h3>
         <div class="card-body">
           <p class="card-text text-center">University College Dublin, Ireland</p>
@@ -22,9 +22,18 @@
         </div>
       </div>
     </div>
-    <div class="col-md-4" style="padding:0px;">
+    <div class="col-md-4">
       <div class="card shadow-lg">
-        <h1 class="card-header text-center">OPEN until 5pm today</h1>
+        <h3 class="card-header text-center" th:text="${openString}">OPEN until 5pm today</h3>
+        <table class="table table-borderless text-table m-2 p-1" id="openingHours">
+          <caption>Opening Hours</caption>
+          <tbody>
+          <tr th:each="oHour : ${openingHours}">
+            <td class="w-50 key-text" th:text="${oHour.dayString}">Monday:</td>
+            <td style="text-align: center;" th:text="${oHour.asString}">9.00 a.m. to 5.00 p.m.</td>
+          </tr>
+          </tbody>
+        </table>
       </div>
       <div class="card">
         <h3 class="card-header text-center">About Us</h3>
