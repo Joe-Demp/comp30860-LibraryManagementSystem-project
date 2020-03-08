@@ -1,3 +1,0 @@
-
-# A thymeleaf cheatsheet
-https://github.com/LaunchCodeEducation/cheatsheets/tree/master/thymeleaf

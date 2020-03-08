@@ -1,10 +1,6 @@
-FROM maven:3-jdk-8-alpine
+FROM mysql
+ENV MYSQL_ROOT_PASSWORD=password
 
-WORKDIR /usr/src/app
-
-COPY . /usr/src/app
-RUN mvn package
-
-ENV PORT 5000
-EXPOSE $PORT
-CMD [ "sh", "-c", "mvn -Dserver.port=${PORT} spring-boot:run" ]
+FROM openjdk:8-jre-alpine
+COPY target/*.jar /service.jar
+CMD /usr/bin/java -jar /service.jar
