@@ -1,8 +1,11 @@
 package ie.ucd.DoHO.model;
 
+import org.hibernate.search.annotations.Indexed;
+
 import javax.persistence.Entity;
 
 @Entity
+@Indexed
 public class Magazine extends Periodical {
     public Magazine() {
         setSubject("Magazine");

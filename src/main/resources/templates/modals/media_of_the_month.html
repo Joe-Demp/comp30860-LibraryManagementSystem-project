@@ -1,0 +1,35 @@
+<a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center" data-target="#motm" data-toggle="modal" href="/update_media_of_month">Media Of the Month</a>
+<div class="modal text-center" id="motm">
+    <div class="modal-dialog" type="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Update Media of the Month</h5>
+                <button aria-label="Close" class="close" data-dismiss="modal" type="button">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form action="/update_media_of_month" method="POST">
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-9" style="margin-left: 10%">
+                                <label class="col-form-label" for="content">Update Media of the Month</label>
+                                <textarea class="form-control" name="content"></textarea>
+                            </div>
+                        </div>
+                        <div class="row text-center">
+                            <div class="col-10"></div>
+                            <div class="col" style="margin-top: 5%">
+                                <button class="btn btn-primary" type="submit">Submit</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" data-dismiss="modal" type="button">Close</button>
+            </div>
+        </div>
+
+    </div>
+</div>

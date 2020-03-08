@@ -33,6 +33,13 @@
             more</a></p>
         </div>
       </div>
+      <div class="card">
+        <h4 class="card-header text-center">Media of The Month</h4>
+        <div class="card-body" th:each="motm : ${motms}">
+          <p th:text="${motm.bodyOfText}"></p>
+        </div>
+      </div>
+
     </div>
     <div class="col-md-4 shadow-lg">
       <h2 class="text-center">Contact Us</h2>
