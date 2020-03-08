@@ -37,6 +37,8 @@ public class GuestController {
     @Autowired
     private OpeningHoursRepository openingHoursRepository;
     @Autowired
+    private MotmRepository motmRepository;
+    @Autowired
     private HibernateSearchDao searchservice;
 
     private Logger logger = LoggerFactory.getLogger(GuestController.class);
@@ -56,6 +58,7 @@ public class GuestController {
         addAllDays();
         model.addAttribute("openingHours", openingHoursRepository.findAll());
         model.addAttribute("open-string", openString());
+        model.addAttribute("motms",motmRepository.findAll());
 
         return "index";
     }
@@ -209,6 +212,21 @@ public class GuestController {
         userRepository.save(user);
         response.sendRedirect("/user_profile?id=" + id);
     }
+
+    @PostMapping("/update_media_of_month")
+    public void updateMotm(String content, HttpServletResponse response) throws IOException {
+      List<Motm> motm = motmRepository.findAll();
+        for (Motm mediaOfMonth : motm) {
+
+            mediaOfMonth.setBodyOfText(content);
+            motmRepository.save(mediaOfMonth);
+            System.out.println(mediaOfMonth.getBodyOfText());
+        }
+
+        response.sendRedirect("/");
+
+    }
+
 
     private void addAllDays() {
         OpeningHours[] hours = new OpeningHours[]{

@@ -35,11 +35,8 @@
       </div>
       <div class="card">
         <h4 class="card-header text-center">Media of The Month</h4>
-        <div class="card-body">
-          <p>Our pick this month is The Planets, Op. 32 by Gustav Holtz. Each movement of the suite is named after a
-            planet in the solar system, however the work is based more on astrology than astromony. Our own UCD Symphony
-          orchestra is preforming two of movements "Mars the bringer of War" and "Jupiter  the Bringer of Jollity" in
-            the National Concert Hall on the 01/04/2020</p>
+        <div class="card-body" th:each="motm : ${motms}">
+          <p th:text="${motm.bodyOfText}"></p>
         </div>
       </div>
 

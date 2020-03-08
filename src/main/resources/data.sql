@@ -53,3 +53,10 @@ VALUES (0, '2020-05-06', '2020-06-01', '2020-08-06', 2, 0),
        (6, '2020-05-06', '2020-06-07', '2020-08-06', 2, 1),
        (7, '2020-02-02', '2020-02-08', null, 3, 0);
 
+INSERT INTO motm(id, body_of_text )VALUES (1, 'Our pick this month is The Planets, Op. 32 by Gustav Holtz. Each movement of the suite is named after a
+            planet in the solar system, however the work is based more on astrology than astromony. Our own UCD Symphony
+            orchestra is preforming two of movements "Mars the bringer of War" and "Jupiter  the Bringer of Jollity" in
+            the National Concert Hall on the 01/04/2020' );
+
+
+
