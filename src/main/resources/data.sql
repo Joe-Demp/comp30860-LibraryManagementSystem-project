@@ -1,4 +1,3 @@
-
 -- Sample Artifacts
 INSERT INTO artifact
 (dtype, id, author, genre, language, library_location, publisher, release_year,
@@ -59,4 +58,14 @@ INSERT INTO motm(id, body_of_text )VALUES (1, 'Our pick this month is The Planet
             the National Concert Hall on the 01/04/2020' );
 
 
+
+INSERT INTO opening_hours (day, opening, closing, open_today)
+VALUES (0, '09:00:00', '17:00:00', 1),
+       (1, '09:00:00', '17:00:00', 1),
+       (2, '09:00:00', '17:00:00', 1),
+       (3, '09:00:00', '17:00:00', 1),
+       (4, '09:00:00', '17:00:00', 1),
+       (5, '10:00:00', '15:00:00', 1),
+       (6, '00:00:00', '00:00:00', 0)
+;
 

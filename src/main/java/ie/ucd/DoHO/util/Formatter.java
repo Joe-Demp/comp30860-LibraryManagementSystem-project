@@ -12,7 +12,7 @@ public class Formatter {
 
     static {
         dateFormat = new SimpleDateFormat("dd-MMM yyyy");
-        timeFormat = DateTimeFormatter.ofPattern("h.m a");
+        timeFormat = DateTimeFormatter.ofPattern("h.mm a");
     }
 
     public static String toKeyString(String key) {

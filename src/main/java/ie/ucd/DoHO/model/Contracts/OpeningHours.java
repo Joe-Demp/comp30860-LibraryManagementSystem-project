@@ -8,22 +8,19 @@ import java.time.DayOfWeek;
 import java.time.LocalTime;
 
 @Entity
-public class OpeningHours {
+public class OpeningHours implements Comparable<OpeningHours> {
     public static final DayOfWeek[] allDays = new DayOfWeek[]{DayOfWeek.MONDAY, DayOfWeek.TUESDAY, DayOfWeek.WEDNESDAY,
             DayOfWeek.THURSDAY, DayOfWeek.FRIDAY, DayOfWeek.SATURDAY, DayOfWeek.SUNDAY};
-    public static String[] dayKeys;
-
-    static {
-        dayKeys = new String[allDays.length];
-        for (int i = 0; i < allDays.length; ++i) {
-            dayKeys[i] = Formatter.toKeyString(allDays[i].toString());
-        }
-    }
+    public static String[] dayStrings = new String[]{
+            "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"
+    };
 
     @Id
     private DayOfWeek day = DayOfWeek.MONDAY;
-    private LocalTime opening = LocalTime.MIN;
-    private LocalTime closing = LocalTime.MIN;
+    private LocalTime opening = LocalTime.NOON;
+    private LocalTime closing = LocalTime.NOON;
+
+    private boolean openToday = false;
 
     public OpeningHours() {
     }
@@ -32,6 +29,7 @@ public class OpeningHours {
         this.day = day;
         this.opening = opening;
         this.closing = closing;
+        computeOpenToday();
     }
 
     public DayOfWeek getDay() {
@@ -48,6 +46,7 @@ public class OpeningHours {
 
     public void setOpening(LocalTime opening) {
         this.opening = opening;
+        computeOpenToday();
     }
 
     public LocalTime getClosing() {
@@ -56,5 +55,40 @@ public class OpeningHours {
 
     public void setClosing(LocalTime closing) {
         this.closing = closing;
+        computeOpenToday();
+    }
+
+    public boolean isOpenToday() {
+        return openToday;
+    }
+
+    public void setOpenToday(boolean openToday) {
+        this.openToday = openToday;
+    }
+
+    private void computeOpenToday() {
+        if (opening.isBefore(closing)) {
+            this.openToday = true;
+        }
+    }
+
+    public String getDayString() {
+        return dayStrings[getDay().getValue() - 1];
+    }
+
+    public String toString() {
+        if (isOpenToday()) {
+            return Formatter.toTimeString(opening) + " to " + Formatter.toTimeString(closing);
+        }
+        return "closed";
+    }
+
+    public String getAsString() {
+        return toString();
+    }
+
+    @Override
+    public int compareTo(OpeningHours other) {
+        return this.getDay().compareTo(other.getDay());
     }
 }

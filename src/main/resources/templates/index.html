@@ -6,7 +6,7 @@
 <div class="container" style="padding-top: 20px;">
   <div class="row" style="padding: 10px;">
     <div class="col-md-4" style="padding:0px;margin:0px;">
-      <div class="card shadow-lg" style="width:100% padding:0; margin:0;">
+      <div class="card shadow-lg" style="width:100%; padding:0; margin:0;">
         <h3 class="card-header text-center">Where can you find us</h3>
         <div class="card-body">
           <p class="card-text text-center">University College Dublin, Ireland</p>
@@ -22,9 +22,12 @@
         </div>
       </div>
     </div>
-    <div class="col-md-4" style="padding:0px;">
-      <div class="card shadow-lg">
-        <h1 class="card-header text-center">OPEN until 5pm today</h1>
+    <div class="col-md-4">
+      <div class="card">
+        <h4 class="card-header text-center">Media of The Month</h4>
+        <div class="card-body" th:each="motm : ${motms}">
+          <p th:text="${motm.bodyOfText}"></p>
+        </div>
       </div>
       <div class="card">
         <h3 class="card-header text-center">About Us</h3>
@@ -34,12 +37,7 @@
           fulfill their academic criteria</p>
         </div>
       </div>
-      <div class="card">
-        <h4 class="card-header text-center">Media of The Month</h4>
-        <div class="card-body" th:each="motm : ${motms}">
-          <p th:text="${motm.bodyOfText}"></p>
-        </div>
-      </div>
+
 
     </div>
     <div class="col-md-4 shadow-lg">
@@ -47,13 +45,27 @@
       <p class="text-center">Got a question? Send us a message!</p>
       <form class="text-center" id="contact-form" method="POST" action="/message" name="contact-form">
         <input class="form-control contact-form" id="name" name="name" placeholder="Name" type="text" maxlength="255">
-        <input class="form-control contact-form" id="email" name="email" placeholder="Email" type="text" maxlength="255">
-        <input class="form-control contact-form" id="subject" name="subject" placeholder="Subject" type="text" maxlength="255">
+        <input class="form-control contact-form" id="email" name="email" placeholder="Email" type="text"
+               maxlength="255">
+        <input class="form-control contact-form" id="subject" name="subject" placeholder="Subject" type="text"
+               maxlength="255">
         <textarea class="form-control contact-form" id="message" name="content" placeholder="Message"
                   style="max-height:150px;"
                   type="text-area" maxlength="255"></textarea>
         <button class="btn btn-info center-block contact-form" type="submit">Send</button>
       </form>
+      <div class="card shadow-lg">
+        <h3 class="card-header text-center" th:text="${openString}">OPEN until 5pm today</h3>
+        <table class="table table-borderless text-table m-2 p-1" id="openingHours">
+          <caption>Opening Hours</caption>
+          <tbody>
+          <tr th:each="oHour : ${openingHours}">
+            <td class="w-50 key-text" th:text="${oHour.dayString}">Monday:</td>
+            <td style="text-align: center;" th:text="${oHour.asString}">9.00 a.m. to 5.00 p.m.</td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
   </div>
 </div>
