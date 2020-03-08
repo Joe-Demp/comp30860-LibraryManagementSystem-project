@@ -56,6 +56,7 @@ public class GuestController {
         IndexGreeter greeter = new IndexGreeter(openingHoursRepository.findAll());
         model.addAttribute("openingHours", greeter.getAllOpeningHours());
         model.addAttribute("openString", greeter.openString());
+        model.addAttribute("motms", motmRepository.findAll());
 
         return "index";
     }
