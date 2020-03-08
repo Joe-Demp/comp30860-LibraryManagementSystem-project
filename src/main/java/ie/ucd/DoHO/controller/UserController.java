@@ -23,8 +23,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.text.ParseException;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Controller
 public class UserController {
@@ -44,6 +43,8 @@ public class UserController {
     public void addAttributes(Model model){
         model.addAttribute("user", userSession.getUser());
     }
+
+
 
     /**
      * @param id the id of the user profile you want to pull up
@@ -69,10 +70,28 @@ public class UserController {
                     response.sendRedirect("/");
                 }
             }
-            //TEST
-            for(Loan loan : loanRepository.findAll()){
-                System.out.println(loan.status());
-            }
+            List<Loan> loans = loanRepository.findAll();
+            loans.sort(new Comparator<Loan>() {
+                @Override
+                public int compare(Loan o1, Loan o2) {
+                    try {
+                        o1.status();
+                        o2.status();
+                        if(o1.getStatus().getValue() == o2.getStatus().getValue()){
+                            return 0;
+                        }else if(o1.getStatus().getValue() > o2.getStatus().getValue()){
+                            return 1;
+                        }else {
+                            return -1;
+                        }
+                    }
+                    catch (ParseException e){
+                        e.printStackTrace();
+                        System.err.println("Could not parse date");
+                    }
+                    return 0;
+                }
+            });
 
             model.addAttribute("fullName", optionalUser.get().getFullName());
             model.addAttribute("username", optionalUser.get().getUsername());
@@ -80,7 +99,7 @@ public class UserController {
             model.addAttribute("phoneNumber", optionalUser.get().getPhoneNumber());
             model.addAttribute("id", optionalUser.get().getId());
             model.addAttribute("created", optionalUser.get().getCreated());
-            model.addAttribute("loans", loanRepository.findByUserId(optionalUser.get().getId()));
+            model.addAttribute("loans", loans);
             model.addAttribute("reservations", reservationRepository.findByUserId(optionalUser.get().getId()));
             return "user_profile";
         }

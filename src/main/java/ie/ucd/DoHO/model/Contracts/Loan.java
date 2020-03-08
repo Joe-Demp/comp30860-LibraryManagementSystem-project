@@ -9,9 +9,12 @@ import java.io.Serializable;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.Locale;
 import java.util.concurrent.TimeUnit;
+
+import static java.lang.System.currentTimeMillis;
 
 @Entity
 public class Loan implements Serializable {
@@ -29,6 +32,22 @@ public class Loan implements Serializable {
     private Date due;
     private Date returned;
 
+    public enum Status {
+        OVERDUE(0),
+        DUE(1),
+        RETURNED(2);
+
+        private final int value;
+        private Status(int value){
+            this.value = value;
+        }
+        public int getValue(){
+            return value;
+        }
+    }
+
+    private Status status;
+
     public Loan() {
     }
 
@@ -42,19 +61,20 @@ public class Loan implements Serializable {
     public String status() throws ParseException {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
         Date dueDate = sdf.parse(getDue().toString().substring(0,10));
-        Date returnedDate;
         if(returned != null){
-            returnedDate = sdf.parse(getReturned().toString().substring(0,10));
-            long diffInMillies = dueDate.getTime() - returnedDate.getTime() ;
+            status = Status.RETURNED;
+            return "RETURNED";
+        }else{
+            long diffInMillies = dueDate.getTime() - currentTimeMillis() ;
             long diff = TimeUnit.DAYS.convert(diffInMillies, TimeUnit.MILLISECONDS);
-            if(diff >= 0){
-                return "RETURNED";
-            }
-            else{
+            if(diff < 0){
+                status = Status.OVERDUE;
                 return "OVERDUE";
             }
-        }else{
-            return "DUE";
+            else{
+                status = Status.DUE;
+                return "DUE";
+            }
         }
     }
 
@@ -102,6 +122,10 @@ public class Loan implements Serializable {
         return returned;
     }
 
+    public Status getStatus() {
+        return status;
+    }
+
     public void setReturned(Date returned) {
         this.returned = returned;
     }
@@ -113,4 +137,5 @@ public class Loan implements Serializable {
     public boolean isOverdue() {
         return due.before(Calendar.getInstance().getTime());
     }
+
 }
