@@ -54,12 +54,13 @@ public class IndexGreeter {
     }
 
     private boolean openNow() {
-        return currentTime.isAfter(todayOpeningHours.getOpening())
+        return todayOpeningHours.isOpenToday()
+                && currentTime.isAfter(todayOpeningHours.getOpening())
                 && currentTime.isBefore(todayOpeningHours.getClosing());
     }
 
     private boolean closedBefore() {
-        return currentTime.isBefore(todayOpeningHours.getOpening());
+        return todayOpeningHours.isOpenToday() && currentTime.isBefore(todayOpeningHours.getOpening());
     }
 
     private boolean closedAfter() {
@@ -68,13 +69,12 @@ public class IndexGreeter {
 
     public String openString() {
         if (openNow()) {
-            return "Open now, until " + Formatter.toTimeString(todayOpeningHours.getClosing()) + "!";
+            return "Open now, until " + Formatter.toTimeString(todayOpeningHours.getClosing());
         } else if (closedBefore()) {
-            return "We open today at " + Formatter.toTimeString(todayOpeningHours.getOpening()) + "!";
-        } else if (closedAfter()) {
+            return "We open today at " + Formatter.toTimeString(todayOpeningHours.getOpening());
+        } else {
             return "We open again at " + Formatter.toTimeString(dayOpenAgain.getOpening()) +
                     " on " + dayOpenAgain.getDayString();
         }
-        return "In openString, no predicate was satisfied";
     }
 }
