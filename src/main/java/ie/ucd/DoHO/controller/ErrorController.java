@@ -14,13 +14,16 @@ public class ErrorController {
     public String error(@RequestParam("title") String title,
                         @RequestParam("msg") String message,
                         Model model, HttpServletResponse response) {
+
         model.addAttribute("message", message);
+        model.addAttribute("title",title);
         return "errors/error?title=" + title + "&msg=" + message;
     }
 
     @GetMapping("/error/user_not_found")
-    public void userNotFound(@RequestParam("name") String name, HttpServletResponse response)
+    public void userNotFound(@RequestParam("name") String name, Model model, HttpServletResponse response)
             throws IOException {
+        model.addAttribute("title", "User Not Found");
         response.sendRedirect(
                 "/error?title=UserNotFound&msg=NoSuchUser:" + name
         );
@@ -35,15 +38,11 @@ public class ErrorController {
     }
 
     @GetMapping("/error/loan_not_found")
-    public void invalidUserForReceive(HttpServletResponse response)
+    public void invalidUserForReceive(HttpServletResponse response, Model model)
             throws IOException {
+        model.addAttribute("title","Loan Not Found");
         response.sendRedirect(
                 "/error?title=LoanNotFound&msg=LoanNotFound'"
         );
-    }
-
-    @GetMapping("/error/already_reserved")
-    public void invalidLoanRenewal(HttpServletResponse response) throws IOException{
-            response.sendRedirect("/error?title=InvalidRenewal&msg=CannotRenewLoan");
     }
 }
