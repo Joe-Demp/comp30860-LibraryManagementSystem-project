@@ -24,3 +24,5 @@
 /dist/
 /nbdist/
 /.nb-gradle/
+/ie.ucd.DoHO.model.Artifact/
+/ie.ucd.DoHO.model.User/

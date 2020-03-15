@@ -24,9 +24,6 @@
           <a class="btn btn-primary" type="button" href="/">Home</a>
         </li>
         <li class="nav-item">
-          <button class="btn btn-primary special" type="button">About</button>
-        </li>
-        <li class="nav-item">
           <a class="btn btn-primary" th:href="@{/user_profile(id=${user.id})}" th:if="${user != null}" type="button">Profile</a>
         </li>
 
