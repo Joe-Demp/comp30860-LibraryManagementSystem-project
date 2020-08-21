@@ -1,7 +1,10 @@
-This was a project submitted in fulfillment of the module: COMP30860 Web Development 2019/2020, from University College Dublin.
-The project team members were: Caoimhe Tiernan (@CaoimheTiernan), Martynas Jagutis (@martynasj99) and myself (@Joe-Demp).
-All commits up to an including commit 40138225bee7e20f02f95ce20b9df575b6ebf245 were prepared and submitted by the team.
-Any further edits are just my own personal improvements.
+This was a project submitted in fulfillment of the module: COMP30860 Web Development 2019/2020, from University College Dublin.  
+The project team members were: Caoimhe Tiernan [@CaoimheTiernan](https://github.com/CaoimheTiernan), Martynas Jagutis [@martynasj99](https://github.com/martynasj99) and myself.  
+All commits up to an including commit 40138225bee7e20f02f95ce20b9df575b6ebf245 were prepared and submitted by the team.  
+Further edits are welcome!
+
+All the best,
+[@Joe-Demp](https://github.com/Joe-Demp)
 
 ### Java Spring template project
 
