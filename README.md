@@ -1,3 +1,8 @@
+This was a project submitted in fulfillment of the module: COMP30860 Web Development 2019/2020, from University College Dublin.
+The project team members were: Caoimhe Tiernan (@CaoimheTiernan), Martynas Jagutis (@martynasj99) and myself (@Joe-Demp).
+All commits up to an including commit 40138225bee7e20f02f95ce20b9df575b6ebf245 were prepared and submitted by the team.
+Any further edits are just my own personal improvements.
+
 ### Java Spring template project
 
 This project is based on a GitLab [Project Template](https://docs.gitlab.com/ee/gitlab-basics/create-project.html).
@@ -14,4 +19,5 @@ From the root of the project folder on the command line:
 
 Thanks to:
 
-Icon image from: https://www.kindpng.com/imgv/ibxwmm_icon-book-transparent-book-icon-png-png-download/
+https://bootswatch.com/journal/ for the Bootstrap theme
+https://www.kindpng.com/imgv/ibxwmm_icon-book-transparent-book-icon-png-png-download/ for our book icon image
